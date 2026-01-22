@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Player
   maxEmbers: 1000
-  moveSpeed: 2
+  moveSpeed: 2.5
   silhouetteColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   dashSpeed: 15
   dashCooldown: 1
   baseEmbers: 100
-  lightRadius: 5
+  lightRadius: 3
