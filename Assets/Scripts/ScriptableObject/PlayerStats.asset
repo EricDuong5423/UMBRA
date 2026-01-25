@@ -15,8 +15,13 @@ MonoBehaviour:
   name: Player
   maxEmbers: 1000
   moveSpeed: 2.5
+  attackDmg: 2
   silhouetteColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
-  dashSpeed: 15
-  dashCooldown: 1
+  lightColor: {r: 1, g: 1, b: 1, a: 1}
+  rollSpeed: 25
+  rollCooldown: 1
   baseEmbers: 100
-  lightRadius: 3
+  maxLightRadius: 5
+  minLightRadius: 0.5
+  maxLightIntensity: 1.5
+  minLightIntensity: 0.5

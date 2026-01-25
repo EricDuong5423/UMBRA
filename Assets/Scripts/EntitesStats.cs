@@ -10,8 +10,12 @@ public class EntitesStats : ScriptableObject
     public float MaxEmbers => maxEmbers;
     [SerializeField] private float moveSpeed;
     public float MoveSpeed => moveSpeed;
+    [SerializeField] private float attackDmg;
+    public float AttackDmg => attackDmg;
     
     [Header("Visuals")]
     [SerializeField] private Color silhouetteColor = Color.black;
     public Color SilhouetteColor => silhouetteColor;
+    [SerializeField] private Color lightColor = Color.white;
+    public Color LightColor => lightColor;
 }
