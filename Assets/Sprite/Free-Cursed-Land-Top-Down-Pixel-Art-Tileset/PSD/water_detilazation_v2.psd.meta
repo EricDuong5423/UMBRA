@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      water_detilazation_v2_0: -6487848460486613316
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
