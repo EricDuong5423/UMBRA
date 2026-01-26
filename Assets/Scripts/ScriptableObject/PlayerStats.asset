@@ -12,16 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfef35631cf674248b047a6d0eceb429, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  name: Player
-  maxEmbers: 1000
-  moveSpeed: 2.5
-  attackDmg: 2
-  silhouetteColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+  baseMaxEmbers: 100
+  baseMoveSpeed: 2.5
+  baseAtkDamage: 10
+  baseMaxStamina: 100
+  baseStaminaRegen: 10
+  healthGrowth: 1.1
+  damageGrowth: 1.1
+  speedGrowth: 1
+  staminaGrowth: 1.01
+  staminaRegenGrowth: 1.02
+  silhouetteColor: {r: 0, g: 0, b: 0, a: 1}
   lightColor: {r: 1, g: 1, b: 1, a: 1}
-  rollSpeed: 25
+  rollSpeed: 5
   rollCooldown: 1
-  baseEmbers: 100
-  maxLightRadius: 5
-  minLightRadius: 0.5
+  xpRequirementMultiplier: 1.5
+  maxLightRadius: 3
+  minLightRadius: 0
   maxLightIntensity: 1.5
   minLightIntensity: 0.5
