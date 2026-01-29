@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.R))
         {
-            health.TakeDamage(10f);
+            // health.TakeDamage(10f);
+            statsManager.AddExperience(10);
         }
     }
 
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
     private void Roll()
     {
         isRolling = true;
-        nextRollTime = Time.time + playerStats.rollCooldown; // Lưu ý: check lại tên biến rollCooldown (viết hoa/thường) trong PlayerStats
+        nextRollTime = Time.time + playerStats.rollCooldown;
         movement.StartRoll(moveInput, playerStats.rollSpeed);
         visuals.TriggerRoll(moveInput);
         Invoke(nameof(EndRoll), 0.2f);

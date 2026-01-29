@@ -34,8 +34,6 @@ public class PlayerVisuals : MonoBehaviour
 
         animator.SetInteger("X", x);
         animator.SetInteger("Y", y);
-
-        animator.SetBool("IsMoving", isMoving);
     }
 
     // ... (Giữ nguyên các hàm TriggerRoll, TriggerAttack, UpdateVisuals cũ)
@@ -80,12 +78,6 @@ public class PlayerVisuals : MonoBehaviour
         {
             spriteRenderer.color = Color.Lerp(playerStats.silhouetteColor, playerStats.lightColor, ratio);
         }
-
-        // 5. Xử lý Animator
-        // Cập nhật biến HEALTH để Animator chuyển state (VD: chuyển sang animation thở dốc khi máu thấp)
-        if (animator != null)
-        {
-            animator.SetInteger("HEALTH", Mathf.RoundToInt(current));
-        }
+        
     }
 }
