@@ -51,8 +51,7 @@ public class StatsManager : MonoBehaviour
         }
         BroadcastExp();
     }
-
-    [ContextMenu("Test Level Up")]
+    
     public void LevelUp()
     {
         currentLevel++;

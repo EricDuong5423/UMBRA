@@ -29,8 +29,28 @@ public class CoinSystem : MonoBehaviour
 
         BroadCastCoins();
     }
-    
-    
+
+    public void AddCoins(uint amount)
+    {
+        currentCoins += amount;
+        BroadCastCoins();
+    }
+
+    public bool TrySpendCoinsBuy(uint price)
+    {
+        if (currentCoins >= price)
+        {
+            currentCoins -= price;
+            BroadCastCoins();
+            return true;
+        }
+        return false;
+    }
+
+    public bool CanAfford(uint price)
+    {
+        return currentCoins >= price;
+    }
 
     private void BroadCastCoins()
     {

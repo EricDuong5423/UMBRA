@@ -9,67 +9,72 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerMovement movement;
     [SerializeField] private StaminaSystem stamina;
     [SerializeField] private PlayerVisuals visuals;
-    [SerializeField] private HealthSystem health;
+    [SerializeField] private PlayerHealth health;
     [SerializeField] private StatsManager statsManager;
 
+    // ... (Các biến private giữ nguyên) ...
     private Vector2 moveInput;
     private float nextRollTime;
     private bool isRolling = false;
+    private bool isAttacking = false;
 
     private void Start()
     {
+        // Truyền PlayerHealth vào Visuals
         visuals.Initialize(playerStats, health);
     }
 
+    // ... (Giữ nguyên toàn bộ logic Update, FixedUpdate, Attack, Roll) ...
+    // ... Chỉ copy lại phần Update để đảm bảo context ...
+
     private void Update()
     {
-        if (isRolling) return;
+        if (isRolling || isAttacking) return;
 
-        // 1. Đọc Input
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
+        if (health.isDead)
+        {
+            x = 0;
+            y = 0;
+        }
         moveInput = new Vector2(x, y).normalized;
-
-        // ---> CẬP NHẬT ANIMATION <---
-        // Kiểm tra xem có đang bấm nút không
+        
         bool isMoving = moveInput.sqrMagnitude > 0.01f;
         visuals.UpdateMovementAnim(moveInput, isMoving);
 
-        // 2. Roll
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            if (Time.time >= nextRollTime && stamina.TryConsumeStamina(20f))
-            {
-                Roll();
-            }
+            if (Time.time >= nextRollTime && stamina.TryConsumeStamina(20f)) Roll();
         }
         
-        // 3. Attack
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (stamina.TryConsumeStamina(10f))
-            {
-                Attack();
-            }
+            if (stamina.TryConsumeStamina(10f)) Attack();
         }
+
+
         
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            // health.TakeDamage(10f);
-            statsManager.AddExperience(10);
-        }
+        // Test Code
+        if (Input.GetKeyDown(KeyCode.R)) statsManager.AddExperience(10);
     }
 
-    // ... (Giữ nguyên FixedUpdate, Attack, Roll, EndRoll)
     private void FixedUpdate()
     {
-        if (!isRolling) movement.Move(moveInput);
+        if (!isRolling && !isAttacking) movement.Move(moveInput);
     }
 
+    // ... (Các hàm Attack, EndAttack, Roll, EndRoll giữ nguyên) ...
     private void Attack()
     {
+        isAttacking = true;
+        moveInput = Vector2.zero;
+        visuals.UpdateMovementAnim(Vector2.zero, false);
+        movement.StopMoving();
         visuals.TriggerAttack();
     }
+    
+    public void EndAttack() { isAttacking = false; }
     
     private void Roll()
     {

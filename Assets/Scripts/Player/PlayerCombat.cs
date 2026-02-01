@@ -2,38 +2,76 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [Header("Hitboxes & Colliders")]
-    [SerializeField] private BoxCollider2D playerHitbox;      // Hitbox nhận sát thương của nhân vật
-    [SerializeField] private Collider2D attackLeftCollider;   // Vũ khí bên trái
+    [Header("Weapon References (Child Objects)")]
+    [SerializeField] private Collider2D attackLeftCollider;
     [SerializeField] private Collider2D attackRightCollider;
-    public void turnOnPlayerHitBox()
+    
+    [Header("Defense References")]
+    [SerializeField] private Collider2D playerBodyCollider; // Body Collider để né đòn
+
+    private StatsManager statsManager;
+
+    private void Awake()
     {
-        if (playerHitbox) playerHitbox.enabled = true;
+        statsManager = GetComponent<StatsManager>();
     }
 
-    public void turnOffPlayerHitBox()
+    private void Start()
     {
-        // Thường dùng khi lộn (Roll) để né đòn (Invincible frame)
-        if (playerHitbox) playerHitbox.enabled = false;
+        // Tự động setup cho 2 vũ khí
+        SetupWeapon(attackLeftCollider);
+        SetupWeapon(attackRightCollider);
     }
 
-    public void turnOnLeftAttackCollider()
+    private void SetupWeapon(Collider2D col)
+    {
+        if (col != null)
+        {
+            // 1. Đảm bảo có script Hitbox
+            var hitbox = col.GetComponent<PlayerWeaponHitbox>();
+            if (hitbox == null) hitbox = col.gameObject.AddComponent<PlayerWeaponHitbox>();
+            
+            // 2. Nạp chỉ số damage
+            hitbox.Initialize(statsManager.AttackDamage, transform);
+            
+            // 3. Tắt hitbox mặc định
+            col.enabled = false; 
+        }
+    }
+
+    // --- ANIMATION EVENTS (Đặt tên chuẩn PascalCase) ---
+
+    // Gọi khi animation chém trái bắt đầu gây dmg
+    public void TurnOnLeftAttackCollider()
     {
         if (attackLeftCollider) attackLeftCollider.enabled = true;
     }
 
-    public void turnOffLeftAttackCollider()
+    public void TurnOffLeftAttackCollider()
     {
         if (attackLeftCollider) attackLeftCollider.enabled = false;
     }
 
-    public void turnOnRightAttackCollider()
+    // Gọi khi animation chém phải bắt đầu gây dmg
+    public void TurnOnRightAttackCollider()
     {
         if (attackRightCollider) attackRightCollider.enabled = true;
     }
 
-    public void turnOffRightAttackCollider()
+    public void TurnOffRightAttackCollider()
     {
         if (attackRightCollider) attackRightCollider.enabled = false;
+    }
+
+    // Gọi khi bắt đầu lộn (Roll Start)
+    public void EnableIFrame()
+    {
+        if (playerBodyCollider) playerBodyCollider.enabled = false;
+    }
+
+    // Gọi khi kết thúc lộn (Roll End)
+    public void DisableIFrame()
+    {
+        if (playerBodyCollider) playerBodyCollider.enabled = true;
     }
 }
