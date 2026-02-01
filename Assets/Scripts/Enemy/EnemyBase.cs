@@ -14,10 +14,11 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected Collider2D weaponCollider; 
 
     [Header("Combat Settings")]
-    [SerializeField] protected float hurtDuration = 0.5f;
+    [SerializeField] protected float hurtDuration = 0.5f; // Thời gian bị choáng
     
     protected Transform target;
     protected EnemyHealth healthSystem;
+    public EnemyHealth HealthSystem => healthSystem;
     public StatsManager statsManager;
     protected Rigidbody2D rb;
     protected Animator anim;
@@ -48,17 +49,15 @@ public abstract class EnemyBase : MonoBehaviour
             healthSystem.OnHit += HandleHit;
         }
 
-        // TỰ ĐỘNG SETUP VŨ KHÍ CHO QUÁI
+        // TỰ ĐỘNG SETUP VŨ KHÍ
         if (weaponCollider != null)
         {
             var hitbox = weaponCollider.GetComponent<EnemyWeaponHitbox>();
             if (hitbox == null) hitbox = weaponCollider.gameObject.AddComponent<EnemyWeaponHitbox>();
             
-            // Ưu tiên lấy damage từ StatsManager (nếu có level), nếu không thì lấy gốc
             float dmg = statsManager != null ? statsManager.AttackDamage : stats.baseAtkDamage;
-            
             hitbox.Initialize(dmg, transform);
-            weaponCollider.enabled = false; // Tắt mặc định
+            weaponCollider.enabled = false; 
         }
     }
 
@@ -71,7 +70,31 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    // --- ANIMATION EVENTS (Dùng chung cho mọi con quái) ---
+    // --- LOGIC XỬ LÝ BỊ ĐÁNH (QUAN TRỌNG) ---
+    protected virtual void HandleHit(Vector2 dir)
+    {
+        // 1. Chuyển ngay sang trạng thái Hurt
+        ChangeState(EnemyState.Hurt);
+        
+        // 2. TẮT NGAY VŨ KHÍ (Hủy đòn đánh hiện tại)
+        DisableEnemyHitBox();
+
+        // 3. Dừng di chuyển
+        StopMovement();
+
+        // 4. Reset các trigger tấn công trong Animator (để tránh lưu lệnh đánh cũ)
+        if(anim) 
+        {
+            anim.ResetTrigger("Attack1"); // Tên trigger tùy theo Skeleton của bạn
+            anim.ResetTrigger("Attack2");
+            anim.SetTrigger("Hurt");
+        }
+
+        // 5. Tính thời gian hết choáng
+        hurtEndTime = Time.time + hurtDuration;
+    }
+
+    // --- ANIMATION EVENTS ---
     public void EnableEnemyHitBox()
     {
         if (weaponCollider) weaponCollider.enabled = true;
@@ -82,20 +105,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (weaponCollider) weaponCollider.enabled = false;
     }
 
-    protected virtual void HandleHit(Vector2 dir)
-    {
-        ChangeState(EnemyState.Hurt);
-        hurtEndTime = Time.time + hurtDuration;
-        if(anim) anim.SetTrigger("Hurt");
-    }
-    
-    protected virtual void FaceTarget()
-    {
-        if (target == null || spriteRenderer == null) return;
-        Vector2 direction = target.position - transform.position;
-        if (direction.x != 0) spriteRenderer.flipX = direction.x < 0;
-    }
-
+    // --- MAIN LOOP ---
     protected virtual void Update()
     {
         if (currentState == EnemyState.Dead) return;
@@ -112,7 +122,6 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    // ... (Giữ nguyên LogicIdle, LogicChase) ...
     protected virtual void LogicIdle()
     {
         StopMovement();
@@ -132,6 +141,7 @@ public abstract class EnemyBase : MonoBehaviour
         StopMovement();
         if (distanceToTarget > stats.attackRangeMax) { ChangeState(EnemyState.Chase); return; }
         FaceTarget();
+        
         if (Time.time >= nextAttackTime)
         {
             int attackType = ChooseAttackType();
@@ -142,11 +152,27 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void LogicHurt()
     {
+        // Trong lúc bị đau: Cưỡng chế đứng im
         StopMovement();
-        if (Time.time >= hurtEndTime) ChangeState(EnemyState.Chase);
+        
+        // Kiểm tra hết giờ chưa
+        if (Time.time >= hurtEndTime)
+        {
+            ChangeState(EnemyState.Chase); // Hết đau thì quay lại đuổi
+        }
     }
 
-    protected void ChangeState(EnemyState newState) { currentState = newState; }
+    protected void ChangeState(EnemyState newState) 
+    { 
+        currentState = newState; 
+    }
+
+    protected virtual void FaceTarget()
+    {
+        if (target == null || spriteRenderer == null) return;
+        Vector2 direction = target.position - transform.position;
+        if (direction.x != 0) spriteRenderer.flipX = direction.x < 0;
+    }
 
     protected virtual void MoveToTarget()
     {
@@ -166,8 +192,18 @@ public abstract class EnemyBase : MonoBehaviour
     {
         ChangeState(EnemyState.Dead);
         StopMovement();
+        DisableEnemyHitBox();
         rb.simulated = false;
-        if (anim) anim.SetTrigger("Die");
+
+        if (anim) 
+        {
+            anim.ResetTrigger("Hurt"); 
+            anim.ResetTrigger("Attack1");
+            anim.ResetTrigger("Attack2");
+
+            anim.SetTrigger("Die"); 
+        }
+
         Destroy(gameObject, 2f); 
     }
 

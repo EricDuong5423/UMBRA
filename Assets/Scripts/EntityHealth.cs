@@ -1,32 +1,33 @@
 using System;
 using UnityEngine;
 
-public class EntityHealth : MonoBehaviour
+// Kế thừa IDamageable để vũ khí nhận diện được
+public class EntityHealth : MonoBehaviour, IDamageable
 {
-    // Events
-    public event Action<float, float> OnHealthChanged; // Cho UI
-    public event Action<Vector2> OnHit;                // Cho Animation (Hurt)
-    public event Action OnDeath;                       // Cho Logic chết
+    public event Action<float, float> OnHealthChanged;
+    public event Action<Vector2> OnHit;
+    public event Action OnDeath;
 
-    // Variables
     protected StatsManager stats;
     protected float currentEmbers;
-    public bool isDead { get; private set; }
+    protected bool isDead = false;
 
-    // Properties
+    // Public Getter
     public float CurrentEmbers => currentEmbers;
     public float MaxEmbers => stats != null ? stats.MaxEmbers : 100f;
+    public bool IsDead => isDead; // Để Controller check
 
     protected virtual void Awake()
     {
         stats = GetComponent<StatsManager>();
-        isDead = false;
-        if (stats) currentEmbers = stats.MaxEmbers;
     }
 
     protected virtual void Start()
     {
+        if (stats) currentEmbers = stats.MaxEmbers;
+        
         if (stats) stats.OnLevelChanged += HandleLevelUp;
+    
         BroadcastHealth();
     }
 
@@ -35,8 +36,7 @@ public class EntityHealth : MonoBehaviour
         if (stats) stats.OnLevelChanged -= HandleLevelUp;
     }
 
-    // --- LOGIC CHÍNH (VIRTUAL ĐỂ CON GHI ĐÈ) ---
-
+    // Implement từ Interface IDamageable
     public virtual void TakeDamage(float amount, Transform source)
     {
         if (isDead) return;
@@ -46,21 +46,14 @@ public class EntityHealth : MonoBehaviour
         
         BroadcastHealth();
 
-        // Tính hướng bị đẩy (Knockback Direction)
         Vector2 direction = Vector2.zero;
         if (source != null)
         {
-            // Vector từ Nguồn -> Nạn nhân
             direction = (transform.position - source.position).normalized;
         }
-
-        // Bắn sự kiện bị đánh kèm hướng
         OnHit?.Invoke(direction);
 
-        if (currentEmbers <= 0)
-        {
-            Die();
-        }
+        if (currentEmbers <= 0) Die();
     }
 
     public virtual void Heal(float amount)

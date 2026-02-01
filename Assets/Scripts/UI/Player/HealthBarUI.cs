@@ -3,8 +3,8 @@ using UnityEngine;
 public class HealthBarUI : ResourceBarUI
 {
     [Header("Data Connection")]
-    // Dùng EntityHealth để support cả PlayerHealth và EnemyHealth
-    [SerializeField] private EntityHealth healthSystem; 
+    // Đổi từ HealthSystem sang EntityHealth
+    [SerializeField] private EntityHealth healthSystem;
 
     private void Start()
     {

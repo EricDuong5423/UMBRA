@@ -33,6 +33,9 @@ public class EnemyReward : MonoBehaviour
             // Tìm PlayerHealth để hồi máu
             var playerHealth = player.GetComponent<PlayerHealth>();
             if (playerHealth) playerHealth.Heal(stats.healOnKill);
+
+            var playerCoin = player.GetComponent<CoinSystem>();
+            if(playerCoin) playerCoin.AddCoins(stats.ligthShardOnKill);
         }
     }
 }

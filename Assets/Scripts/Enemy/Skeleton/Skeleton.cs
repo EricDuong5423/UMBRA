@@ -4,6 +4,8 @@ public class Skeleton : EnemyBase
 {
     protected override void PerformAttack(int attackIndex)
     {
+        if (currentState == EnemyState.Hurt) return;
+
         if (anim == null) return;
         
         switch (attackIndex)

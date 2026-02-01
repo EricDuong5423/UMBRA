@@ -10,28 +10,53 @@ public class StatsManager : MonoBehaviour
     [SerializeField] private int currentLevel = 1;
     [SerializeField] private int currentExp = 0;
     [SerializeField] private int expToNextLevel = 100;
+
+    // --- CACHED VALUES (Biến lưu đệm) ---
+    private float _maxEmbers;
+    private float _moveSpeed;
+    private float _attackDamage;
+    private float _maxStamina;
+    private float _staminaRegen;
+
+    // Public Getters lấy giá trị từ Cache (Siêu nhanh)
     public int CurrentLevel => currentLevel;
     public int CurrentExp => currentExp;
     public int ExpToNextLevel => expToNextLevel;
     
-    public event Action OnLevelChanged;
-    
-    public event Action<int, int, int> OnExpChanged;
-    
-    public float MaxEmbers => GetStat(baseStats.baseMaxEmbers, baseStats.healthGrowth);
-    public float MoveSpeed => GetStat(baseStats.baseMoveSpeed, baseStats.speedGrowth);
-    public float AttackDamage => GetStat(baseStats.baseAtkDamage, baseStats.damageGrowth);
-    public float MaxStamina => GetStat(baseStats.baseMaxStamina, baseStats.staminaGrowth);
-    public float StaminaRegen => GetStat(baseStats.baseStaminaRegen, baseStats.staminaRegenGrowth);
+    public float MaxEmbers => _maxEmbers;
+    public float MoveSpeed => _moveSpeed;
+    public float AttackDamage => _attackDamage;
+    public float MaxStamina => _maxStamina;
+    public float StaminaRegen => _staminaRegen;
     
     public EntitesStats BaseStats => baseStats;
 
+    // Events
+    public event Action OnLevelChanged;
+    public event Action<int, int, int> OnExpChanged;
+
+    private void Awake()
+    {
+        RecalculateStats();
+    }
     private void Start()
     {
         BroadcastExp();
     }
 
-    private float GetStat(float baseVal, float growth)
+    // Hàm tính toán chỉ số (Chỉ chạy 1 lần khi Start hoặc LevelUp)
+    private void RecalculateStats()
+    {
+        if (baseStats == null) return;
+        
+        _maxEmbers = CalculateStat(baseStats.baseMaxEmbers, baseStats.healthGrowth);
+        _moveSpeed = CalculateStat(baseStats.baseMoveSpeed, baseStats.speedGrowth);
+        _attackDamage = CalculateStat(baseStats.baseAtkDamage, baseStats.damageGrowth);
+        _maxStamina = CalculateStat(baseStats.baseMaxStamina, baseStats.staminaGrowth);
+        _staminaRegen = CalculateStat(baseStats.baseStaminaRegen, baseStats.staminaRegenGrowth);
+    }
+
+    private float CalculateStat(float baseVal, float growth)
     {
         return baseVal * Mathf.Pow(growth, currentLevel - 1);
     }
@@ -44,7 +69,7 @@ public class StatsManager : MonoBehaviour
     public void AddExperience(int amount)
     {
         currentExp += amount;
-        if (currentExp >= expToNextLevel)
+        while (currentExp >= expToNextLevel)
         {
             currentExp -= expToNextLevel;
             LevelUp();
@@ -56,7 +81,13 @@ public class StatsManager : MonoBehaviour
     {
         currentLevel++;
         expToNextLevel = Mathf.RoundToInt(expToNextLevel * 1.2f);
+        
+        RecalculateStats();
+        
         OnLevelChanged?.Invoke();
         OnExpChanged?.Invoke(currentLevel, currentExp, expToNextLevel);
     }
+
+    [ContextMenu("Test Level Up")]
+    public void TestLevelUp() => AddExperience(expToNextLevel);
 }

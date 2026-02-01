@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private float hurtDuration = 0.2f;
 
     [Header("Components")]
     [SerializeField] private PlayerMovement movement;
@@ -12,32 +14,54 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerHealth health;
     [SerializeField] private StatsManager statsManager;
 
-    // ... (Các biến private giữ nguyên) ...
     private Vector2 moveInput;
     private float nextRollTime;
     private bool isRolling = false;
     private bool isAttacking = false;
+    private bool isHurting = false;
 
     private void Start()
     {
-        // Truyền PlayerHealth vào Visuals
         visuals.Initialize(playerStats, health);
+        health.OnHit += HandleGetHit;
     }
 
-    // ... (Giữ nguyên toàn bộ logic Update, FixedUpdate, Attack, Roll) ...
-    // ... Chỉ copy lại phần Update để đảm bảo context ...
+    private void OnDestroy()
+    {
+        health.OnHit -= HandleGetHit;
+    }
+
+    private void HandleGetHit(Vector2 dir)
+    {
+        isAttacking = false; 
+        isRolling = false;
+        isHurting = true;
+        
+        movement.StopMoving(); 
+        visuals.UpdateMovementAnim(Vector2.zero, false);
+        
+        CancelInvoke(nameof(RecoverFromHurt)); // Hủy lệnh cũ nếu bị đánh liên tiếp
+        Invoke(nameof(RecoverFromHurt), hurtDuration);
+    }
+    
+    private void RecoverFromHurt()
+    {
+        isHurting = false;
+    }
 
     private void Update()
     {
+        // 1. Kiểm tra chết đầu tiên
+        if (health.IsDead || isHurting) 
+        {
+            movement.StopMoving(); // Đảm bảo xác không trôi
+            return; 
+        }
+
         if (isRolling || isAttacking) return;
 
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-        if (health.isDead)
-        {
-            x = 0;
-            y = 0;
-        }
         moveInput = new Vector2(x, y).normalized;
         
         bool isMoving = moveInput.sqrMagnitude > 0.01f;
@@ -52,19 +76,20 @@ public class PlayerController : MonoBehaviour
         {
             if (stamina.TryConsumeStamina(10f)) Attack();
         }
-
-
         
         // Test Code
-        if (Input.GetKeyDown(KeyCode.R)) statsManager.AddExperience(10);
+        if (Input.GetKeyDown(KeyCode.R)) statsManager.AddExperience(100);
     }
 
     private void FixedUpdate()
     {
-        if (!isRolling && !isAttacking) movement.Move(moveInput);
+        if (!isRolling && !isAttacking && !health.IsDead && !isHurting) 
+            movement.Move(moveInput);
+        else 
+            movement.StopMoving();
     }
 
-    // ... (Các hàm Attack, EndAttack, Roll, EndRoll giữ nguyên) ...
+    // ... (Giữ nguyên Attack, Roll, EndRoll như cũ) ...
     private void Attack()
     {
         isAttacking = true;

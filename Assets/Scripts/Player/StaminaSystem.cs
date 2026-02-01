@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class StaminaSystem : MonoBehaviour
 {
-    // Sự kiện
     public event Action<float, float> OnStaminaChanged;
 
-    // Getters
     public float CurrentStamina => currentStamina;
     public float MaxStamina => stats != null ? stats.MaxStamina : 100f;
 
@@ -16,25 +14,26 @@ public class StaminaSystem : MonoBehaviour
     private void Awake()
     {
         stats = GetComponent<StatsManager>();
-
-        // 1. KHỞI TẠO DỮ LIỆU (Để tránh lỗi = 0 lúc đầu)
-        if (stats != null)
-        {
-            currentStamina = stats.MaxStamina;
-        }
+        
+        // XÓA đoạn gán currentStamina ở đây đi
+        // Vì lúc này stats có thể chưa tính toán xong
     }
 
     private void Start()
     {
-        // 2. ĐĂNG KÝ SỰ KIỆN LEVEL UP
+        // CHUYỂN VIỆC LẤY CHỈ SỐ XUỐNG ĐÂY
+        // Lý do: Hàm Start() luôn chạy sau khi TẤT CẢ hàm Awake() đã chạy xong.
+        // Đảm bảo StatsManager đã tính toán xong MaxStamina.
         if (stats != null)
         {
+            currentStamina = stats.MaxStamina; 
             stats.OnLevelChanged += HandleLevelUp;
         }
 
-        // 3. THÔNG BÁO RA UI (Broadcast)
         BroadcastStamina();
     }
+    
+    // ... (Các phần còn lại giữ nguyên) ...
     
     private void OnDestroy() 
     {
@@ -43,15 +42,11 @@ public class StaminaSystem : MonoBehaviour
 
     private void Update()
     {
-        // LOGIC HỒI PHỤC TỰ ĐỘNG
         if (stats != null && currentStamina < MaxStamina)
         {
             currentStamina += stats.StaminaRegen * Time.deltaTime;
-            
-            // Đảm bảo không vượt quá Max
             if (currentStamina > MaxStamina) currentStamina = MaxStamina;
-            
-            BroadcastStamina(); // Cập nhật liên tục khi đang hồi
+            BroadcastStamina();
         }
     }
 
@@ -60,7 +55,7 @@ public class StaminaSystem : MonoBehaviour
         if (currentStamina >= amount)
         {
             currentStamina -= amount;
-            BroadcastStamina(); // Cập nhật ngay khi dùng
+            BroadcastStamina();
             return true;
         }
         return false;
@@ -68,11 +63,10 @@ public class StaminaSystem : MonoBehaviour
 
     private void HandleLevelUp()
     {
-        currentStamina = MaxStamina; // Hồi đầy thể lực
+        currentStamina = MaxStamina;
         BroadcastStamina();
     }
 
-    // Hàm Broadcast tập trung
     private void BroadcastStamina()
     {
         OnStaminaChanged?.Invoke(currentStamina, MaxStamina);
