@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioController : MonoBehaviour
 {
@@ -41,16 +42,16 @@ public class AudioController : MonoBehaviour
         bgmSource.Play();
     }
 
-    public void SetBGMVolume(float volume)
+    public void SetBGMVolume(Slider slider)
     {
-        SetVolume(bgmSource, volume);
-        PlayerPrefs.SetFloat(BGMVolumeKey, volume);
+        SetVolume(bgmSource, slider.value);
+        PlayerPrefs.SetFloat(BGMVolumeKey, slider.value);
     }
 
-    public void SetSFXVolume(float volume)
+    public void SetSFXVolume(Slider slider)
     {
-        SetVolume(sfxSource, volume);
-        PlayerPrefs.SetFloat(SFXVolumeKey, volume);
+        SetVolume(sfxSource, slider.value);
+        PlayerPrefs.SetFloat(SFXVolumeKey, slider.value);
     }
 
     private void SetVolume(AudioSource audioSource, float volume)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private string TutorialMap = "Tutorial-map";
     [SerializeField] private AudioClip tutorialMapClip;
     [SerializeField] private AudioClip mainMenuClip;
-    [SerializeField] private AudioClip clickButtonClip;
+    [SerializeField] private List<AudioClip> clickButtonClip;
 
     public void OnPlayButtonClick()
     {
@@ -20,7 +21,8 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayClickedButtonSound()
     {
-        AudioController.Instance.PlaySFXSound(clickButtonClip);
+        AudioClip randomAudioClip = clickButtonClip[UnityEngine.Random.Range(0, clickButtonClip.Count)];
+        AudioController.Instance.PlaySFXSound(randomAudioClip);
     }
 
     private void Start()
