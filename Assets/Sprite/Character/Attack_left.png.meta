@@ -204,7 +204,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -282,12 +282,12 @@ TextureImporter:
       name: Attack_left_0
       rect:
         serializedVersion: 2
-        x: 30
-        y: 255
-        width: 53
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 256
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.45762712, y: 0.3964219}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -304,12 +304,12 @@ TextureImporter:
       name: Attack_left_1
       rect:
         serializedVersion: 2
-        x: 176
-        y: 255
-        width: 32
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 256
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.452919, y: 0.4152546}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -326,12 +326,12 @@ TextureImporter:
       name: Attack_left_2
       rect:
         serializedVersion: 2
-        x: 304
-        y: 255
-        width: 34
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 256
+        y: 256
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.46233535, y: 0.4246707}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -348,12 +348,12 @@ TextureImporter:
       name: Attack_left_3
       rect:
         serializedVersion: 2
-        x: 418
-        y: 255
-        width: 47
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 384
+        y: 256
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.46233535, y: 0.405838}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -370,12 +370,12 @@ TextureImporter:
       name: Attack_left_4
       rect:
         serializedVersion: 2
-        x: 542
-        y: 255
-        width: 45
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 513
+        y: 256
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4482112, y: 0.3964219}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -392,12 +392,12 @@ TextureImporter:
       name: Attack_left_5
       rect:
         serializedVersion: 2
-        x: 688
-        y: 255
-        width: 39
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 640
+        y: 256
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4576273, y: 0.405838}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -414,12 +414,12 @@ TextureImporter:
       name: Attack_left_6
       rect:
         serializedVersion: 2
-        x: 818
-        y: 255
-        width: 35
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 768
+        y: 256
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4623356, y: 0.4246707}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -436,12 +436,12 @@ TextureImporter:
       name: Attack_left_7
       rect:
         serializedVersion: 2
-        x: 947
-        y: 255
-        width: 29
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 896
+        y: 256
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4717517, y: 0.4246707}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -458,12 +458,12 @@ TextureImporter:
       name: Attack_left_8
       rect:
         serializedVersion: 2
-        x: 44
-        y: 191
-        width: 31
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 192
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.44821092, y: 0.37758946}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -480,12 +480,12 @@ TextureImporter:
       name: Attack_left_9
       rect:
         serializedVersion: 2
-        x: 176
-        y: 191
-        width: 32
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 192
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.452919, y: 0.3964219}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -502,12 +502,12 @@ TextureImporter:
       name: Attack_left_10
       rect:
         serializedVersion: 2
-        x: 276
-        y: 191
-        width: 55
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 256
+        y: 192
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.48587584, y: 0.36817312}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -524,12 +524,12 @@ TextureImporter:
       name: Attack_left_11
       rect:
         serializedVersion: 2
-        x: 404
-        y: 191
-        width: 55
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 384
+        y: 192
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.48587584, y: 0.37758946}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -546,12 +546,12 @@ TextureImporter:
       name: Attack_left_12
       rect:
         serializedVersion: 2
-        x: 511
-        y: 129
-        width: 76
-        height: 107
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 512
+        y: 192
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4811678, y: 0.36817312}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -568,12 +568,12 @@ TextureImporter:
       name: Attack_left_13
       rect:
         serializedVersion: 2
-        x: 660
-        y: 191
-        width: 57
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 640
+        y: 192
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4764595, y: 0.3964219}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -590,12 +590,12 @@ TextureImporter:
       name: Attack_left_14
       rect:
         serializedVersion: 2
-        x: 813
-        y: 191
-        width: 40
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 768
+        y: 192
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.45291948, y: 0.35875702}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -612,12 +612,12 @@ TextureImporter:
       name: Attack_left_15
       rect:
         serializedVersion: 2
-        x: 926
-        y: 191
-        width: 54
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 896
+        y: 192
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4623356, y: 0.36817312}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -634,12 +634,12 @@ TextureImporter:
       name: Attack_left_16
       rect:
         serializedVersion: 2
-        x: 53
-        y: 127
-        width: 45
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 128
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5423729, y: 0.37758946}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -656,12 +656,12 @@ TextureImporter:
       name: Attack_left_17
       rect:
         serializedVersion: 2
-        x: 169
-        y: 127
-        width: 39
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 128
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.547081, y: 0.405838}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -678,12 +678,12 @@ TextureImporter:
       name: Attack_left_18
       rect:
         serializedVersion: 2
-        x: 299
-        y: 127
-        width: 35
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 256
+        y: 128
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.53295684, y: 0.37758946}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -700,12 +700,12 @@ TextureImporter:
       name: Attack_left_19
       rect:
         serializedVersion: 2
-        x: 432
-        y: 127
-        width: 29
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 384
+        y: 128
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.51883245, y: 0.3870058}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -722,12 +722,12 @@ TextureImporter:
       name: Attack_left_20
       rect:
         serializedVersion: 2
-        x: 562
-        y: 127
-        width: 32
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 512
+        y: 128
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4717512, y: 0.37758946}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -744,12 +744,12 @@ TextureImporter:
       name: Attack_left_21
       rect:
         serializedVersion: 2
-        x: 639
-        y: 127
-        width: 20
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 640
+        y: 128
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4811678, y: 0.36817336}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -766,12 +766,12 @@ TextureImporter:
       name: Attack_left_22
       rect:
         serializedVersion: 2
-        x: 651
-        y: 137
-        width: 24
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 768
+        y: 128
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4670434, y: 0.37758946}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -788,12 +788,12 @@ TextureImporter:
       name: Attack_left_23
       rect:
         serializedVersion: 2
-        x: 690
-        y: 127
-        width: 32
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 896
+        y: 128
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4717517, y: 0.36817336}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -810,12 +810,12 @@ TextureImporter:
       name: Attack_left_24
       rect:
         serializedVersion: 2
-        x: 769
-        y: 126
-        width: 16
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 64
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5235405, y: 0.3964218}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -832,12 +832,12 @@ TextureImporter:
       name: Attack_left_25
       rect:
         serializedVersion: 2
-        x: 782
-        y: 127
-        width: 27
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 64
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.52824855, y: 0.3587569}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -854,12 +854,12 @@ TextureImporter:
       name: Attack_left_26
       rect:
         serializedVersion: 2
-        x: 818
-        y: 127
-        width: 32
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 256
+        y: 64
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.54708123, y: 0.36817312}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -876,12 +876,12 @@ TextureImporter:
       name: Attack_left_27
       rect:
         serializedVersion: 2
-        x: 901
-        y: 127
-        width: 37
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 384
+        y: 64
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5376649, y: 0.37758934}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -898,12 +898,12 @@ TextureImporter:
       name: Attack_left_28
       rect:
         serializedVersion: 2
-        x: 913
-        y: 130
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 512
+        y: 64
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5517888, y: 0.3587569}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -920,12 +920,12 @@ TextureImporter:
       name: Attack_left_29
       rect:
         serializedVersion: 2
-        x: 920
-        y: 127
-        width: 58
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 640
+        y: 64
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5376649, y: 0.38700557}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -942,12 +942,12 @@ TextureImporter:
       name: Attack_left_30
       rect:
         serializedVersion: 2
-        x: 53
-        y: 1
-        width: 76
-        height: 107
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 768
+        y: 64
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5423732, y: 0.41525412}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -964,12 +964,12 @@ TextureImporter:
       name: Attack_left_31
       rect:
         serializedVersion: 2
-        x: 179
-        y: 63
-        width: 57
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 896
+        y: 64
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.55178976, y: 0.3964218}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -986,12 +986,12 @@ TextureImporter:
       name: Attack_left_32
       rect:
         serializedVersion: 2
-        x: 299
-        y: 63
-        width: 40
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5235405, y: 0.37758917}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1008,12 +1008,12 @@ TextureImporter:
       name: Attack_left_33
       rect:
         serializedVersion: 2
-        x: 428
-        y: 63
-        width: 54
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 0
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.52824855, y: 0.3493406}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1030,12 +1030,12 @@ TextureImporter:
       name: Attack_left_34
       rect:
         serializedVersion: 2
-        x: 557
-        y: 63
-        width: 53
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 256
+        y: 0
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5282488, y: 0.3493406}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1052,12 +1052,12 @@ TextureImporter:
       name: Attack_left_35
       rect:
         serializedVersion: 2
-        x: 688
-        y: 63
-        width: 32
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 384
+        y: 0
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5235405, y: 0.33992437}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1074,12 +1074,12 @@ TextureImporter:
       name: Attack_left_36
       rect:
         serializedVersion: 2
-        x: 814
-        y: 63
-        width: 34
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 512
+        y: 0
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5517888, y: 0.37758917}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1096,12 +1096,12 @@ TextureImporter:
       name: Attack_left_37
       rect:
         serializedVersion: 2
-        x: 943
-        y: 63
-        width: 47
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 640
+        y: 0
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.547081, y: 0.37758917}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1118,12 +1118,12 @@ TextureImporter:
       name: Attack_left_38
       rect:
         serializedVersion: 2
-        x: 46
+        x: 768
         y: 0
-        width: 32
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5329571, y: 0.35875678}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1140,12 +1140,12 @@ TextureImporter:
       name: Attack_left_39
       rect:
         serializedVersion: 2
-        x: 174
+        x: 896
         y: 0
-        width: 32
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 128
+        height: 64
+      alignment: 9
+      pivot: {x: 0.52824926, y: 0.37758917}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1158,275 +1158,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Attack_left_40
-      rect:
-        serializedVersion: 2
-        x: 221
-        y: 9
-        width: 24
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1b88983397894ffd0800000000000000
-      internalID: -2309053062611105615
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_41
-      rect:
-        serializedVersion: 2
-        x: 237
-        y: 0
-        width: 20
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a9807301f32454b30800000000000000
-      internalID: 4270892660253198490
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_42
-      rect:
-        serializedVersion: 2
-        x: 302
-        y: 0
-        width: 32
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1d4e3f0e812fc2580800000000000000
-      internalID: -8850432979022650159
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_43
-      rect:
-        serializedVersion: 2
-        x: 343
-        y: 0
-        width: 27
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7cf9c2ab0076858b0800000000000000
-      internalID: -5163263719959126073
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_44
-      rect:
-        serializedVersion: 2
-        x: 367
-        y: 0
-        width: 15
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e5d228e55af15d060800000000000000
-      internalID: 6977517992796106078
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_45
-      rect:
-        serializedVersion: 2
-        x: 430
-        y: 0
-        width: 58
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e66a631c1abdb0340800000000000000
-      internalID: 4831196513062790766
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_46
-      rect:
-        serializedVersion: 2
-        x: 470
-        y: 0
-        width: 37
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a1e4ec5395d094970800000000000000
-      internalID: 8739531228695121434
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_47
-      rect:
-        serializedVersion: 2
-        x: 489
-        y: 2
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aa3a8978c12d891a0800000000000000
-      internalID: -6802456217167289430
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_48
-      rect:
-        serializedVersion: 2
-        x: 565
-        y: 0
-        width: 31
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b0ea224ec368172d0800000000000000
-      internalID: -3282695057292743157
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_49
-      rect:
-        serializedVersion: 2
-        x: 688
-        y: 0
-        width: 32
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 29ac045aa9e4aaa60800000000000000
-      internalID: 7686042140165589650
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_50
-      rect:
-        serializedVersion: 2
-        x: 821
-        y: 0
-        width: 55
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8902d9430bd081350800000000000000
-      internalID: 5987550755037192344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_left_51
-      rect:
-        serializedVersion: 2
-        x: 949
-        y: 0
-        width: 55
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3b10d7602a2d55970800000000000000
-      internalID: 8743125844945076659
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ad8f05f0fb6aa604f9a68f74b653a307
     internalID: 0
     vertices: []
     indices: 
@@ -1471,19 +1207,7 @@ TextureImporter:
       Attack_left_38: -1141147723099946072
       Attack_left_39: -8990867109444887925
       Attack_left_4: 1395497078899178851
-      Attack_left_40: -2309053062611105615
-      Attack_left_41: 4270892660253198490
-      Attack_left_42: -8850432979022650159
-      Attack_left_43: -5163263719959126073
-      Attack_left_44: 6977517992796106078
-      Attack_left_45: 4831196513062790766
-      Attack_left_46: 8739531228695121434
-      Attack_left_47: -6802456217167289430
-      Attack_left_48: -3282695057292743157
-      Attack_left_49: 7686042140165589650
       Attack_left_5: 7606802198511347722
-      Attack_left_50: 5987550755037192344
-      Attack_left_51: 8743125844945076659
       Attack_left_6: -812377091398897359
       Attack_left_7: 9166507001301544475
       Attack_left_8: -3541467289315533133

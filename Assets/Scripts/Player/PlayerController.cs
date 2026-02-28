@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerVisuals visuals;
     [SerializeField] private PlayerHealth health;
     [SerializeField] private StatsManager statsManager;
+    [SerializeField] private CoinSystem coinSystem;
 
     private Vector2 moveInput;
     private float nextRollTime;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
         movement.StopMoving(); 
         visuals.UpdateMovementAnim(Vector2.zero, false);
         
-        CancelInvoke(nameof(RecoverFromHurt)); // Hủy lệnh cũ nếu bị đánh liên tiếp
+        CancelInvoke(nameof(RecoverFromHurt));
         Invoke(nameof(RecoverFromHurt), hurtDuration);
     }
     
@@ -51,10 +52,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // 1. Kiểm tra chết đầu tiên
         if (health.IsDead || isHurting) 
         {
-            movement.StopMoving(); // Đảm bảo xác không trôi
+            movement.StopMoving();
             return; 
         }
 
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         }
         
         // Test Code
-        if (Input.GetKeyDown(KeyCode.R)) statsManager.AddExperience(100);
+        if (Input.GetKeyDown(KeyCode.R)) coinSystem.AddCoins(100);
     }
 
     private void FixedUpdate()
@@ -88,8 +88,7 @@ public class PlayerController : MonoBehaviour
         else 
             movement.StopMoving();
     }
-
-    // ... (Giữ nguyên Attack, Roll, EndRoll như cũ) ...
+    
     private void Attack()
     {
         isAttacking = true;

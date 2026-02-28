@@ -8,24 +8,14 @@ public class CoinSystem : MonoBehaviour
     //Getter
     private uint currentCoins;
     public uint CurrentCoins => currentCoins;
-    [SerializeField] private StatsManager stats;
 
     private void Awake()
     {
-        stats = GetComponent<StatsManager>();
-
-        if (stats != null)
-        {
-            currentCoins = 0;
-        }
+        currentCoins = 0;
     }
 
     private void Start()
     {
-        if (stats != null)
-        {
-            
-        }
 
         BroadCastCoins();
     }
@@ -33,6 +23,12 @@ public class CoinSystem : MonoBehaviour
     public void AddCoins(uint amount)
     {
         currentCoins += amount;
+        BroadCastCoins();
+    }
+
+    public void MinusCoins(uint amount)
+    {
+        currentCoins -= amount;
         BroadCastCoins();
     }
 

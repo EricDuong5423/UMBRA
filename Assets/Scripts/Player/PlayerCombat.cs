@@ -5,9 +5,6 @@ public class PlayerCombat : MonoBehaviour
     [Header("Weapon References (Child Objects)")]
     [SerializeField] private Collider2D attackLeftCollider;
     [SerializeField] private Collider2D attackRightCollider;
-    
-    [Header("Defense References")]
-    [SerializeField] private Collider2D playerBodyCollider; // Body Collider để né đòn
 
     private StatsManager statsManager;
 
@@ -62,16 +59,14 @@ public class PlayerCombat : MonoBehaviour
     {
         if (attackRightCollider) attackRightCollider.enabled = false;
     }
-
-    // Gọi khi bắt đầu lộn (Roll Start)
+    
     public void EnableIFrame()
     {
-        if (playerBodyCollider) playerBodyCollider.enabled = false;
+        PlayerHealth.isInvincible = true;
     }
-
-    // Gọi khi kết thúc lộn (Roll End)
+    
     public void DisableIFrame()
     {
-        if (playerBodyCollider) playerBodyCollider.enabled = true;
+        PlayerHealth.isInvincible = false;
     }
 }
