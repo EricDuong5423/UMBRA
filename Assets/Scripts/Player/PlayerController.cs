@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool isRolling = false;
     private bool isAttacking = false;
     private bool isHurting = false;
+    public static bool isMovable = true;
 
     private void Start()
     {
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (health.IsDead || isHurting) 
+        if (health.IsDead || isHurting || !isMovable) 
         {
             movement.StopMoving();
             return; 

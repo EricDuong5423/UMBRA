@@ -10,22 +10,17 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         statsManager = GetComponent<StatsManager>();
-        
-        // Setup Rigidbody cho game Top-Down
         rb.gravityScale = 0; 
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void Move(Vector2 direction)
     {
-        // Di chuyển bằng vận tốc vật lý
         rb.linearVelocity = direction * statsManager.MoveSpeed;
     }
 
     public void StartRoll(Vector2 direction, float rollSpeed)
     {
-        // Logic roll đơn giản: đẩy mạnh một cái
-        // (Để làm roll mượt hơn bạn có thể dùng Coroutine hoặc Animation Curve sau này)
         rb.linearVelocity = direction * rollSpeed;
     }
     

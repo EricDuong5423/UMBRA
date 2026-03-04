@@ -9,13 +9,23 @@ public class SliderController : MonoBehaviour
     void Start()
     {
         audioController = AudioController.Instance;
-        if (type.Equals("BGM"))
+        switch (type)
         {
-            slider.value = audioController.BGMVolume;
-        }
-        else
-        {
-            slider.value = audioController.SFXVolume;
+            case "BGM":
+            {
+                slider.value = audioController.BGMVolume;
+                break;
+            }
+            case "SFX":
+            {
+                slider.value = audioController.SFXVolume;
+                break;
+            }
+            case "Enviroment":
+            {
+                slider.value = audioController.EnviromentVolume;
+                break;
+            }
         }
     }
 }

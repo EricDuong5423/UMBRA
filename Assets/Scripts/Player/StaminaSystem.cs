@@ -14,16 +14,10 @@ public class StaminaSystem : MonoBehaviour
     private void Awake()
     {
         stats = GetComponent<StatsManager>();
-        
-        // XÓA đoạn gán currentStamina ở đây đi
-        // Vì lúc này stats có thể chưa tính toán xong
     }
 
     private void Start()
     {
-        // CHUYỂN VIỆC LẤY CHỈ SỐ XUỐNG ĐÂY
-        // Lý do: Hàm Start() luôn chạy sau khi TẤT CẢ hàm Awake() đã chạy xong.
-        // Đảm bảo StatsManager đã tính toán xong MaxStamina.
         if (stats != null)
         {
             currentStamina = stats.MaxStamina; 
@@ -32,8 +26,6 @@ public class StaminaSystem : MonoBehaviour
 
         BroadcastStamina();
     }
-    
-    // ... (Các phần còn lại giữ nguyên) ...
     
     private void OnDestroy() 
     {

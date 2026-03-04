@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Bonfire : MonoBehaviour
+public class Bonfire : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject interactionSection;
     [SerializeField] private GameObject initSection;
@@ -11,6 +11,7 @@ public class Bonfire : MonoBehaviour
     [SerializeField] private GameObject failSection;
     private PlayerHealth playerHealth;
     private CoinSystem playerCoin;
+    private Interactor playerInteractor;
 
     [SerializeField] private uint coinAmountRequired = 100;
     [SerializeField] private float healPercentAmount = 0.5f;
@@ -19,9 +20,19 @@ public class Bonfire : MonoBehaviour
     {
         if (other != null && other.gameObject.CompareTag("Player"))
         {
-            if (interactionSection) interactionSection.SetActive(true);
+            playerInteractor =  other.gameObject.GetComponent<Interactor>();
             playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerCoin = other.gameObject.GetComponent<CoinSystem>();
+        }
+    }
+    
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other != null && other.gameObject.CompareTag("Player"))
+        {
+            playerHealth = null;
+            playerCoin = null;
+            playerInteractor = null;
         }
     }
 
@@ -38,16 +49,28 @@ public class Bonfire : MonoBehaviour
         playerCoin.MinusCoins(100);
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    public void StopInteraction()
     {
-        if (other != null && other.gameObject.CompareTag("Player"))
-        {
-            if (interactionSection) interactionSection.SetActive(false);
-            playerHealth = null;
-            playerCoin = null;
-            successSection.SetActive(false);
-            failSection.SetActive(false);
-            initSection.SetActive(true);
-        }
+        PlayerController.isMovable = true;
+        playerHealth = null;
+        playerCoin = null;
+        successSection.SetActive(false);
+        failSection.SetActive(false);
+        initSection.SetActive(true);
+        interactionSection.SetActive(false);
+    }
+
+
+
+    public bool CanInteract()
+    {
+        return true;
+    }
+
+    public void Interact()
+    {
+        if (!CanInteract()) return;
+        PlayerController.isMovable = false;
+        interactionSection.SetActive(true);
     }
 }

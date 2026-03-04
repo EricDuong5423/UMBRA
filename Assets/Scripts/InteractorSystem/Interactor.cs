@@ -1,8 +1,15 @@
+using System;
 using UnityEngine;
 
 public class Interactor : MonoBehaviour
 {
     private IInteractable currentInteractableObject;
+    [SerializeField] private GameObject interactIcon;
+
+    void Start()
+    {
+        interactIcon.SetActive(false);
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && currentInteractableObject != null)
@@ -10,17 +17,26 @@ public class Interactor : MonoBehaviour
             if (currentInteractableObject.CanInteract())
             {
                 currentInteractableObject.Interact();
+                interactIcon.SetActive(false);
             }
         }
     }
 
-    public void SetInteractable(IInteractable interactable)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        currentInteractableObject = interactable;
+        if (other.gameObject.TryGetComponent(out IInteractable interactable) && interactable.CanInteract())
+        {
+            currentInteractableObject =  interactable;
+            interactIcon.SetActive(true);
+        }
     }
 
-    public void RemoveInteractable()
+    private void OnCollisionExit2D(Collision2D other)
     {
-        currentInteractableObject = null;
+        if (other.gameObject.TryGetComponent(out IInteractable interactable) && interactable == currentInteractableObject)
+        {
+            currentInteractableObject = null;
+            interactIcon.SetActive(false);
+        }
     }
 }
