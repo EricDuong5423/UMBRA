@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interactor : MonoBehaviour
@@ -17,26 +18,36 @@ public class Interactor : MonoBehaviour
             if (currentInteractableObject.CanInteract())
             {
                 currentInteractableObject.Interact();
-                interactIcon.SetActive(false);
+                TurnOffInteractIcon();
             }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public void TurnOnInteractIcon()
+    {
+        interactIcon.SetActive(true);
+    }
+
+    public void TurnOffInteractIcon()
+    {
+        interactIcon.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent(out IInteractable interactable) && interactable.CanInteract())
         {
             currentInteractableObject =  interactable;
-            interactIcon.SetActive(true);
+            TurnOnInteractIcon();
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent(out IInteractable interactable) && interactable == currentInteractableObject)
         {
             currentInteractableObject = null;
-            interactIcon.SetActive(false);
+            TurnOffInteractIcon();
         }
     }
 }

@@ -20,7 +20,13 @@ public class PlayerController : MonoBehaviour
     private bool isRolling = false;
     private bool isAttacking = false;
     private bool isHurting = false;
+    private Vector3 _baseScale;
     public static bool isMovable = true;
+
+    private void Awake()
+    {
+        _baseScale = transform.localScale;
+    }
 
     private void Start()
     {
@@ -63,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
+        Flip(x);
         moveInput = new Vector2(x, y).normalized;
         
         bool isMoving = moveInput.sqrMagnitude > 0.01f;
@@ -80,6 +87,18 @@ public class PlayerController : MonoBehaviour
         
         // Test Code
         if (Input.GetKeyDown(KeyCode.R)) coinSystem.AddCoins(100);
+    }
+
+    private void Flip(float horizontal)
+    {
+        if (horizontal < 0)
+        {
+            transform.localScale = new Vector3(-_baseScale.x, _baseScale.y, _baseScale.z);    
+        }
+        else if (horizontal > 0)
+        {
+            transform.localScale = _baseScale;
+        }
     }
 
     private void FixedUpdate()

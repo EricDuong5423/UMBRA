@@ -46,14 +46,22 @@ public class EntityHealth : MonoBehaviour, IDamageable
         
         BroadcastHealth();
 
-        Vector2 direction = Vector2.zero;
-        if (source != null)
+        if (currentEmbers <= 0)
         {
-            direction = (transform.position - source.position).normalized;
+            Die();
         }
-        OnHit?.Invoke(direction);
+        else
+        {
 
-        if (currentEmbers <= 0) Die();
+            Vector2 direction = Vector2.zero;
+            if (source != null)
+            {
+                direction = (transform.position - source.position).normalized;
+            }
+
+            OnHit?.Invoke(direction);
+
+        }
     }
 
     public virtual void Heal(float amount)

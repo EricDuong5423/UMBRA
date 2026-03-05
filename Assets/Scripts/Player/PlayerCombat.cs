@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [Header("Weapon References (Child Objects)")]
-    [SerializeField] private Collider2D attackLeftCollider;
-    [SerializeField] private Collider2D attackRightCollider;
+    [Header("Weapon References (Child Objects)")] 
+    [SerializeField] private Collider2D normalAttackCollider;
 
     private StatsManager statsManager;
 
@@ -15,49 +14,28 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
-        // Tự động setup cho 2 vũ khí
-        SetupWeapon(attackLeftCollider);
-        SetupWeapon(attackRightCollider);
+        SetupWeapon(normalAttackCollider);
     }
 
     private void SetupWeapon(Collider2D col)
     {
         if (col != null)
         {
-            // 1. Đảm bảo có script Hitbox
             var hitbox = col.GetComponent<PlayerWeaponHitbox>();
             if (hitbox == null) hitbox = col.gameObject.AddComponent<PlayerWeaponHitbox>();
-            
-            // 2. Nạp chỉ số damage
             hitbox.Initialize(statsManager.AttackDamage, transform);
-            
-            // 3. Tắt hitbox mặc định
             col.enabled = false; 
         }
     }
 
-    // --- ANIMATION EVENTS (Đặt tên chuẩn PascalCase) ---
-
-    // Gọi khi animation chém trái bắt đầu gây dmg
-    public void TurnOnLeftAttackCollider()
+    public void TurnOnNormalAttackCollider()
     {
-        if (attackLeftCollider) attackLeftCollider.enabled = true;
+        if(normalAttackCollider) normalAttackCollider.enabled = true;
     }
 
-    public void TurnOffLeftAttackCollider()
+    public void TurnOffNormalAttackCollider()
     {
-        if (attackLeftCollider) attackLeftCollider.enabled = false;
-    }
-
-    // Gọi khi animation chém phải bắt đầu gây dmg
-    public void TurnOnRightAttackCollider()
-    {
-        if (attackRightCollider) attackRightCollider.enabled = true;
-    }
-
-    public void TurnOffRightAttackCollider()
-    {
-        if (attackRightCollider) attackRightCollider.enabled = false;
+        if(normalAttackCollider) normalAttackCollider.enabled = false;
     }
     
     public void EnableIFrame()
