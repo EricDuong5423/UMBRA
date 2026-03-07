@@ -20,16 +20,15 @@ public class StaminaSystem : MonoBehaviour
     {
         if (stats != null)
         {
-            currentStamina = stats.MaxStamina; 
-            stats.OnLevelChanged += HandleLevelUp;
+            currentStamina = stats.MaxStamina;
+            stats.OnStatsChange += HandleStatsChanged;
         }
-
         BroadcastStamina();
     }
     
     private void OnDestroy() 
     {
-        if(stats) stats.OnLevelChanged -= HandleLevelUp;
+        if (stats != null) stats.OnStatsChange -= HandleStatsChanged;
     }
 
     private void Update()
@@ -53,9 +52,9 @@ public class StaminaSystem : MonoBehaviour
         return false;
     }
 
-    private void HandleLevelUp()
+    private void HandleStatsChanged()
     {
-        currentStamina = MaxStamina;
+        currentStamina = Mathf.Clamp(currentStamina, 0, stats.MaxStamina);
         BroadcastStamina();
     }
 

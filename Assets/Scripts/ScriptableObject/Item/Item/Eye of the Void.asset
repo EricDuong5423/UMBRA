@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f751bff750879498796a0e2eb7ccc9, type: 3}
+  m_Name: Eye of the Void
+  m_EditorClassIdentifier: 
+  Name: Eye of the Void
+  Type: 3
+  Icon: {fileID: 5803681514650601596, guid: 2f6d08cb5fa7754409d029f126937ca9, type: 3}
+  Description: An ancient ring radiating pure dark energy. It seeks the weak points
+    of your enemies.
+  bonusMaxEmbers: 0
+  bonusMoveSpeed: 0
+  bonusAttackDmg: 0
+  bonusStamina: 0
+  bonusStaminaRegen: 0
+  bonusCritRate: 2
+  bonusCritDamage: 10

@@ -7,12 +7,39 @@ public class PlayerHealth : EntityHealth
     [SerializeField] private float iFrameDuration = 0.5f;
     public static bool isInvincible = false;
 
+    private StatsManager stats;
+
+    private void Awake()
+    {
+        stats = GetComponent<StatsManager>();
+    }
+
+    private void Start()
+    {
+        if (stats != null)
+        {
+            InitializeHealth(stats.MaxEmbers);
+            stats.OnStatsChange += HandleStatsChanged;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (stats != null) stats.OnStatsChange -= HandleStatsChanged;
+    }
+
+    private void HandleStatsChanged()
+    {
+        UpdateMaxHealth(stats.MaxEmbers);
+    }
+
     public override void TakeDamage(float amount, Transform source)
     {
-        if (isInvincible || isDead) return;
+        if (isInvincible || IsDead) return;
 
         base.TakeDamage(amount, source);
-        StartCoroutine(InvincibilityRoutine());
+        
+        if (!IsDead) StartCoroutine(InvincibilityRoutine());
     }
 
     private IEnumerator InvincibilityRoutine()

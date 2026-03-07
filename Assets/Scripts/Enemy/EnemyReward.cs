@@ -2,23 +2,25 @@ using UnityEngine;
 
 public class EnemyReward : MonoBehaviour
 {
+    [Header("Reward Data")]
     [SerializeField] private EnemyStats stats;
-
-    private EnemyHealth healthSystem; // Đổi thành EnemyHealth
+    [Header("Loot Settings")]
+    [SerializeField] private LootTable myLootTable;
+    private EnemyHealth enemyHealth;
 
     private void Awake()
     {
-        healthSystem = GetComponent<EnemyHealth>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     private void Start()
     {
-        if (healthSystem) healthSystem.OnDeath += GiveReward;
+        if (enemyHealth) enemyHealth.OnDeath += GiveReward;
     }
 
     private void OnDestroy()
     {
-        if (healthSystem) healthSystem.OnDeath -= GiveReward;
+        if (enemyHealth) enemyHealth.OnDeath -= GiveReward;
     }
 
     private void GiveReward()
@@ -27,15 +29,16 @@ public class EnemyReward : MonoBehaviour
 
         if (player != null)
         {
-            var playerStats = player.GetComponent<StatsManager>();
-            if (playerStats) playerStats.AddExperience(stats.xpReward);
-
-            // Tìm PlayerHealth để hồi máu
             var playerHealth = player.GetComponent<PlayerHealth>();
             if (playerHealth) playerHealth.Heal(stats.healOnKill);
 
             var playerCoin = player.GetComponent<CoinSystem>();
             if(playerCoin) playerCoin.AddCoins(stats.ligthShardOnKill);
+        }
+
+        if (LootManager.Instance != null && myLootTable != null)
+        {
+            LootManager.Instance.TryDropItem(transform.position, myLootTable);
         }
     }
 }

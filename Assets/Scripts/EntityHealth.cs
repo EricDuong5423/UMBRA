@@ -1,91 +1,64 @@
 using System;
 using UnityEngine;
 
-// Kế thừa IDamageable để vũ khí nhận diện được
-public class EntityHealth : MonoBehaviour, IDamageable
+public abstract class EntityHealth : MonoBehaviour, IDamageable
 {
     public event Action<float, float> OnHealthChanged;
     public event Action<Vector2> OnHit;
     public event Action OnDeath;
-
-    protected StatsManager stats;
-    protected float currentEmbers;
-    protected bool isDead = false;
-
-    // Public Getter
-    public float CurrentEmbers => currentEmbers;
-    public float MaxEmbers => stats != null ? stats.MaxEmbers : 100f;
-    public bool IsDead => isDead; // Để Controller check
-
-    protected virtual void Awake()
+    public float CurrentEmbers { get; protected set; }
+    public float MaxEmbers { get; protected set; }
+    public bool IsDead { get; protected set; } 
+    protected void InitializeHealth(float maxHealth)
     {
-        stats = GetComponent<StatsManager>();
-    }
-
-    protected virtual void Start()
-    {
-        if (stats) currentEmbers = stats.MaxEmbers;
-        
-        if (stats) stats.OnLevelChanged += HandleLevelUp;
-    
+        MaxEmbers = maxHealth;
+        CurrentEmbers = maxHealth;
         BroadcastHealth();
     }
 
-    protected virtual void OnDestroy()
+    protected void UpdateMaxHealth(float newMaxHealth)
     {
-        if (stats) stats.OnLevelChanged -= HandleLevelUp;
+        MaxEmbers = newMaxHealth;
+        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
+        BroadcastHealth();
     }
 
-    // Implement từ Interface IDamageable
+    // --- LOGIC CHUNG CHO MỌI THỰC THỂ ---
     public virtual void TakeDamage(float amount, Transform source)
     {
-        if (isDead) return;
+        if (IsDead) return;
 
-        currentEmbers -= amount;
-        currentEmbers = Mathf.Clamp(currentEmbers, 0, MaxEmbers);
-        
+        CurrentEmbers -= amount;
+        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
         BroadcastHealth();
 
-        if (currentEmbers <= 0)
+        if (CurrentEmbers <= 0) 
         {
             Die();
         }
-        else
+        else 
         {
-
-            Vector2 direction = Vector2.zero;
-            if (source != null)
-            {
-                direction = (transform.position - source.position).normalized;
-            }
-
+            Vector2 direction = source != null ? (Vector2)(transform.position - source.position).normalized : Vector2.zero;
             OnHit?.Invoke(direction);
-
         }
     }
 
     public virtual void Heal(float amount)
     {
-        if (isDead) return;
-        currentEmbers += amount;
-        currentEmbers = Mathf.Clamp(currentEmbers, 0, MaxEmbers);
+        if (IsDead) return;
+        CurrentEmbers += amount;
+        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
         BroadcastHealth();
     }
 
     protected virtual void Die()
     {
-        isDead = true;
+        IsDead = true;
         OnDeath?.Invoke();
-    }
-
-    protected virtual void HandleLevelUp()
-    {
-        currentEmbers = MaxEmbers;
-        BroadcastHealth();
     }
 
     protected void BroadcastHealth()
     {
-        OnHealthChanged?.Invoke(currentEmbers, MaxEmbers);
+        OnHealthChanged?.Invoke(CurrentEmbers, MaxEmbers);
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerHealth health;
     [SerializeField] private StatsManager statsManager;
     [SerializeField] private CoinSystem coinSystem;
+    [SerializeField] private ItemManager playerInventory;
 
     private Vector2 moveInput;
     private float nextRollTime;
@@ -86,7 +88,11 @@ public class PlayerController : MonoBehaviour
         }
         
         // Test Code
-        if (Input.GetKeyDown(KeyCode.R)) coinSystem.AddCoins(100);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ItemData item = playerInventory.randomItemsDebug[Random.Range(0, playerInventory.randomItemsDebug.Count)];
+            playerInventory.AddItem(item);
+        }
     }
 
     private void Flip(float horizontal)
@@ -103,10 +109,16 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isRolling && !isAttacking && !health.IsDead && !isHurting) 
-            movement.Move(moveInput);
-        else 
+        if (health.IsDead || isHurting || isAttacking) 
+        {
             movement.StopMoving();
+            return;
+        }
+        if (isRolling)
+        {
+            return; 
+        }
+        movement.Move(moveInput);
     }
     
     private void Attack()

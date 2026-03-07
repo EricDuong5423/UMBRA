@@ -7,8 +7,9 @@ public class PlayerStats : EntitesStats
     public float rollSpeed = 15f;
     public float rollCooldown = 1f;
 
-    [Header("Leveling Settings")]
-    public float xpRequirementMultiplier = 1.5f;
+    [Header("Player other stats")] 
+    public float critRate = 0f;
+    public float critDamage = 0f;
 
     [Header("Light Mechanics (Visuals)")] 
     

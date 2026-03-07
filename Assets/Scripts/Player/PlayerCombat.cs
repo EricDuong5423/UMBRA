@@ -23,7 +23,7 @@ public class PlayerCombat : MonoBehaviour
         {
             var hitbox = col.GetComponent<PlayerWeaponHitbox>();
             if (hitbox == null) hitbox = col.gameObject.AddComponent<PlayerWeaponHitbox>();
-            hitbox.Initialize(statsManager.AttackDamage, transform);
+            hitbox.Initialize(statsManager, transform);
             col.enabled = false; 
         }
     }

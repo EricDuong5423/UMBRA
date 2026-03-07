@@ -11,9 +11,6 @@ public class PlayerVisuals : MonoBehaviour
     private PlayerStats playerStats; 
     private PlayerHealth playerHealth;
 
-    // SỬA 1: Đổi int thành float (Mặc định nhìn phải = 1f)
-    private float lastX = 1f; 
-
     public void Initialize(PlayerStats stats, PlayerHealth health)
     {
         playerStats = stats;

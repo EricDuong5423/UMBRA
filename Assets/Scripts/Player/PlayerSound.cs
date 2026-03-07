@@ -10,12 +10,14 @@ public class PlayerSound : MonoBehaviour
     public void playDirtStepsSound()
     {
         AudioClip randomAudioClip = playerStepsInDirtClip[Random.Range(0, playerStepsInDirtClip.Count)];
+        if(AudioController.Instance == null) return;
         AudioController.Instance.PlaySFXSound(randomAudioClip);
     }
 
     public void playAttackSound()
     {
         AudioClip randomAudioClip = playerAttack[Random.Range(0, playerAttack.Count)];
+        if(AudioController.Instance == null) return;
         AudioController.Instance.PlaySFXSound(randomAudioClip);
     }
 }

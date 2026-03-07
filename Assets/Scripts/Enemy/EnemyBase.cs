@@ -3,23 +3,21 @@ using UnityEngine;
 public enum EnemyState { Idle, Chase, Attack, Dead, Hurt }
 
 [RequireComponent(typeof(EnemyHealth))] 
-[RequireComponent(typeof(StatsManager))]
+[RequireComponent(typeof(EnemyStatsManager))]
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class EnemyBase : MonoBehaviour
 {
     [Header("Setup")]
     [SerializeField] protected EnemyStats stats;
-    
-    // BIẾN DUY NHẤT ĐỂ CHỨA VŨ KHÍ CỦA QUÁI
     [SerializeField] protected Collider2D weaponCollider; 
 
     [Header("Combat Settings")]
-    [SerializeField] protected float hurtDuration = 0.5f; // Thời gian bị choáng
+    [SerializeField] protected float hurtDuration = 0.5f;
     
     protected Transform target;
     protected EnemyHealth healthSystem;
     public EnemyHealth HealthSystem => healthSystem;
-    public StatsManager statsManager;
+    public EnemyStatsManager statsManager;
     protected Rigidbody2D rb;
     protected Animator anim;
     protected SpriteRenderer spriteRenderer;
@@ -32,7 +30,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Awake()
     {
         healthSystem = GetComponent<EnemyHealth>();
-        statsManager = GetComponent<StatsManager>();
+        statsManager = GetComponent<EnemyStatsManager>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();

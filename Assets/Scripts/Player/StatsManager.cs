@@ -1,93 +1,112 @@
 using System;
 using UnityEngine;
+using Random = System.Random;
 
 public class StatsManager : MonoBehaviour
 {
     [Header("Data")]
-    [SerializeField] private EntitesStats baseStats; 
+    [SerializeField] private PlayerStats baseStats; 
 
-    [Header("Runtime")]
-    [SerializeField] private int currentLevel = 1;
-    [SerializeField] private int currentExp = 0;
-    [SerializeField] private int expToNextLevel = 100;
-
-    // --- CACHED VALUES (Biến lưu đệm) ---
+    [Header("Equipment Bonuses")] 
+    public float bonusMaxEmbers = 0;
+    public float bonusMoveSpeed = 0;
+    public float bonusAttackDamage = 0;
+    public float bonusMaxStamina = 0;
+    public float bonusStaminaRegen = 0;
+    public float bonusCritRate = 0;
+    public float bonusCritDamage = 0;
+    
     private float _maxEmbers;
     private float _moveSpeed;
     private float _attackDamage;
     private float _maxStamina;
     private float _staminaRegen;
+    private float _critRate;
+    private float _critDamage;
 
-    // Public Getters lấy giá trị từ Cache (Siêu nhanh)
-    public int CurrentLevel => currentLevel;
-    public int CurrentExp => currentExp;
-    public int ExpToNextLevel => expToNextLevel;
-    
     public float MaxEmbers => _maxEmbers;
     public float MoveSpeed => _moveSpeed;
     public float AttackDamage => _attackDamage;
+    
+    public float CritRate => _critRate;
+    
+    public float CritDamage => _critDamage;
+
     public float MaxStamina => _maxStamina;
     public float StaminaRegen => _staminaRegen;
     
-    public EntitesStats BaseStats => baseStats;
+    public PlayerStats BaseStats => baseStats;
 
-    // Events
-    public event Action OnLevelChanged;
-    public event Action<int, int, int> OnExpChanged;
+    public float GetCalculatedHitDamage()
+    {
+        float randomChance = UnityEngine.Random.Range(0f, 100f);
+        if (randomChance <= _critRate)
+        {
+            return _attackDamage * (1f + _critDamage);
+        }
+        return _attackDamage;
+    }
+
+    public event Action OnStatsChange;
 
     private void Awake()
     {
         RecalculateStats();
     }
-    private void Start()
-    {
-        BroadcastExp();
-    }
-
-    // Hàm tính toán chỉ số (Chỉ chạy 1 lần khi Start hoặc LevelUp)
-    private void RecalculateStats()
+    public void RecalculateStats()
     {
         if (baseStats == null) return;
-        
-        _maxEmbers = CalculateStat(baseStats.baseMaxEmbers, baseStats.healthGrowth);
-        _moveSpeed = CalculateStat(baseStats.baseMoveSpeed, baseStats.speedGrowth);
-        _attackDamage = CalculateStat(baseStats.baseAtkDamage, baseStats.damageGrowth);
-        _maxStamina = CalculateStat(baseStats.baseMaxStamina, baseStats.staminaGrowth);
-        _staminaRegen = CalculateStat(baseStats.baseStaminaRegen, baseStats.staminaRegenGrowth);
-    }
-
-    private float CalculateStat(float baseVal, float growth)
-    {
-        return baseVal * Mathf.Pow(growth, currentLevel - 1);
-    }
-
-    private void BroadcastExp()
-    {
-        OnExpChanged?.Invoke(currentLevel, currentExp, expToNextLevel);
+        _maxEmbers = baseStats.baseMaxEmbers + bonusMaxEmbers;
+        _moveSpeed = baseStats.baseMoveSpeed + bonusMoveSpeed;
+        _attackDamage = baseStats.baseAtkDamage + bonusAttackDamage;
+        _maxStamina = baseStats.baseMaxStamina + bonusMaxStamina;
+        _staminaRegen = baseStats.baseStaminaRegen + bonusStaminaRegen;
+        _critRate = baseStats.critRate + bonusCritRate;
+        _critDamage = baseStats.critDamage + bonusCritDamage;
+        OnStatsChange?.Invoke();
     }
     
-    public void AddExperience(int amount)
+    // Bonus stats add functions
+
+    public void AddDamageModifier(float amount)
     {
-        currentExp += amount;
-        while (currentExp >= expToNextLevel)
-        {
-            currentExp -= expToNextLevel;
-            LevelUp();
-        }
-        BroadcastExp();
-    }
-    
-    public void LevelUp()
-    {
-        currentLevel++;
-        expToNextLevel = Mathf.RoundToInt(expToNextLevel * 1.2f);
-        
+        bonusAttackDamage += amount;
         RecalculateStats();
-        
-        OnLevelChanged?.Invoke();
-        OnExpChanged?.Invoke(currentLevel, currentExp, expToNextLevel);
     }
 
-    [ContextMenu("Test Level Up")]
-    public void TestLevelUp() => AddExperience(expToNextLevel);
+    public void AddCritRateModifier(float amount)
+    {
+        bonusCritRate += amount;
+        RecalculateStats();
+    }
+
+    public void AddCritDamageModifier(float amount)
+    {
+        bonusCritDamage += amount;
+        RecalculateStats();
+    }
+
+    public void AddStaminaModifier(float amount)
+    {
+        bonusMaxStamina += amount;
+        RecalculateStats();
+    }
+
+    public void AddMaxEmbersModifier(float amount)
+    {
+        bonusMaxEmbers += amount;
+        RecalculateStats();
+    }
+
+    public void AddMoveSpeedModifier(float amount)
+    {
+        bonusMoveSpeed += amount;
+        RecalculateStats();
+    }
+
+    public void AddStaminaRegenModifier(float amount)
+    {
+        bonusStaminaRegen += amount;
+        RecalculateStats();
+    }
 }
