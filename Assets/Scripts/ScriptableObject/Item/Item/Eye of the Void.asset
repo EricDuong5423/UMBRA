@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eye of the Void
   m_EditorClassIdentifier: 
   Name: Eye of the Void
-  Type: 3
+  Rarity: 3
   Icon: {fileID: 5803681514650601596, guid: 2f6d08cb5fa7754409d029f126937ca9, type: 3}
   Description: An ancient ring radiating pure dark energy. It seeks the weak points
     of your enemies.
@@ -24,3 +24,4 @@ MonoBehaviour:
   bonusStaminaRegen: 0
   bonusCritRate: 2
   bonusCritDamage: 10
+  effects: {fileID: 11400000, guid: 454d0e53220853640879f666ce4fd31e, type: 2}

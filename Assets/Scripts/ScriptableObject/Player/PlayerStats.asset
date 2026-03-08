@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMaxEmbers: 100
   baseMoveSpeed: 2.5
-  baseAtkDamage: 100
+  baseAtkDamage: 10
   baseMaxStamina: 100
   baseStaminaRegen: 10
   silhouetteColor: {r: 0, g: 0, b: 0, a: 1}

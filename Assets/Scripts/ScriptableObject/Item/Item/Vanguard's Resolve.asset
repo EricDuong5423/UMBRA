@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Vanguard's Resolve
   m_EditorClassIdentifier: 
   Name: Vanguard's Resolve
-  Type: 0
+  Rarity: 0
   Icon: {fileID: -6360245308494984325, guid: e1ad99bab90a13348b6f2d042d59ccbd, type: 3}
   Description: A standard issue shield, heavily dented but never broken. It takes
     the brunt of the exertion.
@@ -24,3 +24,4 @@ MonoBehaviour:
   bonusStaminaRegen: 0
   bonusCritRate: 0
   bonusCritDamage: 0
+  effects: []

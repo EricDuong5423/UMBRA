@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tome of the Evergreen
   m_EditorClassIdentifier: 
   Name: Tome of the Evergreen
-  Type: 1
+  Rarity: 1
   Icon: {fileID: -7532490490740612965, guid: 089add6de35c71347a2894780002b331, type: 3}
   Description: Its pages smell of fresh pine and morning dew. Reading it invigorates
     the soul.
@@ -24,3 +24,4 @@ MonoBehaviour:
   bonusStaminaRegen: 5
   bonusCritRate: 0
   bonusCritDamage: 0
+  effects: []

@@ -55,4 +55,43 @@ public class ItemManager : MonoBehaviour
         }
         statsManager.RecalculateStats();
     }
+
+    public void TriggerOnHitEffects(IDamageable enemy, float damage)
+    {
+        foreach (var kvp in inventory)
+        {
+            ItemData item = kvp.Key;
+            int stack = kvp.Value;
+            if (item.effects != null && item.effects != null)
+            {
+                item.effects.OnHitEnemy(gameObject, enemy, damage, stack);
+            }
+        }
+    }
+
+    public void TriggerOnKillEnemyEffect()
+    {
+        foreach (var kvp in inventory)
+        {
+            ItemData item = kvp.Key;
+            int stack = kvp.Value;
+            if (item.effects != null && item.effects != null)
+            {
+                item.effects.OnKillEnemy(gameObject, stack);
+            }
+        }
+    }
+
+    public void TriggerOnPlayerTakeDamageEffect(float damageTaken)
+    {
+        foreach (var kvp in inventory)
+        {
+            ItemData item = kvp.Key;
+            int stack = kvp.Value;
+            if (item.effects != null && item.effects != null)
+            {
+                item.effects.OnPlayerTakeDamage(gameObject, damageTaken, stack);
+            }
+        }
+    }
 }

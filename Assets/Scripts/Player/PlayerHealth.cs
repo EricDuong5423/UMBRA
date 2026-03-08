@@ -36,8 +36,10 @@ public class PlayerHealth : EntityHealth
     public override void TakeDamage(float amount, Transform source)
     {
         if (isInvincible || IsDead) return;
-
         base.TakeDamage(amount, source);
+        ItemManager inventory =  GetComponent<ItemManager>();
+        if (!inventory) return;
+        inventory.TriggerOnPlayerTakeDamageEffect(amount);
         
         if (!IsDead) StartCoroutine(InvincibilityRoutine());
     }

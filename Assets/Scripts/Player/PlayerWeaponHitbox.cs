@@ -19,6 +19,12 @@ public class PlayerWeaponHitbox : MonoBehaviour
             if (!stats) return;
             float finalDamage = stats.GetCalculatedHitDamage();
             target.TakeDamage(finalDamage, owner);
+            if (!owner) return;
+            ItemManager inventory = owner.GetComponent<ItemManager>();
+            if (inventory != null)
+            {
+                inventory.TriggerOnHitEffects(target, finalDamage);
+            }
         }
     }
 }

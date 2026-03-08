@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Crimson Edge
   m_EditorClassIdentifier: 
   Name: Crimson Edge
-  Type: 4
+  Rarity: 4
   Icon: {fileID: 2370178707641904052, guid: 6e00a4149d8a714429591c90959289c7, type: 3}
   Description: A blade thirsty for battle. It feels unnaturally warm to the touch.
   bonusMaxEmbers: 0
@@ -23,3 +23,5 @@ MonoBehaviour:
   bonusStaminaRegen: 0
   bonusCritRate: 0
   bonusCritDamage: 0
+  effects:
+  - {fileID: 11400000, guid: 3fed340e51c7640419991e9ecdc15436, type: 2}

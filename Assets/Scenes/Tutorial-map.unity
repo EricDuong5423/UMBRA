@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 125104298}
   - component: {fileID: 125104300}
   - component: {fileID: 125104299}
+  - component: {fileID: 125104301}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -743,12 +744,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomItemsDebug:
-  - {fileID: 11400000, guid: 9ecba27ff3f755440b4d5de3f278a6c3, type: 2}
-  - {fileID: 11400000, guid: c6469e7fc15071240ab68d2736a3c3e3, type: 2}
   - {fileID: 11400000, guid: 2d3f0a2bf73c7ea4aa1f85d65854a427, type: 2}
-  - {fileID: 11400000, guid: ab39bbe74f9436a4e9612a6977387076, type: 2}
-  - {fileID: 11400000, guid: 2b24f689981a5684a866abd375ef9fbb, type: 2}
-  - {fileID: 11400000, guid: 235a149f8096f2844b80a58ce3115a0b, type: 2}
+--- !u!114 &125104301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125104280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089682d409d970e44aad6d59037a6a69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeEffects: []
 --- !u!1 &126989543
 GameObject:
   m_ObjectHideFlags: 0
@@ -17465,6 +17474,7 @@ GameObject:
   - component: {fileID: 1659987029}
   - component: {fileID: 1659987030}
   - component: {fileID: 1659987031}
+  - component: {fileID: 1659987032}
   m_Layer: 8
   m_Name: Skeleton
   m_TagString: Enemy
@@ -17697,6 +17707,19 @@ MonoBehaviour:
   bonusMaxEmbers: 0
   bonusMoveSpeed: 0
   bonusAttackDamage: 0
+--- !u!114 &1659987032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659987019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ff0e1314e822b45a4c6ca2a80f161b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeEffects: []
 --- !u!1 &1711284190
 GameObject:
   m_ObjectHideFlags: 0

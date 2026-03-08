@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Windwalker Boots
   m_EditorClassIdentifier: 
   Name: Windwalker Boots
-  Type: 0
+  Rarity: 0
   Icon: {fileID: 4418083714772906797, guid: 563ffb0b527e4954c9837bd40e863600, type: 3}
   Description: Woven from the feathers of a legendary bird. Makes you feel light
     as a feather.
   bonusMaxEmbers: 0
-  bonusMoveSpeed: 1.5
+  bonusMoveSpeed: 0.1
   bonusAttackDmg: 0
   bonusStamina: 0
   bonusStaminaRegen: 0
   bonusCritRate: 0
   bonusCritDamage: 0
+  effects: {fileID: 11400000, guid: 7e733003ba95d6b4b8f72d9ebc15bb1c, type: 2}

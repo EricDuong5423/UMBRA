@@ -40,5 +40,9 @@ public class EnemyReward : MonoBehaviour
         {
             LootManager.Instance.TryDropItem(transform.position, myLootTable);
         }
+
+        ItemManager inventory = player.GetComponent<ItemManager>();
+        if (!inventory) return;
+        inventory.TriggerOnKillEnemyEffect();
     }
 }
