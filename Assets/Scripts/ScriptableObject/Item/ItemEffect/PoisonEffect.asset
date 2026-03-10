@@ -15,5 +15,6 @@ MonoBehaviour:
   Name: Poison
   Description: Damage over time by using poison
   baseDuration: 3
+  EffectVFXPrefab: {fileID: 6139276577770672751, guid: 733ff3170c17c4f94a1631fb91f96f57, type: 3}
   DamagePerTick: 10
   TickInterval: 0.5

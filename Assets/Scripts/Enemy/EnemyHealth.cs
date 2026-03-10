@@ -6,7 +6,6 @@ public class EnemyHealth : EntityHealth
 
     private void Awake()
     {
-        // Tìm StatsManager của riêng Quái
         enemyStats = GetComponent<EnemyStatsManager>();
     }
 
@@ -14,7 +13,6 @@ public class EnemyHealth : EntityHealth
     {
         if (enemyStats != null)
         {
-            // Bơm máu gốc dựa theo EnemyStatsManager
             InitializeHealth(enemyStats.MaxEmbers);
             enemyStats.OnStatsChange += HandleStatsChanged;
         }
@@ -30,10 +28,8 @@ public class EnemyHealth : EntityHealth
         UpdateMaxHealth(enemyStats.MaxEmbers);
     }
 
-    protected override void Die()
+    public void DestroySelf()
     {
-        base.Die();
-        
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
 }

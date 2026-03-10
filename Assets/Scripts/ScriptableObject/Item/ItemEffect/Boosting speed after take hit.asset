@@ -15,4 +15,5 @@ MonoBehaviour:
   Name: Speed boosting after take hit
   Description: Boosting speed after getting hit
   baseDuration: 1
+  EffectVFXPrefab: {fileID: 6326746862184855928, guid: cf3f54932b04844fb99722bfeb8bfb10, type: 3}
   speedBoost: 0.5

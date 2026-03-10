@@ -2,9 +2,12 @@ using UnityEngine;
 
 public abstract class ItemEffect : ScriptableObject
 {
+    [Header("Basic info")]
     public string Name;
     [TextArea]public string Description;
     public float baseDuration = 3f;
+    [Header("Effect VFX")]
+    public GameObject EffectVFXPrefab;
     public virtual void OnHitEnemy(GameObject player, IDamageable enemy, float damage, int stackCount){}
     public virtual void OnKillEnemy(GameObject player, int stackCount){}
     public virtual void OnPlayerTakeDamage(GameObject player, float damageTaken, int stackCount){}

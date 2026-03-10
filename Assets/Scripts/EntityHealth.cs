@@ -22,8 +22,6 @@ public abstract class EntityHealth : MonoBehaviour, IDamageable
         CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
         BroadcastHealth();
     }
-
-    // --- LOGIC CHUNG CHO MỌI THỰC THỂ ---
     public virtual void TakeDamage(float amount, Transform source)
     {
         if (IsDead) return;
@@ -40,6 +38,18 @@ public abstract class EntityHealth : MonoBehaviour, IDamageable
         {
             Vector2 direction = source != null ? (Vector2)(transform.position - source.position).normalized : Vector2.zero;
             OnHit?.Invoke(direction);
+        }
+    }
+
+    public virtual void TakeDoTDamage(float amount)
+    {
+        if (IsDead) return;
+        CurrentEmbers -= amount;
+        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
+        BroadcastHealth();
+        if (CurrentEmbers <= 0)
+        {
+            Die();
         }
     }
 

@@ -67,28 +67,21 @@ public abstract class EnemyBase : MonoBehaviour
             healthSystem.OnHit -= HandleHit;
         }
     }
-
-    // --- LOGIC XỬ LÝ BỊ ĐÁNH (QUAN TRỌNG) ---
+    
     protected virtual void HandleHit(Vector2 dir)
     {
-        // 1. Chuyển ngay sang trạng thái Hurt
         ChangeState(EnemyState.Hurt);
         
-        // 2. TẮT NGAY VŨ KHÍ (Hủy đòn đánh hiện tại)
         DisableEnemyHitBox();
-
-        // 3. Dừng di chuyển
+        
         StopMovement();
-
-        // 4. Reset các trigger tấn công trong Animator (để tránh lưu lệnh đánh cũ)
         if(anim) 
         {
-            anim.ResetTrigger("Attack1"); // Tên trigger tùy theo Skeleton của bạn
+            anim.ResetTrigger("Attack1");
             anim.ResetTrigger("Attack2");
             anim.SetTrigger("Hurt");
         }
-
-        // 5. Tính thời gian hết choáng
+        
         hurtEndTime = Time.time + hurtDuration;
     }
 
@@ -150,13 +143,11 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void LogicHurt()
     {
-        // Trong lúc bị đau: Cưỡng chế đứng im
         StopMovement();
         
-        // Kiểm tra hết giờ chưa
         if (Time.time >= hurtEndTime)
         {
-            ChangeState(EnemyState.Chase); // Hết đau thì quay lại đuổi
+            ChangeState(EnemyState.Chase);
         }
     }
 

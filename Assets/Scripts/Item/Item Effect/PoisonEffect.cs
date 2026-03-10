@@ -24,7 +24,7 @@ public class PoisonEffect : ItemEffect
             IDamageable damageable = target.GetComponent<IDamageable>();
             if (damageable == null) return;
             float totalDamage = DamagePerTick * activeData.stackCount;
-            damageable.TakeDamage(totalDamage, null);
+            damageable.TakeDoTDamage(totalDamage);
             activeData.nextTickTime = Time.time + TickInterval;
         }
     }

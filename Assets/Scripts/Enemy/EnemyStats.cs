@@ -7,7 +7,6 @@ public class EnemyStats : EntitesStats
     public string enemyName = "Monster";
 
     [Header("Rewards")]
-    public int xpReward = 20;        // Tăng kinh nghiệm
     public float healOnKill = 10f;   // Hồi máu cho Player khi giết con này
     public uint ligthShardOnKill = 10; //Tiền sau khi giết
 

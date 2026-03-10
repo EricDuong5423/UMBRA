@@ -28,7 +28,7 @@ public class ItemSlotUI : MonoBehaviour
     {
         switch (itemRarity)
         {
-            case ItemRarity.Common: return Color.white;
+            case ItemRarity.Common: return Color.gray;
             case ItemRarity.Uncommon: return Color.green;
             case ItemRarity.Rare: return new Color(0f, 0.5f, 1f);
             case ItemRarity.Epic: return new  Color(0.6f, 0.1f, 0.9f);
