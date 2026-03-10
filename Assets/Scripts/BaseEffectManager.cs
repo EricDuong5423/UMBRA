@@ -6,6 +6,9 @@ public abstract class BaseEffectManager : MonoBehaviour
 {
     public List<ActiveEffect> activeEffects = new List<ActiveEffect>();
     protected EntityHealth healthSystem;
+    
+    public event Action<ActiveEffect, Transform> OnEffectStarted;
+    public event Action<ActiveEffect> OnEffectEnded;
 
     protected virtual void Awake()
     {
@@ -27,7 +30,7 @@ public abstract class BaseEffectManager : MonoBehaviour
 
             effectData.OnEffectApplied(gameObject, stacks);
             
-            OnEffectAdded(newEffect);
+            OnEffectStarted?.Invoke(newEffect, transform);
         }
     }
 
@@ -42,12 +45,9 @@ public abstract class BaseEffectManager : MonoBehaviour
             if (current.durationTimer <= 0)
             {
                 current.effectData.OnEffectRemoved(gameObject, current.stackCount);
-                OnEffectRemoved(current);
+                OnEffectEnded?.Invoke(current);
                 activeEffects.RemoveAt(i);
             }
         }
     }
-    
-    protected virtual void OnEffectAdded(ActiveEffect effect){}
-    protected virtual void OnEffectRemoved(ActiveEffect effect){}
 }

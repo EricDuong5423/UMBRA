@@ -15,5 +15,22 @@ MonoBehaviour:
   Name: Speed boosting after take hit
   Description: Boosting speed after getting hit
   baseDuration: 1
-  EffectVFXPrefab: {fileID: 6326746862184855928, guid: cf3f54932b04844fb99722bfeb8bfb10, type: 3}
+  vfxFrames:
+  - {fileID: -4965461386674320956, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 2767512872368101590, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: -3154650709727212153, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 4197550155672469071, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 8544095637233017539, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 3232715875015924842, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: -865472079992361682, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: -3040882510606726364, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 183529119695479382, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 6246495318474152922, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 2757782196929828021, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 989672193485236133, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: -1956455596127592828, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: -2099453883027646928, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: 4746201402229973324, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  - {fileID: -7722315607846520857, guid: 0208c7cc4f7e346968e4ccde8b2cfc8d, type: 3}
+  vfxFramerate: 24
   speedBoost: 0.5

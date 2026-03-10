@@ -235,6 +235,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1197,7 +1210,50 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      StunEffect_Sheet_64x64_0: -1522287180028870417
+      StunEffect_Sheet_64x64_1: 4309122218462826623
+      StunEffect_Sheet_64x64_10: -4730131817606694702
+      StunEffect_Sheet_64x64_11: 4539451697935184715
+      StunEffect_Sheet_64x64_12: -1901961982448967742
+      StunEffect_Sheet_64x64_13: -4388030417801386782
+      StunEffect_Sheet_64x64_14: -353044149273520651
+      StunEffect_Sheet_64x64_15: -5608441799935744814
+      StunEffect_Sheet_64x64_16: -8588627020711178922
+      StunEffect_Sheet_64x64_17: -3037848407033135543
+      StunEffect_Sheet_64x64_18: 543816342737972245
+      StunEffect_Sheet_64x64_19: 165697965705947102
+      StunEffect_Sheet_64x64_2: 7429649671465244622
+      StunEffect_Sheet_64x64_20: -4869233151681582456
+      StunEffect_Sheet_64x64_21: 3923366886498808849
+      StunEffect_Sheet_64x64_22: -6311436234730009146
+      StunEffect_Sheet_64x64_23: -1838668204716064449
+      StunEffect_Sheet_64x64_24: -2738219325679441609
+      StunEffect_Sheet_64x64_25: 106911878342960020
+      StunEffect_Sheet_64x64_26: -2332371320261940441
+      StunEffect_Sheet_64x64_27: -7890576210805191942
+      StunEffect_Sheet_64x64_28: 4630589586468530723
+      StunEffect_Sheet_64x64_29: -1312563022213352383
+      StunEffect_Sheet_64x64_3: -6977432011315714063
+      StunEffect_Sheet_64x64_30: 3652576228531456066
+      StunEffect_Sheet_64x64_31: -3080026028992401533
+      StunEffect_Sheet_64x64_32: 787749172963128448
+      StunEffect_Sheet_64x64_33: 4268342881313399494
+      StunEffect_Sheet_64x64_34: -132606329339363471
+      StunEffect_Sheet_64x64_35: 3063550653432762775
+      StunEffect_Sheet_64x64_36: -4027747135857116115
+      StunEffect_Sheet_64x64_37: 4035115000918630383
+      StunEffect_Sheet_64x64_38: -9166588457359059870
+      StunEffect_Sheet_64x64_39: -8287041074953871401
+      StunEffect_Sheet_64x64_4: 1629445274058666443
+      StunEffect_Sheet_64x64_40: -6217061114079123397
+      StunEffect_Sheet_64x64_41: 2678606616109251064
+      StunEffect_Sheet_64x64_42: 3395413596614001667
+      StunEffect_Sheet_64x64_5: -1338649205393752747
+      StunEffect_Sheet_64x64_6: -9102916945086502788
+      StunEffect_Sheet_64x64_7: 9099269321530973512
+      StunEffect_Sheet_64x64_8: -3148331663998845045
+      StunEffect_Sheet_64x64_9: -3365534607593017142
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

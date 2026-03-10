@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ArmorEffect_Sheet_64x64_0: 5564741106089515428
+      ArmorEffect_Sheet_64x64_1: 2262854795135280013
+      ArmorEffect_Sheet_64x64_10: 3591990147499357472
+      ArmorEffect_Sheet_64x64_11: -7142595959289617667
+      ArmorEffect_Sheet_64x64_12: -5562245551419430495
+      ArmorEffect_Sheet_64x64_13: 6486467519683352434
+      ArmorEffect_Sheet_64x64_14: -8183844470039882540
+      ArmorEffect_Sheet_64x64_15: 8487385615716941018
+      ArmorEffect_Sheet_64x64_2: 4371045577270651138
+      ArmorEffect_Sheet_64x64_3: -5723368514548988116
+      ArmorEffect_Sheet_64x64_4: 6425138897272155469
+      ArmorEffect_Sheet_64x64_5: -58233006760583413
+      ArmorEffect_Sheet_64x64_6: -6081698507663575346
+      ArmorEffect_Sheet_64x64_7: 5137780456946806963
+      ArmorEffect_Sheet_64x64_8: -5559793432164080175
+      ArmorEffect_Sheet_64x64_9: 6946062585838728006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

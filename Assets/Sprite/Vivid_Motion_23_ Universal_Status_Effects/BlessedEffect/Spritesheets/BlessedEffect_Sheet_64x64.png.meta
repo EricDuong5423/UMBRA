@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BlessedEffect_Sheet_64x64_0: -1483211432568030616
+      BlessedEffect_Sheet_64x64_1: 3180356498977184071
+      BlessedEffect_Sheet_64x64_10: 371065670441533131
+      BlessedEffect_Sheet_64x64_11: 6973218465039068850
+      BlessedEffect_Sheet_64x64_12: 7198607478291554131
+      BlessedEffect_Sheet_64x64_13: 4167792140104793694
+      BlessedEffect_Sheet_64x64_14: -6484132746762133816
+      BlessedEffect_Sheet_64x64_15: -4912017445427919837
+      BlessedEffect_Sheet_64x64_2: 6583719705872586557
+      BlessedEffect_Sheet_64x64_3: 1695748913167001151
+      BlessedEffect_Sheet_64x64_4: -1884411880853963557
+      BlessedEffect_Sheet_64x64_5: -1304870437895189932
+      BlessedEffect_Sheet_64x64_6: -2436987836103862346
+      BlessedEffect_Sheet_64x64_7: -2074116474676488817
+      BlessedEffect_Sheet_64x64_8: -635820441892926330
+      BlessedEffect_Sheet_64x64_9: 3764663721882345893
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

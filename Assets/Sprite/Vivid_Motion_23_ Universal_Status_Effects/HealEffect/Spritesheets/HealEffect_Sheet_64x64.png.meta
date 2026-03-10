@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      HealEffect_Sheet_64x64_0: -4153297127794264501
+      HealEffect_Sheet_64x64_1: 2657221103284204274
+      HealEffect_Sheet_64x64_10: 1200289168014337856
+      HealEffect_Sheet_64x64_11: -6091986711129603051
+      HealEffect_Sheet_64x64_12: -5645844730481614762
+      HealEffect_Sheet_64x64_13: 6353049047714978219
+      HealEffect_Sheet_64x64_14: -7994070217645609280
+      HealEffect_Sheet_64x64_15: 2440874607449387431
+      HealEffect_Sheet_64x64_2: 6493853133053274772
+      HealEffect_Sheet_64x64_3: -8587682288340644398
+      HealEffect_Sheet_64x64_4: 2893129219600392011
+      HealEffect_Sheet_64x64_5: -3566242054481414772
+      HealEffect_Sheet_64x64_6: 1054301797481582463
+      HealEffect_Sheet_64x64_7: 5501220048807525362
+      HealEffect_Sheet_64x64_8: 6459387181496121140
+      HealEffect_Sheet_64x64_9: -1018469055899858569
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

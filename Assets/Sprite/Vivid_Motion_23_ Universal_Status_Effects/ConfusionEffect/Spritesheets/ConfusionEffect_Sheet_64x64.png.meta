@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ConfusionEffect_Sheet_64x64_0: 8294764547174993719
+      ConfusionEffect_Sheet_64x64_1: -4582984832699101446
+      ConfusionEffect_Sheet_64x64_10: -1614214278813106008
+      ConfusionEffect_Sheet_64x64_11: -6288097818118331293
+      ConfusionEffect_Sheet_64x64_12: -1808835846348288888
+      ConfusionEffect_Sheet_64x64_13: -6390054171745045345
+      ConfusionEffect_Sheet_64x64_14: -8550051377736849849
+      ConfusionEffect_Sheet_64x64_15: -8294442441656218822
+      ConfusionEffect_Sheet_64x64_2: -3545657445030903241
+      ConfusionEffect_Sheet_64x64_3: 7061548485797744705
+      ConfusionEffect_Sheet_64x64_4: -2789385076581914576
+      ConfusionEffect_Sheet_64x64_5: 1629009258003694331
+      ConfusionEffect_Sheet_64x64_6: -7994686372216794458
+      ConfusionEffect_Sheet_64x64_7: -7577018075902612967
+      ConfusionEffect_Sheet_64x64_8: 5108839322236295358
+      ConfusionEffect_Sheet_64x64_9: 4889986632492058753
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

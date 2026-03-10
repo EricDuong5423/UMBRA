@@ -217,6 +217,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1047,7 +1060,44 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      InvisibilityEffect_Sheet_64x64_0: -1604836620062467174
+      InvisibilityEffect_Sheet_64x64_1: -1323435063430207464
+      InvisibilityEffect_Sheet_64x64_10: 971499416527965405
+      InvisibilityEffect_Sheet_64x64_11: 1682497408097059712
+      InvisibilityEffect_Sheet_64x64_12: 8497610301951992059
+      InvisibilityEffect_Sheet_64x64_13: -8715166767036753174
+      InvisibilityEffect_Sheet_64x64_14: 142163267104380085
+      InvisibilityEffect_Sheet_64x64_15: -2106982816717145948
+      InvisibilityEffect_Sheet_64x64_16: 1997888933710253583
+      InvisibilityEffect_Sheet_64x64_17: 4204693929135764832
+      InvisibilityEffect_Sheet_64x64_18: -1356827005981537085
+      InvisibilityEffect_Sheet_64x64_19: 4166147055297864908
+      InvisibilityEffect_Sheet_64x64_2: -2203217115496207196
+      InvisibilityEffect_Sheet_64x64_20: 1498168784794623537
+      InvisibilityEffect_Sheet_64x64_21: 8059845443304931879
+      InvisibilityEffect_Sheet_64x64_22: 1507805589739142533
+      InvisibilityEffect_Sheet_64x64_23: -4734756533627862813
+      InvisibilityEffect_Sheet_64x64_24: 7128120756062778404
+      InvisibilityEffect_Sheet_64x64_25: -2823175856807919385
+      InvisibilityEffect_Sheet_64x64_26: 763385400026419755
+      InvisibilityEffect_Sheet_64x64_27: -5458294066928690644
+      InvisibilityEffect_Sheet_64x64_28: -4588296795559029948
+      InvisibilityEffect_Sheet_64x64_29: 6100741894175208331
+      InvisibilityEffect_Sheet_64x64_3: -3698878531208795766
+      InvisibilityEffect_Sheet_64x64_30: -5273232351587726864
+      InvisibilityEffect_Sheet_64x64_31: -3268669761403912429
+      InvisibilityEffect_Sheet_64x64_32: 2412750401417077560
+      InvisibilityEffect_Sheet_64x64_33: 6263468147082407349
+      InvisibilityEffect_Sheet_64x64_34: 8685274078868531965
+      InvisibilityEffect_Sheet_64x64_35: 6448115895647359732
+      InvisibilityEffect_Sheet_64x64_36: -6063798955924912769
+      InvisibilityEffect_Sheet_64x64_4: -1752377447425606666
+      InvisibilityEffect_Sheet_64x64_5: -5225055200308446598
+      InvisibilityEffect_Sheet_64x64_6: 4096205920815464729
+      InvisibilityEffect_Sheet_64x64_7: -2886198235752755316
+      InvisibilityEffect_Sheet_64x64_8: -625324606616842282
+      InvisibilityEffect_Sheet_64x64_9: -1461561896930805441
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

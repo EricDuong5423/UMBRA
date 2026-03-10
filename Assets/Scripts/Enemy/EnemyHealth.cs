@@ -23,6 +23,11 @@ public class EnemyHealth : EntityHealth
         if (enemyStats != null) enemyStats.OnStatsChange -= HandleStatsChanged;
     }
 
+    protected override void Die()
+    {
+        base.Die();
+    }
+
     private void HandleStatsChanged()
     {
         UpdateMaxHealth(enemyStats.MaxEmbers);

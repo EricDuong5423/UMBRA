@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CurseEffect_Sheet_64x64_0: -3939078683947166220
+      CurseEffect_Sheet_64x64_1: -279919420702103035
+      CurseEffect_Sheet_64x64_10: -3645689405933515825
+      CurseEffect_Sheet_64x64_11: -4062530722485365134
+      CurseEffect_Sheet_64x64_12: 7093584143224792664
+      CurseEffect_Sheet_64x64_13: -2558715094251331936
+      CurseEffect_Sheet_64x64_14: -3234906955284807290
+      CurseEffect_Sheet_64x64_15: 3960096812531970580
+      CurseEffect_Sheet_64x64_2: 505043890881508320
+      CurseEffect_Sheet_64x64_3: 5336052424542421299
+      CurseEffect_Sheet_64x64_4: -3470104132894108679
+      CurseEffect_Sheet_64x64_5: 202781072602931416
+      CurseEffect_Sheet_64x64_6: -6040522196507989391
+      CurseEffect_Sheet_64x64_7: -5897077977542154821
+      CurseEffect_Sheet_64x64_8: -4464021010191335736
+      CurseEffect_Sheet_64x64_9: 3312954621174520024
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

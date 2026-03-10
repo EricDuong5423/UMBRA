@@ -15,6 +15,23 @@ MonoBehaviour:
   Name: Poison
   Description: Damage over time by using poison
   baseDuration: 3
-  EffectVFXPrefab: {fileID: 6139276577770672751, guid: 733ff3170c17c4f94a1631fb91f96f57, type: 3}
+  vfxFrames:
+  - {fileID: 4652571438245949999, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: -3313879187858481780, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: -903666060312386971, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: 1704509862269795833, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: 7708240392394803262, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: -3906887127626722458, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: -7184141713558715160, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: -5327734022550014960, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: -6372921701961748639, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: -1864198379901672812, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: 7462993822011983807, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: -3631982606072114154, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: 7319802003861302949, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: 6087568775891900821, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: 1322663582548524895, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  - {fileID: 3690610942413690355, guid: 781ebd34f36c743d49325a6fb4ae3440, type: 3}
+  vfxFramerate: 24
   DamagePerTick: 10
   TickInterval: 0.5

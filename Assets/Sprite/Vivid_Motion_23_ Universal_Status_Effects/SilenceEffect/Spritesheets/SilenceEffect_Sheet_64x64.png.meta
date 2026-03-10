@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SilenceEffect_Sheet_64x64_0: -1083181680062326178
+      SilenceEffect_Sheet_64x64_1: 5506097214301508728
+      SilenceEffect_Sheet_64x64_10: 2249923593990035697
+      SilenceEffect_Sheet_64x64_11: -1741153846337341685
+      SilenceEffect_Sheet_64x64_12: 8282277844928148030
+      SilenceEffect_Sheet_64x64_13: -2662461435892485815
+      SilenceEffect_Sheet_64x64_14: -1008770131421491770
+      SilenceEffect_Sheet_64x64_15: -7578155434204075233
+      SilenceEffect_Sheet_64x64_2: 1309983083260180480
+      SilenceEffect_Sheet_64x64_3: 71896945716315390
+      SilenceEffect_Sheet_64x64_4: 2140742315879684905
+      SilenceEffect_Sheet_64x64_5: -5897014622001788878
+      SilenceEffect_Sheet_64x64_6: 349612913861055483
+      SilenceEffect_Sheet_64x64_7: -6754400296836579533
+      SilenceEffect_Sheet_64x64_8: 1128438089927209675
+      SilenceEffect_Sheet_64x64_9: 7095836252871341727
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

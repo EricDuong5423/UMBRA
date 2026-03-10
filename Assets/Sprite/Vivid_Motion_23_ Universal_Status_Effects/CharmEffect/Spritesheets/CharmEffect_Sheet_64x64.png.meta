@@ -202,6 +202,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -922,7 +935,39 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CharmEffect_Sheet_64x64_0: 4203944783199025946
+      CharmEffect_Sheet_64x64_1: 9004663141775096105
+      CharmEffect_Sheet_64x64_10: -2348328887979108369
+      CharmEffect_Sheet_64x64_11: 1146763137600384287
+      CharmEffect_Sheet_64x64_12: 802849637190047583
+      CharmEffect_Sheet_64x64_13: 2755593198315877855
+      CharmEffect_Sheet_64x64_14: -1112598767321917698
+      CharmEffect_Sheet_64x64_15: -6512193218125139337
+      CharmEffect_Sheet_64x64_16: -7899150231942835796
+      CharmEffect_Sheet_64x64_17: 240875894628982985
+      CharmEffect_Sheet_64x64_18: 8238188159846316552
+      CharmEffect_Sheet_64x64_19: -1155603892955192677
+      CharmEffect_Sheet_64x64_2: 8029838020324053919
+      CharmEffect_Sheet_64x64_20: 6413265187715367814
+      CharmEffect_Sheet_64x64_21: 3535810420632331112
+      CharmEffect_Sheet_64x64_22: -541200171112127589
+      CharmEffect_Sheet_64x64_23: -8646589919475165194
+      CharmEffect_Sheet_64x64_24: -8332360516744978974
+      CharmEffect_Sheet_64x64_25: 2640456832648837783
+      CharmEffect_Sheet_64x64_26: 4453544478532496343
+      CharmEffect_Sheet_64x64_27: -3887219628833067883
+      CharmEffect_Sheet_64x64_28: -5755868675047628155
+      CharmEffect_Sheet_64x64_29: 7015777215413685904
+      CharmEffect_Sheet_64x64_3: 2899864113439068797
+      CharmEffect_Sheet_64x64_30: 3223183249727355048
+      CharmEffect_Sheet_64x64_31: -8403559372421996499
+      CharmEffect_Sheet_64x64_4: 4756490898378846991
+      CharmEffect_Sheet_64x64_5: -9145189992401827299
+      CharmEffect_Sheet_64x64_6: -2242618623251966794
+      CharmEffect_Sheet_64x64_7: -8109064727506617496
+      CharmEffect_Sheet_64x64_8: 5080002628580340784
+      CharmEffect_Sheet_64x64_9: 1775815361705107857
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

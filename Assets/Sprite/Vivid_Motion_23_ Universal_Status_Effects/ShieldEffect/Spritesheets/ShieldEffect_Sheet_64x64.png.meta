@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ShieldEffect_Sheet_64x64_0: -2501270135328261768
+      ShieldEffect_Sheet_64x64_1: -239420939232320553
+      ShieldEffect_Sheet_64x64_10: 8466829723940702601
+      ShieldEffect_Sheet_64x64_11: 4012453706555282743
+      ShieldEffect_Sheet_64x64_12: 7259465870276158069
+      ShieldEffect_Sheet_64x64_13: -7155135213749127540
+      ShieldEffect_Sheet_64x64_14: 6911285548273426512
+      ShieldEffect_Sheet_64x64_15: 3147699922044203391
+      ShieldEffect_Sheet_64x64_2: -7785379550098147387
+      ShieldEffect_Sheet_64x64_3: 2177228889295985841
+      ShieldEffect_Sheet_64x64_4: -6660280221313071137
+      ShieldEffect_Sheet_64x64_5: 2684012327448150862
+      ShieldEffect_Sheet_64x64_6: -2840706422642881141
+      ShieldEffect_Sheet_64x64_7: 5744774503904181965
+      ShieldEffect_Sheet_64x64_8: -4175841265062687033
+      ShieldEffect_Sheet_64x64_9: -262121879788014642
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

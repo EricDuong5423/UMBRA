@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BleedEffect_Sheet_64x64_0: 3254852846476143696
+      BleedEffect_Sheet_64x64_1: 9162774789041568326
+      BleedEffect_Sheet_64x64_10: -6308824755041774634
+      BleedEffect_Sheet_64x64_11: -2075050501514735899
+      BleedEffect_Sheet_64x64_12: -8509545715317062529
+      BleedEffect_Sheet_64x64_13: 210890605156426096
+      BleedEffect_Sheet_64x64_14: -6495806858346623044
+      BleedEffect_Sheet_64x64_15: -9126261348624368240
+      BleedEffect_Sheet_64x64_2: 3795455352972590754
+      BleedEffect_Sheet_64x64_3: -8601537893712153499
+      BleedEffect_Sheet_64x64_4: 6815893357928689254
+      BleedEffect_Sheet_64x64_5: -658821162225165948
+      BleedEffect_Sheet_64x64_6: 3784715013841593904
+      BleedEffect_Sheet_64x64_7: -2966680027300434174
+      BleedEffect_Sheet_64x64_8: 6053536775189578339
+      BleedEffect_Sheet_64x64_9: 2367986935714856658
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ShockEffect_Sheet_64x64_0: -4397869019433388150
+      ShockEffect_Sheet_64x64_1: -7047057619695080704
+      ShockEffect_Sheet_64x64_10: 7015286408363075975
+      ShockEffect_Sheet_64x64_11: 2522835894687723729
+      ShockEffect_Sheet_64x64_12: -9129147128283770512
+      ShockEffect_Sheet_64x64_13: -2336872826752215814
+      ShockEffect_Sheet_64x64_14: 3539219904099332579
+      ShockEffect_Sheet_64x64_15: -912137323250679951
+      ShockEffect_Sheet_64x64_2: -2865973518876683229
+      ShockEffect_Sheet_64x64_3: 2247736158199483681
+      ShockEffect_Sheet_64x64_4: -5167502337198507894
+      ShockEffect_Sheet_64x64_5: -613077874506004694
+      ShockEffect_Sheet_64x64_6: 2659677007543676661
+      ShockEffect_Sheet_64x64_7: 251992469856582941
+      ShockEffect_Sheet_64x64_8: 5180010624535200394
+      ShockEffect_Sheet_64x64_9: 7314635245650138934
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

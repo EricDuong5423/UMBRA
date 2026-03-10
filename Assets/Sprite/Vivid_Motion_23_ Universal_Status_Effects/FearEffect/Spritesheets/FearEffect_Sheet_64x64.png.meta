@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FearEffect_Sheet_64x64_0: 5308272670715346592
+      FearEffect_Sheet_64x64_1: -7606672281857030073
+      FearEffect_Sheet_64x64_10: -3419477425535306605
+      FearEffect_Sheet_64x64_11: -5225007165330672604
+      FearEffect_Sheet_64x64_12: -2662567108119950943
+      FearEffect_Sheet_64x64_13: -191720757635265184
+      FearEffect_Sheet_64x64_14: 3699384515016602942
+      FearEffect_Sheet_64x64_15: 955297060513615576
+      FearEffect_Sheet_64x64_2: 7627972918373083945
+      FearEffect_Sheet_64x64_3: 6896922273898175783
+      FearEffect_Sheet_64x64_4: -4572759372410027247
+      FearEffect_Sheet_64x64_5: 6480109148851145961
+      FearEffect_Sheet_64x64_6: 2357616736102044802
+      FearEffect_Sheet_64x64_7: 3718678604621318326
+      FearEffect_Sheet_64x64_8: 1949169713250831843
+      FearEffect_Sheet_64x64_9: -9164765631381103812
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

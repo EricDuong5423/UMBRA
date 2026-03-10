@@ -232,6 +232,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1172,7 +1185,49 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SlowEffect_Sheet_64x64_0: -7776030529857846977
+      SlowEffect_Sheet_64x64_1: 2656713018895251023
+      SlowEffect_Sheet_64x64_10: -5179910688265594920
+      SlowEffect_Sheet_64x64_11: -8983399386329039284
+      SlowEffect_Sheet_64x64_12: -901641392671868895
+      SlowEffect_Sheet_64x64_13: 838707225100216915
+      SlowEffect_Sheet_64x64_14: 8727057204458146093
+      SlowEffect_Sheet_64x64_15: 6181525477039089526
+      SlowEffect_Sheet_64x64_16: -1806914118811671805
+      SlowEffect_Sheet_64x64_17: 406614239794017623
+      SlowEffect_Sheet_64x64_18: 7572703317884983355
+      SlowEffect_Sheet_64x64_19: 7110765700313184221
+      SlowEffect_Sheet_64x64_2: 2287813245094010159
+      SlowEffect_Sheet_64x64_20: -5726026100304295039
+      SlowEffect_Sheet_64x64_21: 4011560639390399176
+      SlowEffect_Sheet_64x64_22: 4721734146243729601
+      SlowEffect_Sheet_64x64_23: -526186392246262477
+      SlowEffect_Sheet_64x64_24: 5647191598919043864
+      SlowEffect_Sheet_64x64_25: 4931529557160153658
+      SlowEffect_Sheet_64x64_26: -5671705790741401805
+      SlowEffect_Sheet_64x64_27: -6439171585673803099
+      SlowEffect_Sheet_64x64_28: 5515878317997936561
+      SlowEffect_Sheet_64x64_29: -3616673584152796264
+      SlowEffect_Sheet_64x64_3: -2159813456960630183
+      SlowEffect_Sheet_64x64_30: 5583955877011749435
+      SlowEffect_Sheet_64x64_31: 5573356738086841982
+      SlowEffect_Sheet_64x64_32: 1727011973154119834
+      SlowEffect_Sheet_64x64_33: 5693480093298056386
+      SlowEffect_Sheet_64x64_34: 2676862766718748082
+      SlowEffect_Sheet_64x64_35: -4542771226523250176
+      SlowEffect_Sheet_64x64_36: -3221944978557346491
+      SlowEffect_Sheet_64x64_37: -7518182130707225515
+      SlowEffect_Sheet_64x64_38: -1132770544371818033
+      SlowEffect_Sheet_64x64_39: -3864201546560317319
+      SlowEffect_Sheet_64x64_4: -7913800156426058090
+      SlowEffect_Sheet_64x64_40: -3627683905085526425
+      SlowEffect_Sheet_64x64_41: 3727374397031552789
+      SlowEffect_Sheet_64x64_5: 3632308539767927936
+      SlowEffect_Sheet_64x64_6: 7289238087471945345
+      SlowEffect_Sheet_64x64_7: -8297666247170572683
+      SlowEffect_Sheet_64x64_8: -6309717982996372464
+      SlowEffect_Sheet_64x64_9: -6236962016291411826
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

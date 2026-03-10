@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BurnEffect_Sheet_64x64_0: -2982449103894348810
+      BurnEffect_Sheet_64x64_1: -7528776340506589829
+      BurnEffect_Sheet_64x64_10: 4165958354235466800
+      BurnEffect_Sheet_64x64_11: 5852568555420558734
+      BurnEffect_Sheet_64x64_12: -3546681615577163793
+      BurnEffect_Sheet_64x64_13: 5941105544365045045
+      BurnEffect_Sheet_64x64_14: 2251405064499672015
+      BurnEffect_Sheet_64x64_15: 2279956159982575119
+      BurnEffect_Sheet_64x64_2: 1748260471109927933
+      BurnEffect_Sheet_64x64_3: -1385259650226547042
+      BurnEffect_Sheet_64x64_4: -2238746482089496173
+      BurnEffect_Sheet_64x64_5: -4690849059268855354
+      BurnEffect_Sheet_64x64_6: -6091954967467821770
+      BurnEffect_Sheet_64x64_7: -6600265584545397203
+      BurnEffect_Sheet_64x64_8: -3012553517064938515
+      BurnEffect_Sheet_64x64_9: -6670128345543811272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

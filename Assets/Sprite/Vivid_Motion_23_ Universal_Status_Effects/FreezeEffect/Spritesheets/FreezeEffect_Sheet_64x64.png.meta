@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FreezeEffect_Sheet_64x64_0: -7716474987347072936
+      FreezeEffect_Sheet_64x64_1: 3102178930003581651
+      FreezeEffect_Sheet_64x64_10: -2677769518944734549
+      FreezeEffect_Sheet_64x64_11: -753081262512908501
+      FreezeEffect_Sheet_64x64_12: -8774665591292594682
+      FreezeEffect_Sheet_64x64_13: 2540422656820239552
+      FreezeEffect_Sheet_64x64_14: -2971059119837058551
+      FreezeEffect_Sheet_64x64_15: -8345237703167951591
+      FreezeEffect_Sheet_64x64_2: 6703322254474641798
+      FreezeEffect_Sheet_64x64_3: -524396949056169789
+      FreezeEffect_Sheet_64x64_4: 533112934339769453
+      FreezeEffect_Sheet_64x64_5: -7324412326052600925
+      FreezeEffect_Sheet_64x64_6: 6481884383961488374
+      FreezeEffect_Sheet_64x64_7: -4828557468622078139
+      FreezeEffect_Sheet_64x64_8: -8454734636550725974
+      FreezeEffect_Sheet_64x64_9: -5900972145566592047
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

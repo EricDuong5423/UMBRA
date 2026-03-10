@@ -190,6 +190,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -822,7 +835,35 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RegenEffect_Sheet_64x64_0: -6863419273888529115
+      RegenEffect_Sheet_64x64_1: -9074563815764691549
+      RegenEffect_Sheet_64x64_10: 5969964485537120945
+      RegenEffect_Sheet_64x64_11: 5166780236301258372
+      RegenEffect_Sheet_64x64_12: 4882667477526233782
+      RegenEffect_Sheet_64x64_13: 7273107177790976580
+      RegenEffect_Sheet_64x64_14: 6589589455710901913
+      RegenEffect_Sheet_64x64_15: -5755368946571915491
+      RegenEffect_Sheet_64x64_16: 4733515628266794677
+      RegenEffect_Sheet_64x64_17: 2534797082575894814
+      RegenEffect_Sheet_64x64_18: -130064749102450748
+      RegenEffect_Sheet_64x64_19: -5645293525445678652
+      RegenEffect_Sheet_64x64_2: -181103918163993749
+      RegenEffect_Sheet_64x64_20: -6730099542846388785
+      RegenEffect_Sheet_64x64_21: 1476451967735931742
+      RegenEffect_Sheet_64x64_22: 2905602040747154759
+      RegenEffect_Sheet_64x64_23: 8600813367274065216
+      RegenEffect_Sheet_64x64_24: 994897966607454011
+      RegenEffect_Sheet_64x64_25: -7953626723124286132
+      RegenEffect_Sheet_64x64_26: 640430400619650609
+      RegenEffect_Sheet_64x64_27: -3988737505636154884
+      RegenEffect_Sheet_64x64_3: -6307197419529474295
+      RegenEffect_Sheet_64x64_4: 1576846670460532960
+      RegenEffect_Sheet_64x64_5: 565503345370398917
+      RegenEffect_Sheet_64x64_6: -7159150798210574295
+      RegenEffect_Sheet_64x64_7: -951583193942441763
+      RegenEffect_Sheet_64x64_8: 8714147747378377291
+      RegenEffect_Sheet_64x64_9: -8063274175520943197
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RageEffect_Sheet_64x64_0: -2052567970522071427
+      RageEffect_Sheet_64x64_1: -3828895352273675979
+      RageEffect_Sheet_64x64_10: 2408978000995702888
+      RageEffect_Sheet_64x64_11: 8057539283643870576
+      RageEffect_Sheet_64x64_12: -5637853764730785910
+      RageEffect_Sheet_64x64_13: 3960294075576328938
+      RageEffect_Sheet_64x64_14: 355573683902048197
+      RageEffect_Sheet_64x64_15: 2030521671574248586
+      RageEffect_Sheet_64x64_2: 8296817307017509765
+      RageEffect_Sheet_64x64_3: 3172791876868101138
+      RageEffect_Sheet_64x64_4: -5057144535907286486
+      RageEffect_Sheet_64x64_5: 7071983696832634939
+      RageEffect_Sheet_64x64_6: 7146554974973219857
+      RageEffect_Sheet_64x64_7: 1313837489155276704
+      RageEffect_Sheet_64x64_8: -4624127459147617875
+      RageEffect_Sheet_64x64_9: -2492264771570813063
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
