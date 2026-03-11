@@ -33,7 +33,7 @@ public class EntityVFXHandler : MonoBehaviour
     {
         if (effect.effectData.vfxFrames == null || effect.effectData.vfxFrames.Length == 0) return;
         
-        GameObject vfx = EffectVFXManager.Instance.SpawnVFX(effectVFXContainer.position, effectVFXContainer);
+        GameObject vfx = EffectVFXManager.Instance.SpawnGenericVFX(effectVFXContainer.position, effectVFXContainer);
         
         vfx.GetComponent<SimpleVFXPlayer>()?.PlayAnimation(effect.effectData.vfxFrames, effect.effectData.vfxFramerate);
         
@@ -46,7 +46,7 @@ public class EntityVFXHandler : MonoBehaviour
     {
         if (spawnedVFXs.TryGetValue(effect, out GameObject vfxToRemove))
         {
-            EffectVFXManager.Instance.ReturnToPool(vfxToRemove);
+            EffectVFXManager.Instance.ReturnGenericVFX(vfxToRemove);
 
             spawnedVFXs.Remove(effect);
         }

@@ -1,36 +1,58 @@
 using UnityEngine;
 
-public class EnemyHealth : EntityHealth, IEnemyComponent
+public class EnemyHealth : EntityHealth
 {
-    private EnemyBase _brain;
+    private EnemyStatsManager enemyStats;
+    [SerializeField] private DamageText damageTextPrefab;
+    [SerializeField] private Transform damageTextParent;
 
-    public void Initialize(EnemyBase brain)
+    private void Awake()
     {
-        _brain = brain;
-        InitializeHealth(brain.Stats.MaxEmbers);
+        enemyStats = GetComponent<EnemyStatsManager>();
     }
 
-    public override void TakeDamage(float damage, Transform source)
+    private void Start()
     {
-        base.TakeDamage(damage, source);
-        if (_brain != null && !IsDead)
+        if (enemyStats != null)
         {
-            _brain.ChangeState(EnemyState.Hurt);
-            _brain.Physics.StopMoving();
+            InitializeHealth(enemyStats.MaxEmbers);
+            enemyStats.OnStatsChange += HandleStatsChanged;
         }
     }
 
-    protected override void Die()
+    private void OnDestroy()
     {
-        base.Die();
+        if (enemyStats != null) enemyStats.OnStatsChange -= HandleStatsChanged;
+    }
 
-        if (_brain != null)
-        {
-            _brain.ChangeState(EnemyState.Dead);
-            _brain.Physics.StopMoving();
-            Collider2D col = GetComponent<Collider2D>();
-            if (col != null) col.enabled = false;
-            EnemyManager.Instance.ReturnEnemy(_brain.originalPrefab, _brain.gameObject);
-        }
+    public override void TakeDamage(float amount, Transform source)
+    {
+        base.TakeDamage(amount, source);
+        var dmgText = Instantiate(damageTextPrefab
+                                , damageTextParent.position
+                                , Quaternion.identity);
+        dmgText.transform.SetParent(damageTextParent);
+        dmgText.SetData($"{amount}", Color.red);
+    }
+
+    public override void TakeDoTDamage(float amount)
+    {
+        base.TakeDoTDamage(amount);
+        
+        var dmgText = Instantiate(damageTextPrefab
+            , damageTextParent.position
+            , Quaternion.identity);
+        dmgText.transform.SetParent(damageTextParent);
+        dmgText.SetData($"{amount}", Color.red);
+    }
+
+    private void HandleStatsChanged()
+    {
+        UpdateMaxHealth(enemyStats.MaxEmbers);
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }

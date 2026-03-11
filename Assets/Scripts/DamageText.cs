@@ -5,58 +5,46 @@ using UnityEngine;
 public class DamageText : MonoBehaviour
 {
     [SerializeField] private TMP_Text text;
-    
-    [Header("Animation Settings")]
-    [SerializeField] private float startScale = 1f;
-    [SerializeField] private float jumpHeight = 0.5f;
-    [SerializeField] private float duration = 0.5f;
-    [SerializeField] private Ease ease = Ease.OutQuad;
-    
-    [Header("Random Offset")]
-    [SerializeField, Range(-1f, 0f)] private float xMin = -0.5f;
-    [SerializeField, Range(0f, 1f)] private float xMax = 0.5f;
+    [SerializeField] private RectTransform rectTransform;
+    [SerializeField] private float startScale;
+    [SerializeField] private float startY;
+    [SerializeField] private float endY;
+    [SerializeField] private float duration;
+    [SerializeField] private Ease ease;
 
-    private Transform target;
-    private Vector3 randomOffset;
-    private Vector3 lastKnownPosition;
-    private float animatedY;
+    [SerializeField, Range(-1f, 0f)] private float xMin;
+    [SerializeField, Range(0f, 1f)] private float xMax;
 
-    public void SetData(string value, Color color, Transform targetTransform)
+    private void Start()
+    {
+        var x = UnityEngine.Random.Range(xMin, xMax);
+        rectTransform.anchoredPosition = new Vector2(x, startY);
+        rectTransform.localScale = startScale * Vector3.one;
+    }
+
+    public void SetData(string value, Color color)
     {
         text.text = value;
         text.color = color;
-        target = targetTransform;
-        float randomX = Random.Range(xMin, xMax);
-        randomOffset = new Vector3(randomX, 0f, 0f);
-        animatedY = 0f;
-        if (target != null) lastKnownPosition = target.position;
-        transform.localScale = Vector3.one * startScale;
-        var moveTween = DOTween.To(() => animatedY, y => animatedY = y, jumpHeight, duration);
+
+        var moveTween = rectTransform.DOAnchorPosY(endY, duration);
         var fadeTween = text.DOFade(0f, duration);
-        var scaleTween = transform.DOScale(0f, duration);
-        
+        var colorTween = text.DOColor(Color.white, duration);
+        var scaleTween = rectTransform.DOScale(0f, duration);
         var sequence = DOTween.Sequence();
         sequence
             .Append(moveTween)
             .Join(fadeTween)
+            .Join(colorTween)
             .Join(scaleTween)
             .SetEase(ease)
             .OnComplete(SelfDestroy)
-            .Play();
-    }
-
-    private void LateUpdate()
-    {
-        if (target != null && target.gameObject.activeInHierarchy)
-        {
-            lastKnownPosition = target.position;
-        }
-        
-        transform.position = lastKnownPosition + randomOffset + new Vector3(0, animatedY, 0);
+            .Play()
+            ;
     }
 
     private void SelfDestroy()
     {
-        DamageTextManager.Instance.ReturnToPool(this.gameObject);
+        Destroy(this.gameObject);
     }
 }

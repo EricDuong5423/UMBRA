@@ -3,38 +3,72 @@ using UnityEngine;
 
 public abstract class EntityHealth : MonoBehaviour, IDamageable
 {
-    public float CurrentEmbers { get; protected set; }
-    public bool IsDead { get; protected set; }
-
-    public event Action<float, Transform> OnHit;
-    public event Action<float> OnDoTHit;
+    public event Action<float, float> OnHealthChanged;
+    public event Action<Vector2> OnHit;
     public event Action OnDeath;
-
-    public virtual void InitializeHealth(float maxHealth)
+    public float CurrentEmbers { get; protected set; }
+    public float MaxEmbers { get; protected set; }
+    public bool IsDead { get; protected set; } 
+    protected void InitializeHealth(float maxHealth)
     {
+        MaxEmbers = maxHealth;
         CurrentEmbers = maxHealth;
-        IsDead = false;
+        BroadcastHealth();
     }
 
+    protected void UpdateMaxHealth(float newMaxHealth)
+    {
+        MaxEmbers = newMaxHealth;
+        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
+        BroadcastHealth();
+    }
     public virtual void TakeDamage(float amount, Transform source)
     {
         if (IsDead) return;
+
         CurrentEmbers -= amount;
-        OnHit?.Invoke(amount, source);
-        if (CurrentEmbers <= 0) Die();
+        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
+        BroadcastHealth();
+
+        if (CurrentEmbers <= 0) 
+        {
+            Die();
+        }
+        else 
+        {
+            Vector2 direction = source != null ? (Vector2)(transform.position - source.position).normalized : Vector2.zero;
+            OnHit?.Invoke(direction);
+        }
     }
 
     public virtual void TakeDoTDamage(float amount)
     {
         if (IsDead) return;
         CurrentEmbers -= amount;
-        OnDoTHit?.Invoke(amount);
-        if (CurrentEmbers <= 0) Die();
+        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
+        BroadcastHealth();
+        if (CurrentEmbers <= 0)
+        {
+            Die();
+        }
+    }
+
+    public virtual void Heal(float amount)
+    {
+        if (IsDead) return;
+        CurrentEmbers += amount;
+        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
+        BroadcastHealth();
     }
 
     protected virtual void Die()
     {
         IsDead = true;
         OnDeath?.Invoke();
+    }
+
+    protected void BroadcastHealth()
+    {
+        OnHealthChanged?.Invoke(CurrentEmbers, MaxEmbers);
     }
 }
