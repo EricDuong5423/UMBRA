@@ -1,58 +1,36 @@
 using UnityEngine;
 
-public class EnemyHealth : EntityHealth
+public class EnemyHealth : EntityHealth, IEnemyComponent
 {
-    private EnemyStatsManager enemyStats;
-    [SerializeField] private DamageText damageTextPrefab;
-    [SerializeField] private Transform damageTextParent;
+    private EnemyBase _brain;
 
-    private void Awake()
+    public void Initialize(EnemyBase brain)
     {
-        enemyStats = GetComponent<EnemyStatsManager>();
+        _brain = brain;
+        InitializeHealth(brain.Stats.MaxEmbers);
     }
 
-    private void Start()
+    public override void TakeDamage(float damage, Transform source)
     {
-        if (enemyStats != null)
+        base.TakeDamage(damage, source);
+        if (_brain != null && !IsDead)
         {
-            InitializeHealth(enemyStats.MaxEmbers);
-            enemyStats.OnStatsChange += HandleStatsChanged;
+            _brain.ChangeState(EnemyState.Hurt);
+            _brain.Physics.StopMoving();
         }
     }
 
-    private void OnDestroy()
+    protected override void Die()
     {
-        if (enemyStats != null) enemyStats.OnStatsChange -= HandleStatsChanged;
-    }
+        base.Die();
 
-    public override void TakeDamage(float amount, Transform source)
-    {
-        base.TakeDamage(amount, source);
-        var dmgText = Instantiate(damageTextPrefab
-                                , damageTextParent.position
-                                , Quaternion.identity);
-        dmgText.transform.SetParent(damageTextParent);
-        dmgText.SetData($"{amount}", Color.red);
-    }
-
-    public override void TakeDoTDamage(float amount)
-    {
-        base.TakeDoTDamage(amount);
-        
-        var dmgText = Instantiate(damageTextPrefab
-            , damageTextParent.position
-            , Quaternion.identity);
-        dmgText.transform.SetParent(damageTextParent);
-        dmgText.SetData($"{amount}", Color.red);
-    }
-
-    private void HandleStatsChanged()
-    {
-        UpdateMaxHealth(enemyStats.MaxEmbers);
-    }
-
-    public void DestroySelf()
-    {
-        Destroy(gameObject);
+        if (_brain != null)
+        {
+            _brain.ChangeState(EnemyState.Dead);
+            _brain.Physics.StopMoving();
+            Collider2D col = GetComponent<Collider2D>();
+            if (col != null) col.enabled = false;
+            EnemyManager.Instance.ReturnEnemy(_brain.originalPrefab, _brain.gameObject);
+        }
     }
 }

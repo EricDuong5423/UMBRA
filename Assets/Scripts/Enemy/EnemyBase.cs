@@ -1,215 +1,60 @@
 using UnityEngine;
 
-public enum EnemyState { Idle, Chase, Attack, Dead, Hurt }
-
-[RequireComponent(typeof(EnemyHealth))] 
-[RequireComponent(typeof(EnemyStatsManager))]
-[RequireComponent(typeof(Rigidbody2D))]
-public abstract class EnemyBase : MonoBehaviour
+public enum EnemyState { Idle, Chase, Attack, Hurt, Dead, Frozen }
+public class EnemyBase : MonoBehaviour
 {
-    [Header("Setup")]
-    [SerializeField] protected EnemyStats stats;
-    [SerializeField] protected Collider2D weaponCollider; 
+    [HideInInspector] public GameObject originalPrefab; // Phục vụ Object Pool
+    public Transform Target { get; private set; }
+    public EnemyState CurrentState { get; private set; } = EnemyState.Idle;
+    public float DistanceToTarget { get; private set; }
 
-    [Header("Combat Settings")]
-    [SerializeField] protected float hurtDuration = 0.5f;
-    
-    protected Transform target;
-    protected EnemyHealth healthSystem;
-    public EnemyHealth HealthSystem => healthSystem;
-    public EnemyStatsManager statsManager;
-    protected Rigidbody2D rb;
-    protected Animator anim;
-    protected SpriteRenderer spriteRenderer;
+    // --- References tới đàn em ---
+    public EnemyStatsManager Stats { get; private set; }
+    public EnemyHealth Health { get; private set; }
+    public EnemyPhysics Physics { get; private set; }
+    public EnemyCombatBase Combat { get; private set; }
+    public EnemyAnimator Anim { get; private set; }
+    public EnemySound Sound { get; private set; }
+    public EnemyVFX VFX { get; private set; }
+    public EnemyReward Reward { get; private set; }
 
-    protected EnemyState currentState = EnemyState.Idle;
-    protected float nextAttackTime = 0f;
-    protected float distanceToTarget;
-    protected float hurtEndTime;
-
-    protected virtual void Awake()
+    public void InjectDependencies(Transform playerTarget)
     {
-        healthSystem = GetComponent<EnemyHealth>();
-        statsManager = GetComponent<EnemyStatsManager>();
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        Target = playerTarget;
 
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj) target = playerObj.transform;
-    }
-    
-    protected virtual void Start()
-    {
-        if (healthSystem)
+        Stats = GetComponent<EnemyStatsManager>();
+        Health = GetComponent<EnemyHealth>();
+        Physics = GetComponent<EnemyPhysics>();
+        Combat = GetComponent<EnemyCombatBase>();
+        Anim = GetComponent<EnemyAnimator>();
+        Sound = GetComponent<EnemySound>();
+        VFX = GetComponent<EnemyVFX>();
+        Reward = GetComponent<EnemyReward>();
+        foreach (var component in GetComponents<IEnemyComponent>())
         {
-            healthSystem.OnDeath += HandleDeath;
-            healthSystem.OnHit += HandleHit;
-        }
-
-        // TỰ ĐỘNG SETUP VŨ KHÍ
-        if (weaponCollider != null)
-        {
-            var hitbox = weaponCollider.GetComponent<EnemyWeaponHitbox>();
-            if (hitbox == null) hitbox = weaponCollider.gameObject.AddComponent<EnemyWeaponHitbox>();
-            
-            float dmg = statsManager != null ? statsManager.AttackDamage : stats.baseAtkDamage;
-            hitbox.Initialize(dmg, transform);
-            weaponCollider.enabled = false; 
+            component.Initialize(this);
         }
     }
 
-    protected virtual void OnDestroy()
+    private void Update()
     {
-        if (healthSystem)
-        {
-            healthSystem.OnDeath -= HandleDeath;
-            healthSystem.OnHit -= HandleHit;
-        }
-    }
-    
-    protected virtual void HandleHit(Vector2 dir)
-    {
-        ChangeState(EnemyState.Hurt);
-        
-        DisableEnemyHitBox();
-        
-        StopMovement();
-        if(anim) 
-        {
-            anim.ResetTrigger("Attack1");
-            anim.ResetTrigger("Attack2");
-            anim.SetTrigger("Hurt");
-        }
-        
-        hurtEndTime = Time.time + hurtDuration;
-    }
+        if (CurrentState == EnemyState.Dead || CurrentState == EnemyState.Frozen) return;
 
-    // --- ANIMATION EVENTS ---
-    public void EnableEnemyHitBox()
-    {
-        if (weaponCollider) weaponCollider.enabled = true;
-    }
+        if (Target != null)
+            DistanceToTarget = Vector2.Distance(transform.position, Target.position);
 
-    public void DisableEnemyHitBox()
-    {
-        if (weaponCollider) weaponCollider.enabled = false;
-    }
-
-    // --- MAIN LOOP ---
-    protected virtual void Update()
-    {
-        if (currentState == EnemyState.Dead) return;
-        if (target == null) return;
-
-        distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-        switch (currentState)
-        {
-            case EnemyState.Idle: LogicIdle(); break;
-            case EnemyState.Chase: LogicChase(); break;
-            case EnemyState.Attack: LogicAttack(); break;
-            case EnemyState.Hurt:  LogicHurt(); break;
-        }
-    }
-
-    protected virtual void LogicIdle()
-    {
-        StopMovement();
-        if (distanceToTarget <= stats.lookRadius) ChangeState(EnemyState.Chase);
-    }
-
-    protected virtual void LogicChase()
-    {
-        if (distanceToTarget > stats.lookRadius * 1.5f) { ChangeState(EnemyState.Idle); return; }
-        if (distanceToTarget <= stats.attackRangeMax) { ChangeState(EnemyState.Attack); return; }
-        FaceTarget();
-        MoveToTarget();
-    }
-
-    protected virtual void LogicAttack()
-    {
-        StopMovement();
-        if (distanceToTarget > stats.attackRangeMax) { ChangeState(EnemyState.Chase); return; }
-        FaceTarget();
-        
-        if (Time.time >= nextAttackTime)
-        {
-            int attackType = ChooseAttackType();
-            PerformAttack(attackType);
-            nextAttackTime = Time.time + stats.attackCooldown;
-        }
-    }
-
-    protected virtual void LogicHurt()
-    {
-        StopMovement();
-        
-        if (Time.time >= hurtEndTime)
-        {
+        if (CurrentState == EnemyState.Hurt) return;
+        if (DistanceToTarget <= Stats.BaseStats.attackRangeMax && Combat.CanAttack())
+            ChangeState(EnemyState.Attack);
+        else if (DistanceToTarget <= Stats.BaseStats.lookRadius)
             ChangeState(EnemyState.Chase);
-        }
+        else
+            ChangeState(EnemyState.Idle);
+        Combat.HandleCombat();
     }
 
-    protected void ChangeState(EnemyState newState) 
-    { 
-        currentState = newState; 
-    }
-
-    protected virtual void FaceTarget()
+    public void ChangeState(EnemyState newState)
     {
-        if (target == null || spriteRenderer == null) return;
-        Vector2 direction = target.position - transform.position;
-        if (direction.x != 0) spriteRenderer.flipX = direction.x < 0;
-    }
-
-    protected virtual void MoveToTarget()
-    {
-        if (anim) anim.SetBool("IsMoving", true);
-        Vector2 direction = (target.position - transform.position).normalized;
-        float speed = statsManager != null ? statsManager.MoveSpeed : stats.baseMoveSpeed;
-        rb.linearVelocity = direction * speed;
-    }
-
-    protected virtual void StopMovement()
-    {
-        if (anim) anim.SetBool("IsMoving", false);
-        rb.linearVelocity = Vector2.zero;
-    }
-
-    protected virtual void HandleDeath()
-    {
-        ChangeState(EnemyState.Dead);
-        StopMovement();
-        DisableEnemyHitBox();
-        rb.simulated = false;
-
-        if (anim) 
-        {
-            anim.ResetTrigger("Hurt"); 
-            anim.ResetTrigger("Attack1");
-            anim.ResetTrigger("Attack2");
-
-            anim.SetTrigger("Die"); 
-        }
-
-        Destroy(gameObject, 2f); 
-    }
-
-    protected virtual int ChooseAttackType()
-    {
-        if (distanceToTarget <= stats.attackRangeMin) return 1;
-        return 2;
-    }
-
-    protected abstract void PerformAttack(int attackIndex);
-
-    protected virtual void OnDrawGizmosSelected()
-    {
-        if (stats == null) return;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, stats.lookRadius);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, stats.attackRangeMax);
+        CurrentState = newState;
     }
 }

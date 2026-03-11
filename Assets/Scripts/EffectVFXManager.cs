@@ -1,36 +1,23 @@
 using UnityEngine;
 
-public class EffectVFXManager : MonoBehaviour
+public class EffectVFXManager : BasePoolManager<EffectVFXManager>
 {
-    public static EffectVFXManager Instance;
-
-    [SerializeField] private GameObject genericVFXPrefab; 
-    [SerializeField] private Transform poolContainer;     
-
-    private ObjectPooling vfxPool;
-
-    private void Awake()
+    public GameObject SpawnVFX(Vector3 position, Transform parent)
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-
-        vfxPool = gameObject.AddComponent<ObjectPooling>();
-        vfxPool.SetPrefab(genericVFXPrefab);
-    }
-
-    public GameObject SpawnGenericVFX(Vector3 position, Transform parent)
-    {
-        GameObject vfxObj = vfxPool.Get();
+        GameObject vfxObj = base.Spawn();
         vfxObj.transform.position = position;
-        vfxObj.transform.SetParent(parent, true); 
+        vfxObj.transform.SetParent(parent, true);
         return vfxObj;
     }
-
-    public void ReturnGenericVFX(GameObject vfxObj)
+    
+    public override void ReturnToPool(GameObject vfxObj)
     {
         if (vfxObj == null) return;
-        vfxObj.GetComponent<SimpleVFXPlayer>()?.StopAnimation();
-        vfxObj.transform.SetParent(poolContainer);
-        vfxPool.AddToPool(vfxObj);
+        SimpleVFXPlayer player = vfxObj.GetComponent<SimpleVFXPlayer>();
+        if (player != null) 
+        {
+            player.StopAnimation();
+        }
+        base.ReturnToPool(vfxObj);
     }
 }

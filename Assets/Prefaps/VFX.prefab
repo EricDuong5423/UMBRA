@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1572415991648144053}
   - component: {fileID: 2469653327361634047}
   m_Layer: 6
-  m_Name: GenericVFX
+  m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

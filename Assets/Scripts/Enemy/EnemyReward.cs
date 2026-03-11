@@ -1,48 +1,25 @@
 using UnityEngine;
 
-public class EnemyReward : MonoBehaviour
+public class EnemyReward : MonoBehaviour, IEnemyComponent
 {
-    [Header("Reward Data")]
-    [SerializeField] private EnemyStats stats;
-    [Header("Loot Settings")]
-    [SerializeField] private LootTable myLootTable;
-    private EnemyHealth enemyHealth;
+    private EnemyBase _brain;
 
-    private void Awake()
+    public void Initialize(EnemyBase brain)
     {
-        enemyHealth = GetComponent<EnemyHealth>();
-    }
-
-    private void Start()
-    {
-        if (enemyHealth) enemyHealth.OnDeath += GiveReward;
+        _brain = brain;
+        brain.Health.OnDeath += GiveReward;
     }
 
     private void OnDestroy()
     {
-        if (enemyHealth) enemyHealth.OnDeath -= GiveReward;
+        if (_brain != null && _brain.Health != null) _brain.Health.OnDeath -= GiveReward;
     }
 
     private void GiveReward()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (player != null)
+        if (LootManager.Instance != null && _brain.Stats != null && _brain.Stats.LootTable != null)
         {
-            var playerHealth = player.GetComponent<PlayerHealth>();
-            if (playerHealth) playerHealth.Heal(stats.healOnKill);
-
-            var playerCoin = player.GetComponent<CoinSystem>();
-            if(playerCoin) playerCoin.AddCoins(stats.ligthShardOnKill);
+            LootManager.Instance.TryDropItem(transform.position, _brain.Stats.LootTable);
         }
-
-        if (LootManager.Instance != null && myLootTable != null)
-        {
-            LootManager.Instance.TryDropItem(transform.position, myLootTable);
-        }
-
-        ItemManager inventory = player.GetComponent<ItemManager>();
-        if (!inventory) return;
-        inventory.TriggerOnKillEnemyEffect();
     }
 }

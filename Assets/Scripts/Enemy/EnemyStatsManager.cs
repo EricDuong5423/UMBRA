@@ -1,10 +1,15 @@
 using System;
 using UnityEngine;
 
-public class EnemyStatsManager : MonoBehaviour
+public class EnemyStatsManager : MonoBehaviour, IEnemyComponent
 {
+    private EnemyBase brain; // Bộ não trung tâm
+
     [Header("Data")]
     [SerializeField] private EnemyStats baseStats; 
+    [SerializeField] private LootTable lootTable;
+    
+    public LootTable LootTable => lootTable;
 
     [Header("Buffs & Debuffs (Runtime)")] 
     public float bonusMaxEmbers = 0;
@@ -24,24 +29,24 @@ public class EnemyStatsManager : MonoBehaviour
     public EnemyStats BaseStats => baseStats;
 
     public event Action OnStatsChange;
-
-    private void Awake()
+    public void Initialize(EnemyBase brain)
     {
+        this.brain = brain;
+        bonusMaxEmbers = 0;
+        bonusMoveSpeed = 0;
+        bonusAttackDamage = 0;
+
         RecalculateStats();
     }
 
     public void RecalculateStats()
     {
         if (baseStats == null) return;
-        
         _maxEmbers = baseStats.baseMaxEmbers + bonusMaxEmbers;
         _moveSpeed = baseStats.baseMoveSpeed + bonusMoveSpeed;
         _attackDamage = baseStats.baseAtkDamage + bonusAttackDamage;
-        
         OnStatsChange?.Invoke();
     }
-    
-    // --- CÁC HÀM NHẬN DEBUFF TỪ PLAYER ---
 
     public void AddDamageModifier(float amount)
     {
@@ -52,6 +57,12 @@ public class EnemyStatsManager : MonoBehaviour
     public void AddMoveSpeedModifier(float amount)
     {
         bonusMoveSpeed += amount;
+        RecalculateStats();
+    }
+
+    public void AddEmbersModifier(float amount)
+    {
+        bonusMaxEmbers += amount;
         RecalculateStats();
     }
 }
