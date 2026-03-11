@@ -3,6 +3,8 @@ using UnityEngine;
 public class EnemyHealth : EntityHealth
 {
     private EnemyStatsManager enemyStats;
+    [SerializeField] private DamageText damageTextPrefab;
+    [SerializeField] private Transform damageTextParent;
 
     private void Awake()
     {
@@ -23,9 +25,25 @@ public class EnemyHealth : EntityHealth
         if (enemyStats != null) enemyStats.OnStatsChange -= HandleStatsChanged;
     }
 
-    protected override void Die()
+    public override void TakeDamage(float amount, Transform source)
     {
-        base.Die();
+        base.TakeDamage(amount, source);
+        var dmgText = Instantiate(damageTextPrefab
+                                , damageTextParent.position
+                                , Quaternion.identity);
+        dmgText.transform.SetParent(damageTextParent);
+        dmgText.SetData($"{amount}", Color.red);
+    }
+
+    public override void TakeDoTDamage(float amount)
+    {
+        base.TakeDoTDamage(amount);
+        
+        var dmgText = Instantiate(damageTextPrefab
+            , damageTextParent.position
+            , Quaternion.identity);
+        dmgText.transform.SetParent(damageTextParent);
+        dmgText.SetData($"{amount}", Color.red);
     }
 
     private void HandleStatsChanged()
