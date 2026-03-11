@@ -16087,7 +16087,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -17359,7 +17359,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -17805,8 +17805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a350aa811c2dc04badec571351c9342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPrefab: {fileID: 7773507205012600354, guid: 84d95affcb8e2f94da76cc4167a84779, type: 3}
-  damageTextParent: {fileID: 1659987020}
 --- !u!114 &1659987030
 MonoBehaviour:
   m_ObjectHideFlags: 0
