@@ -27,6 +27,6 @@ public class CoinUI : MonoBehaviour
 
     private void ChangeCoinText(uint newCurrentCoin)
     {
-        coinText.text = $"x{newCurrentCoin:N0}";
+        coinText.text = $"{newCurrentCoin:N0}";
     }
 }
