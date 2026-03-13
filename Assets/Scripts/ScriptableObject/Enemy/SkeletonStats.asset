@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e486c9b0c1f8840aa81985051a0427, type: 3}
   m_Name: SkeletonStats
   m_EditorClassIdentifier: 
-  baseMaxEmbers: 1000
-  baseMoveSpeed: 0.7
-  baseAtkDamage: 10
-  baseMaxStamina: 100
-  baseStaminaRegen: 5
+  BaseMaxEmbers: 100
+  BaseMoveSpeed: 1
+  BaseAtkDamage: 10
+  BaseMaxStamina: 100
+  BaseStaminaRegen: 5
+  BaseCritRate: 1
+  BaseCritDamage: 10
+  BaseArmor: 20
   silhouetteColor: {r: 1, g: 1, b: 1, a: 1}
   lightColor: {r: 0, g: 0, b: 0, a: 1}
   enemyName: Monster

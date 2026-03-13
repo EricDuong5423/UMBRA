@@ -53,7 +53,7 @@ public abstract class EnemyBase : MonoBehaviour
             var hitbox = weaponCollider.GetComponent<EnemyWeaponHitbox>();
             if (hitbox == null) hitbox = weaponCollider.gameObject.AddComponent<EnemyWeaponHitbox>();
             
-            float dmg = statsManager != null ? statsManager.AttackDamage : stats.baseAtkDamage;
+            float dmg = statsManager != null ? statsManager.AttackDamage : stats.BaseAtkDamage;
             hitbox.Initialize(dmg, transform);
             weaponCollider.enabled = false; 
         }
@@ -167,7 +167,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (anim) anim.SetBool("IsMoving", true);
         Vector2 direction = (target.position - transform.position).normalized;
-        float speed = statsManager != null ? statsManager.MoveSpeed : stats.baseMoveSpeed;
+        float speed = statsManager != null ? statsManager.MoveSpeed : stats.BaseMoveSpeed;
         rb.linearVelocity = direction * speed;
     }
 

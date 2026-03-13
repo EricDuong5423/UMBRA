@@ -5,11 +5,12 @@ public class PlayerCombat : MonoBehaviour
     [Header("Weapon References (Child Objects)")] 
     [SerializeField] private Collider2D normalAttackCollider;
 
-    private StatsManager statsManager;
+    private PlayerStatsManager playerStatsManager;
 
-    private void Awake()
+    public void Initialize(PlayerStatsManager statsManager)
     {
-        statsManager = GetComponent<StatsManager>();
+        playerStatsManager = statsManager;
+        SetupWeapon(normalAttackCollider);
     }
 
     private void Start()
@@ -23,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
         {
             var hitbox = col.GetComponent<PlayerWeaponHitbox>();
             if (hitbox == null) hitbox = col.gameObject.AddComponent<PlayerWeaponHitbox>();
-            hitbox.Initialize(statsManager, transform);
+            hitbox.Initialize(playerStatsManager, transform);
             col.enabled = false; 
         }
     }

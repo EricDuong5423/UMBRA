@@ -4,18 +4,12 @@ using UnityEngine;
 public class PlayerStats : EntitesStats
 {
     [Header("Player Movement Specifics")]
-    public float rollSpeed = 15f;
-    public float rollCooldown = 1f;
-
-    [Header("Player other stats")] 
-    public float critRate = 0f;
-    public float critDamage = 0f;
-
+    public float RollSpeed = 15f;
+    public float RollCooldown = 1f;
+    public float InvicibleDuration = 0.5f;
     [Header("Light Mechanics (Visuals)")] 
-    
-    public float maxLightRadius = 15f;
-    public float minLightRadius = 1f;
-    
-    public float maxLightIntensity = 1.5f;
-    public float minLightIntensity = 0.5f;
+    public float MaxLightRadius = 5f;
+    public float MinLightRadius = 1f;
+    public float MaxLightIntensity = 1.5f;
+    public float MinLightIntensity = 0.5f;
 }

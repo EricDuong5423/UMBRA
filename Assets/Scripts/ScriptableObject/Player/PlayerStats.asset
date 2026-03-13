@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfef35631cf674248b047a6d0eceb429, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  baseMaxEmbers: 100
-  baseMoveSpeed: 2.5
-  baseAtkDamage: 10
-  baseMaxStamina: 100
-  baseStaminaRegen: 10
+  BaseMaxEmbers: 100
+  BaseMoveSpeed: 1.5
+  BaseAtkDamage: 10
+  BaseMaxStamina: 100
+  BaseStaminaRegen: 5
+  BaseCritRate: 1
+  BaseCritDamage: 10
+  BaseArmor: 20
   silhouetteColor: {r: 0, g: 0, b: 0, a: 1}
   lightColor: {r: 1, g: 1, b: 1, a: 1}
-  rollSpeed: 5
-  rollCooldown: 1
-  critRate: 0
-  critDamage: 0
-  maxLightRadius: 3
-  minLightRadius: 0
-  maxLightIntensity: 1.5
-  minLightIntensity: 0.5
+  RollSpeed: 15
+  RollCooldown: 1
+  InvicibleDuration: 0.5
+  MaxLightRadius: 3
+  MinLightRadius: 1
+  MaxLightIntensity: 1.5
+  MinLightIntensity: 0.5

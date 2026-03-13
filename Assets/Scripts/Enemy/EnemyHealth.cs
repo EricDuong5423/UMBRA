@@ -28,22 +28,13 @@ public class EnemyHealth : EntityHealth
     public override void TakeDamage(float amount, Transform source)
     {
         base.TakeDamage(amount, source);
-        var dmgText = Instantiate(damageTextPrefab
-                                , damageTextParent.position
-                                , Quaternion.identity);
-        dmgText.transform.SetParent(damageTextParent);
-        dmgText.SetData($"{amount}", Color.red);
+        DamageTextManager.Instance.SpawnDamageText($"{amount}", Color.red, transform);
     }
 
     public override void TakeDoTDamage(float amount)
     {
         base.TakeDoTDamage(amount);
-        
-        var dmgText = Instantiate(damageTextPrefab
-            , damageTextParent.position
-            , Quaternion.identity);
-        dmgText.transform.SetParent(damageTextParent);
-        dmgText.SetData($"{amount}", Color.red);
+        DamageTextManager.Instance.SpawnDamageText($"{amount}", Color.green, transform);
     }
 
     private void HandleStatsChanged()

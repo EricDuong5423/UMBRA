@@ -5,17 +5,7 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
     [Header("Data")]
-    [SerializeField] private PlayerStats playerStats;
     [SerializeField] private float hurtDuration = 0.2f;
-
-    [Header("Components")]
-    [SerializeField] private PlayerMovement movement;
-    [SerializeField] private StaminaSystem stamina;
-    [SerializeField] private PlayerVisuals visuals;
-    [SerializeField] private PlayerHealth health;
-    [SerializeField] private StatsManager statsManager;
-    [SerializeField] private CoinSystem coinSystem;
-    [SerializeField] private ItemManager playerInventory;
 
     private Vector2 moveInput;
     private float nextRollTime;
@@ -30,15 +20,14 @@ public class PlayerController : MonoBehaviour
         _baseScale = transform.localScale;
     }
 
-    private void Start()
+    public void Initialize(PlayerHealth playerHealth)
     {
-        visuals.Initialize(playerStats, health);
-        health.OnHit += HandleGetHit;
+        playerHealth.OnHit += HandleGetHit;
     }
 
     private void OnDestroy()
     {
-        health.OnHit -= HandleGetHit;
+        PlayerManager.Instance.PlayerHealth.OnHit -= HandleGetHit;
     }
 
     private void HandleGetHit(Vector2 dir)
@@ -47,8 +36,8 @@ public class PlayerController : MonoBehaviour
         isRolling = false;
         isHurting = true;
         
-        movement.StopMoving(); 
-        visuals.UpdateMovementAnim(Vector2.zero, false);
+        PlayerManager.Instance.PlayerMovement.StopMoving(); 
+        PlayerManager.Instance.PlayerVisuals.UpdateMovementAnim(Vector2.zero, false);
         
         CancelInvoke(nameof(RecoverFromHurt));
         Invoke(nameof(RecoverFromHurt), hurtDuration);
@@ -61,9 +50,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (health.IsDead || isHurting || !isMovable) 
+        if (PlayerManager.Instance.PlayerHealth.IsDead || isHurting || !isMovable) 
         {
-            movement.StopMoving();
+            PlayerManager.Instance.PlayerMovement.StopMoving();
             return; 
         }
 
@@ -75,23 +64,23 @@ public class PlayerController : MonoBehaviour
         moveInput = new Vector2(x, y).normalized;
         
         bool isMoving = moveInput.sqrMagnitude > 0.01f;
-        visuals.UpdateMovementAnim(moveInput, isMoving);
+        PlayerManager.Instance.PlayerVisuals.UpdateMovementAnim(moveInput, isMoving);
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            if (Time.time >= nextRollTime && stamina.TryConsumeStamina(20f)) Roll();
+            if (Time.time >= nextRollTime && PlayerManager.Instance.PlayerStamina.TryConsumeStamina(20f)) Roll();
         }
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (stamina.TryConsumeStamina(10f)) Attack();
+            if (PlayerManager.Instance.PlayerStamina.TryConsumeStamina(10f)) Attack();
         }
         
         // Test Code
         if (Input.GetKeyDown(KeyCode.R))
         {
-            ItemData item = playerInventory.randomItemsDebug[Random.Range(0, playerInventory.randomItemsDebug.Count)];
-            playerInventory.AddItem(item);
+            ItemData item = PlayerManager.Instance.PlayerItemManager.randomItemsDebug[Random.Range(0, PlayerManager.Instance.PlayerItemManager.randomItemsDebug.Count)];
+            PlayerManager.Instance.PlayerItemManager.AddItem(item);
         }
     }
 
@@ -109,25 +98,25 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (health.IsDead || isHurting || isAttacking) 
+        if (PlayerManager.Instance.PlayerHealth.IsDead || isHurting || isAttacking) 
         {
-            movement.StopMoving();
+            PlayerManager.Instance.PlayerMovement.StopMoving();
             return;
         }
         if (isRolling)
         {
             return; 
         }
-        movement.Move(moveInput);
+        PlayerManager.Instance.PlayerMovement.Move(moveInput);
     }
     
     private void Attack()
     {
         isAttacking = true;
         moveInput = Vector2.zero;
-        visuals.UpdateMovementAnim(Vector2.zero, false);
-        movement.StopMoving();
-        visuals.TriggerAttack();
+        PlayerManager.Instance.PlayerVisuals.UpdateMovementAnim(Vector2.zero, false);
+        PlayerManager.Instance.PlayerMovement.StopMoving();
+        PlayerManager.Instance.PlayerVisuals.TriggerAttack();
     }
     
     public void EndAttack() { isAttacking = false; }
@@ -135,15 +124,15 @@ public class PlayerController : MonoBehaviour
     private void Roll()
     {
         isRolling = true;
-        nextRollTime = Time.time + playerStats.rollCooldown;
-        movement.StartRoll(moveInput, playerStats.rollSpeed);
-        visuals.TriggerRoll(moveInput);
+        nextRollTime = Time.time + PlayerManager.Instance.PlayerStatsManager.BaseStats.RollCooldown;
+        PlayerManager.Instance.PlayerMovement.StartRoll(moveInput, PlayerManager.Instance.PlayerStatsManager.BaseStats.RollSpeed);
+        PlayerManager.Instance.PlayerVisuals.TriggerRoll(moveInput);
         Invoke(nameof(EndRoll), 0.2f);
     }
 
     private void EndRoll()
     {
         isRolling = false;
-        movement.StopMoving();
+        PlayerManager.Instance.PlayerMovement.StopMoving();
     }
 }

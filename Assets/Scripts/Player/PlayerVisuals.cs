@@ -69,8 +69,8 @@ public class PlayerVisuals : MonoBehaviour
         float ratio = max > 0 ? Mathf.Clamp01(current / max) : 0f;
         if (playerLight != null)
         {
-            playerLight.intensity = Mathf.Lerp(playerStats.minLightIntensity, playerStats.maxLightIntensity, ratio);
-            playerLight.pointLightOuterRadius = Mathf.Lerp(playerStats.minLightRadius, playerStats.maxLightRadius, ratio);
+            playerLight.intensity = Mathf.Lerp(playerStats.MinLightIntensity, playerStats.MaxLightIntensity, ratio);
+            playerLight.pointLightOuterRadius = Mathf.Lerp(playerStats.MinLightRadius, playerStats.MaxLightRadius, ratio);
         }
         if (spriteRenderer != null)
         {

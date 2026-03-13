@@ -4,19 +4,23 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private StatsManager statsManager; // Để lấy MoveSpeed
+    private PlayerStatsManager playerStatsManager;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        statsManager = GetComponent<StatsManager>();
         rb.gravityScale = 0; 
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
+    public void Initialize(PlayerStatsManager statsManager)
+    {
+        playerStatsManager = statsManager;
+    }
+
     public void Move(Vector2 direction)
     {
-        rb.linearVelocity = direction * statsManager.MoveSpeed;
+        rb.linearVelocity = direction * playerStatsManager.MoveSpeed;
     }
 
     public void StartRoll(Vector2 direction, float rollSpeed)

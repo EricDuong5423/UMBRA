@@ -389,7 +389,6 @@ GameObject:
   - component: {fileID: 125104294}
   - component: {fileID: 125104292}
   - component: {fileID: 125104291}
-  - component: {fileID: 125104290}
   - component: {fileID: 125104289}
   - component: {fileID: 125104295}
   - component: {fileID: 125104296}
@@ -399,6 +398,8 @@ GameObject:
   - component: {fileID: 125104299}
   - component: {fileID: 125104301}
   - component: {fileID: 125104302}
+  - component: {fileID: 125104304}
+  - component: {fileID: 125104303}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -587,26 +588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c871d599a2844fafbd34a005a982591c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &125104290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125104280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6976329e227a4125b21943c332b4d689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseStats: {fileID: 11400000, guid: 6ecf9b7ba3707744d8b1f45d3a31f20d, type: 2}
-  bonusMaxEmbers: 0
-  bonusMoveSpeed: 0
-  bonusAttackDamage: 0
-  bonusMaxStamina: 0
-  bonusStaminaRegen: 0
-  bonusCritRate: 0
-  bonusCritDamage: 0
 --- !u!114 &125104291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,15 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b1d6b2a89a44b9a8c7beade96d17d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 6ecf9b7ba3707744d8b1f45d3a31f20d, type: 2}
   hurtDuration: 0.2
-  movement: {fileID: 125104292}
-  stamina: {fileID: 125104289}
-  visuals: {fileID: 125104291}
-  health: {fileID: 125104297}
-  statsManager: {fileID: 125104290}
-  coinSystem: {fileID: 125104296}
-  playerInventory: {fileID: 125104300}
 --- !u!114 &125104295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,7 +665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8303960dcc09a1a4484b20dcb2556e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iFrameDuration: 0.5
 --- !u!114 &125104298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +746,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectVFXContainer: {fileID: 2001612755}
+--- !u!114 &125104303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125104280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c752fe2e56a4d3dbc27ea0e4fc53d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &125104304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125104280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05359aaf2a63f4d6e84a9778a9bbfb09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: 6ecf9b7ba3707744d8b1f45d3a31f20d, type: 2}
+  bonusMaxEmbers: 0
+  bonusMoveSpeed: 0
+  bonusAttackDamage: 0
+  bonusMaxStamina: 0
+  bonusStaminaRegen: 0
+  bonusCritRate: 0
+  bonusCritDamage: 0
+  bonusArmor: 0
 --- !u!1 &126989543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1438,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355685606}
   m_CullTransparentMesh: 1
+--- !u!1 &381836270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 381836271}
+  - component: {fileID: 381836272}
+  m_Layer: 0
+  m_Name: DamageTextManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &381836271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381836270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2100295687}
+  m_Father: {fileID: 620510847}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &381836272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381836270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3688bfce78b914325a9c7fb5e919ee79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4476114780076110532, guid: 84d95affcb8e2f94da76cc4167a84779, type: 3}
+  container: {fileID: 2100295687}
 --- !u!1 &389016384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,6 +2422,7 @@ Transform:
   m_Children:
   - {fileID: 1303752973}
   - {fileID: 1368315394}
+  - {fileID: 381836271}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &625536202
@@ -17837,6 +17890,11 @@ MonoBehaviour:
   bonusMaxEmbers: 0
   bonusMoveSpeed: 0
   bonusAttackDamage: 0
+  bonusMaxStamina: 0
+  bonusStaminaRegen: 0
+  bonusCritRate: 0
+  bonusCritDamage: 0
+  bonusArmor: 0
 --- !u!114 &1659987032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19206,6 +19264,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barFill: {fileID: 584542076}
   healthSystem: {fileID: 125104297}
+--- !u!1 &2100295686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100295687}
+  m_Layer: 0
+  m_Name: PoolContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2100295687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100295686}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 381836271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2129434347
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,11 +16,11 @@ public class SpeedAffterTakeHitEffect: ItemEffect
 
     public override void OnEffectApplied(GameObject target, int stackCount)
     {
-        target.GetComponent<StatsManager>()?.AddMoveSpeedModifier(speedBoost * stackCount );
+        target.GetComponent<PlayerStatsManager>()?.AddMoveSpeedModifier(speedBoost * stackCount );
     }
 
     public override void OnEffectRemoved(GameObject target, int stackCount)
     {
-        target.GetComponent<StatsManager>()?.AddMoveSpeedModifier(-speedBoost * stackCount);
+        target.GetComponent<PlayerStatsManager>()?.AddMoveSpeedModifier(-speedBoost * stackCount);
     }
 }
