@@ -5,14 +5,14 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     public Dictionary<ItemData, int> inventory = new Dictionary<ItemData, int>();
-    private StatsManager statsManager;
+    private PlayerStatsManager playerStatsManager;
     public event Action<ItemData, int> OnInvetoryChanged;
     
     [field:SerializeField] public List<ItemData> randomItemsDebug = new List<ItemData>();
 
-    private void Awake()
+    public void Initialize(PlayerStatsManager statsManager)
     {
-        statsManager = GetComponent<StatsManager>();
+        playerStatsManager = statsManager;
     }
 
     public void AddItem(ItemData item)
@@ -33,27 +33,28 @@ public class ItemManager : MonoBehaviour
 
     private void ApplyAllItemStats()
     {
-        statsManager.bonusAttackDamage = 0;
-        statsManager.bonusCritDamage = 0;
-        statsManager.bonusCritRate = 0;
-        statsManager.bonusStaminaRegen = 0;
-        statsManager.bonusMaxEmbers = 0;
-        statsManager.bonusMaxStamina = 0;
-        statsManager.bonusMoveSpeed = 0;
+        playerStatsManager.bonusAttackDamage = 0;
+        playerStatsManager.bonusCritDamage = 0;
+        playerStatsManager.bonusCritRate = 0;
+        playerStatsManager.bonusStaminaRegen = 0;
+        playerStatsManager.bonusMaxEmbers = 0;
+        playerStatsManager.bonusMaxStamina = 0;
+        playerStatsManager.bonusMoveSpeed = 0;
+        playerStatsManager.bonusArmor = 0;
         foreach (var kvp in inventory)
         {
             ItemData item = kvp.Key;
             int count =  kvp.Value;
             
-            statsManager.bonusAttackDamage += item.bonusAttackDmg * count;
-            statsManager.bonusCritDamage += item.bonusCritDamage * count;
-            statsManager.bonusCritRate += item.bonusCritRate * count;
-            statsManager.bonusStaminaRegen += item.bonusStaminaRegen * count;
-            statsManager.bonusMaxEmbers += item.bonusMaxEmbers * count;
-            statsManager.bonusMaxStamina += item.bonusStamina * count;
-            statsManager.bonusMoveSpeed += item.bonusMoveSpeed * count;
+            playerStatsManager.bonusAttackDamage += item.bonusAttackDmg * count;
+            playerStatsManager.bonusCritDamage += item.bonusCritDamage * count;
+            playerStatsManager.bonusCritRate += item.bonusCritRate * count;
+            playerStatsManager.bonusStaminaRegen += item.bonusStaminaRegen * count;
+            playerStatsManager.bonusMaxEmbers += item.bonusMaxEmbers * count;
+            playerStatsManager.bonusMaxStamina += item.bonusStamina * count;
+            playerStatsManager.bonusMoveSpeed += item.bonusMoveSpeed * count;
         }
-        statsManager.RecalculateStats();
+        playerStatsManager.RecalculateStats();
     }
 
     public void TriggerOnHitEffects(IDamageable enemy, float damage)

@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class EnemyEffectManager : BaseEffectManager
 {
+    private EnemyBase enemyBase;
     private EnemyStatsManager enemyStats;
+    protected override void Awake() { }
 
-    protected override void Awake()
+    public void Initialize(EnemyBase manager)
     {
-        base.Awake();
-        enemyStats = GetComponent<EnemyStatsManager>();
+        enemyBase = manager;
+        enemyStats = enemyBase.StatsManager;
+        
+        healthSystem = enemyBase.HealthSystem;
+        
+        if (activeEffects != null) activeEffects.Clear();
     }
 }

@@ -2,47 +2,44 @@ using UnityEngine;
 
 public class EnemyReward : MonoBehaviour
 {
+    private EnemyBase enemyBase;
+
     [Header("Reward Data")]
     [SerializeField] private EnemyStats stats;
     [Header("Loot Settings")]
     [SerializeField] private LootTable myLootTable;
-    private EnemyHealth enemyHealth;
 
-    private void Awake()
+    public void Initialize(EnemyBase manager)
     {
-        enemyHealth = GetComponent<EnemyHealth>();
-    }
-
-    private void Start()
-    {
-        if (enemyHealth) enemyHealth.OnDeath += GiveReward;
+        enemyBase = manager;
+        
+        enemyBase.HealthSystem.OnDeath -= GiveReward;
+        enemyBase.HealthSystem.OnDeath += GiveReward;
     }
 
     private void OnDestroy()
     {
-        if (enemyHealth) enemyHealth.OnDeath -= GiveReward;
+        if (enemyBase != null && enemyBase.HealthSystem != null) 
+            enemyBase.HealthSystem.OnDeath -= GiveReward;
     }
 
     private void GiveReward()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (player != null)
+        if (enemyBase.Target != null)
         {
-            var playerHealth = player.GetComponent<PlayerHealth>();
+            var playerHealth = enemyBase.Target.GetComponent<PlayerHealth>();
             if (playerHealth) playerHealth.Heal(stats.healOnKill);
 
-            var playerCoin = player.GetComponent<CoinSystem>();
+            var playerCoin = enemyBase.Target.GetComponent<CoinSystem>();
             if(playerCoin) playerCoin.AddCoins(stats.ligthShardOnKill);
+
+            ItemManager inventory = enemyBase.Target.GetComponent<ItemManager>();
+            if (inventory) inventory.TriggerOnKillEnemyEffect();
         }
 
         if (LootManager.Instance != null && myLootTable != null)
         {
             LootManager.Instance.TryDropItem(transform.position, myLootTable);
         }
-
-        ItemManager inventory = player.GetComponent<ItemManager>();
-        if (!inventory) return;
-        inventory.TriggerOnKillEnemyEffect();
     }
 }

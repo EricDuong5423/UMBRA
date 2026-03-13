@@ -14,9 +14,8 @@ public class CoinSystem : MonoBehaviour
         currentCoins = 0;
     }
 
-    private void Start()
+    public void Initialize()
     {
-
         BroadCastCoins();
     }
 

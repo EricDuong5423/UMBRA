@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class PlayerEffectManager : BaseEffectManager
 {
-    private StatsManager playerStats;
+    private PlayerStatsManager playerStatsManager;
 
-    protected override void Awake()
+    public void Initialize(PlayerStatsManager statsManager)
     {
-        base.Awake();
-        playerStats = GetComponent<StatsManager>();
+        playerStatsManager = statsManager;
     }
 }

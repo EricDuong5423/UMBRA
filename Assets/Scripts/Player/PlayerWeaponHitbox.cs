@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerWeaponHitbox : MonoBehaviour
 {
     private Transform owner;
-    private StatsManager stats;
+    private PlayerStatsManager stats;
 
-    public void Initialize(StatsManager playerStats, Transform playerTransform)
+    public void Initialize(PlayerStatsManager playerStats, Transform playerTransform)
     {
         stats = playerStats;
         owner = playerTransform;

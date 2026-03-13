@@ -2,57 +2,40 @@ using UnityEngine;
 
 public class EnemyHealth : EntityHealth
 {
-    private EnemyStatsManager enemyStats;
+    private EnemyBase enemyBase;
     [SerializeField] private DamageText damageTextPrefab;
     [SerializeField] private Transform damageTextParent;
 
-    private void Awake()
+    public void Initialize(EnemyBase manager)
     {
-        enemyStats = GetComponent<EnemyStatsManager>();
-    }
-
-    private void Start()
-    {
-        if (enemyStats != null)
-        {
-            InitializeHealth(enemyStats.MaxEmbers);
-            enemyStats.OnStatsChange += HandleStatsChanged;
-        }
+        enemyBase = manager;
+        
+        InitializeHealth(enemyBase.StatsManager.MaxEmbers);
+        enemyBase.StatsManager.OnStatsChange -= HandleStatsChanged;
+        enemyBase.StatsManager.OnStatsChange += HandleStatsChanged;
     }
 
     private void OnDestroy()
     {
-        if (enemyStats != null) enemyStats.OnStatsChange -= HandleStatsChanged;
+        if (enemyBase != null && enemyBase.StatsManager != null) 
+            enemyBase.StatsManager.OnStatsChange -= HandleStatsChanged;
     }
 
     public override void TakeDamage(float amount, Transform source)
     {
-        base.TakeDamage(amount, source);
-        var dmgText = Instantiate(damageTextPrefab
-                                , damageTextParent.position
-                                , Quaternion.identity);
-        dmgText.transform.SetParent(damageTextParent);
-        dmgText.SetData($"{amount}", Color.red);
+        float finalDamage = enemyBase.StatsManager.GetDamageTaken(amount);
+        DamageTextManager.Instance.SpawnDamageText($"{Mathf.RoundToInt(finalDamage)}", Color.red, transform);
+        base.TakeDamage(finalDamage, source);
     }
 
     public override void TakeDoTDamage(float amount)
     {
         base.TakeDoTDamage(amount);
-        
-        var dmgText = Instantiate(damageTextPrefab
-            , damageTextParent.position
-            , Quaternion.identity);
-        dmgText.transform.SetParent(damageTextParent);
-        dmgText.SetData($"{amount}", Color.red);
+        DamageTextManager.Instance.SpawnDamageText($"{amount}", Color.green, transform);
     }
 
     private void HandleStatsChanged()
     {
-        UpdateMaxHealth(enemyStats.MaxEmbers);
-    }
-
-    public void DestroySelf()
-    {
-        Destroy(gameObject);
+        UpdateMaxHealth(enemyBase.StatsManager.MaxEmbers);
     }
 }

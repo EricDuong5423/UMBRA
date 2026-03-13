@@ -6,36 +6,39 @@ public class StaminaSystem : MonoBehaviour
     public event Action<float, float> OnStaminaChanged;
 
     public float CurrentStamina => currentStamina;
-    public float MaxStamina => stats != null ? stats.MaxStamina : 100f;
+    public float MaxStamina => playerStatsManager != null ? playerStatsManager.MaxStamina : 100f;
 
-    private StatsManager stats;
+    private PlayerStatsManager playerStatsManager;
     private float currentStamina;
 
-    private void Awake()
+    public void Initialize(PlayerStatsManager statsManager)
     {
-        stats = GetComponent<StatsManager>();
+        playerStatsManager = statsManager;
+        currentStamina = playerStatsManager.MaxStamina;
+        playerStatsManager.OnStatsChange += HandleStatsChanged;
+        BroadcastStamina();
     }
 
     private void Start()
     {
-        if (stats != null)
+        if (playerStatsManager != null)
         {
-            currentStamina = stats.MaxStamina;
-            stats.OnStatsChange += HandleStatsChanged;
+            currentStamina = playerStatsManager.MaxStamina;
+            playerStatsManager.OnStatsChange += HandleStatsChanged;
         }
         BroadcastStamina();
     }
     
     private void OnDestroy() 
     {
-        if (stats != null) stats.OnStatsChange -= HandleStatsChanged;
+        if (playerStatsManager != null) playerStatsManager.OnStatsChange -= HandleStatsChanged;
     }
 
     private void Update()
     {
-        if (stats != null && currentStamina < MaxStamina)
+        if (playerStatsManager != null && currentStamina < MaxStamina)
         {
-            currentStamina += stats.StaminaRegen * Time.deltaTime;
+            currentStamina += playerStatsManager.StaminaRegen * Time.deltaTime;
             if (currentStamina > MaxStamina) currentStamina = MaxStamina;
             BroadcastStamina();
         }
@@ -54,7 +57,7 @@ public class StaminaSystem : MonoBehaviour
 
     private void HandleStatsChanged()
     {
-        currentStamina = Mathf.Clamp(currentStamina, 0, stats.MaxStamina);
+        currentStamina = Mathf.Clamp(currentStamina, 0, playerStatsManager.MaxStamina);
         BroadcastStamina();
     }
 

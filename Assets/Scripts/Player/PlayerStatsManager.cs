@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using Random = System.Random;
 
-public class StatsManager : MonoBehaviour
+public class PlayerStatsManager : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] private PlayerStats baseStats; 
@@ -15,6 +14,7 @@ public class StatsManager : MonoBehaviour
     public float bonusStaminaRegen = 0;
     public float bonusCritRate = 0;
     public float bonusCritDamage = 0;
+    public float bonusArmor = 0;
     
     private float _maxEmbers;
     private float _moveSpeed;
@@ -23,6 +23,7 @@ public class StatsManager : MonoBehaviour
     private float _staminaRegen;
     private float _critRate;
     private float _critDamage;
+    private float _armor;
 
     public float MaxEmbers => _maxEmbers;
     public float MoveSpeed => _moveSpeed;
@@ -34,6 +35,7 @@ public class StatsManager : MonoBehaviour
 
     public float MaxStamina => _maxStamina;
     public float StaminaRegen => _staminaRegen;
+    public float Armor => _armor;
     
     public PlayerStats BaseStats => baseStats;
 
@@ -49,24 +51,34 @@ public class StatsManager : MonoBehaviour
 
     public event Action OnStatsChange;
 
-    private void Awake()
+    public void Initialize()
     {
         RecalculateStats();
     }
     public void RecalculateStats()
     {
         if (baseStats == null) return;
-        _maxEmbers = baseStats.baseMaxEmbers + bonusMaxEmbers;
-        _moveSpeed = baseStats.baseMoveSpeed + bonusMoveSpeed;
-        _attackDamage = baseStats.baseAtkDamage + bonusAttackDamage;
-        _maxStamina = baseStats.baseMaxStamina + bonusMaxStamina;
-        _staminaRegen = baseStats.baseStaminaRegen + bonusStaminaRegen;
-        _critRate = baseStats.critRate + bonusCritRate;
-        _critDamage = baseStats.critDamage + bonusCritDamage;
+        _maxEmbers = baseStats.BaseMaxEmbers + bonusMaxEmbers;
+        _moveSpeed = baseStats.BaseMoveSpeed + bonusMoveSpeed;
+        _attackDamage = baseStats.BaseAtkDamage + bonusAttackDamage;
+        _maxStamina = baseStats.BaseMaxStamina + bonusMaxStamina;
+        _staminaRegen = baseStats.BaseStaminaRegen + bonusStaminaRegen;
+        _critRate = baseStats.BaseCritRate + bonusCritRate;
+        _critDamage = baseStats.BaseCritDamage + bonusCritDamage;
+        _armor = baseStats.BaseArmor + bonusArmor;
         OnStatsChange?.Invoke();
     }
     
-    // Bonus stats add functions
+    public float GetDamageTaken(float rawDamage)
+    {
+        if (_armor < 0) 
+        {
+            float amplifyMultiplier = 2f - (100f / (100f - _armor));
+            return rawDamage * amplifyMultiplier; 
+        }
+        float damageMultiplier = 100f / (100f + _armor);
+        return rawDamage * damageMultiplier; 
+    }
 
     public void AddDamageModifier(float amount)
     {
@@ -107,6 +119,12 @@ public class StatsManager : MonoBehaviour
     public void AddStaminaRegenModifier(float amount)
     {
         bonusStaminaRegen += amount;
+        RecalculateStats();
+    }
+    
+    public void AddArmorModifier(float amount)
+    {
+        bonusArmor += amount;
         RecalculateStats();
     }
 }

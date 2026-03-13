@@ -18,6 +18,7 @@ public class ItemData : ScriptableObject
     public float bonusStaminaRegen;
     public float bonusCritRate;
     public float bonusCritDamage;
+    public float bonusArmor;
     
     [Header("Special effects")]
     public ItemEffect effects;
