@@ -69,7 +69,16 @@ public class PlayerStatsManager : MonoBehaviour
         OnStatsChange?.Invoke();
     }
     
-    // Bonus stats add functions
+    public float GetDamageTaken(float rawDamage)
+    {
+        if (_armor < 0) 
+        {
+            float amplifyMultiplier = 2f - (100f / (100f - _armor));
+            return rawDamage * amplifyMultiplier; 
+        }
+        float damageMultiplier = 100f / (100f + _armor);
+        return rawDamage * damageMultiplier; 
+    }
 
     public void AddDamageModifier(float amount)
     {

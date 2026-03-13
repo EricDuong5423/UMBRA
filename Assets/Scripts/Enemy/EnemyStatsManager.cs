@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemyStatsManager : MonoBehaviour
 {
+    private EnemyBase enemyBase;
+
     [Header("Data")]
     [SerializeField] private EnemyStats baseStats; 
     
@@ -28,11 +30,8 @@ public class EnemyStatsManager : MonoBehaviour
     public float MaxEmbers => _maxEmbers;
     public float MoveSpeed => _moveSpeed;
     public float AttackDamage => _attackDamage;
-    
     public float CritRate => _critRate;
-    
     public float CritDamage => _critDamage;
-
     public float MaxStamina => _maxStamina;
     public float StaminaRegen => _staminaRegen;
     public float Armor => _armor;
@@ -41,18 +40,36 @@ public class EnemyStatsManager : MonoBehaviour
 
     public event Action OnStatsChange;
 
-    private void Awake()
+    public void Initialize(EnemyBase manager)
     {
+        enemyBase = manager;
+        bonusMaxEmbers = 0;
+        bonusMoveSpeed = 0;
+        bonusAttackDamage = 0;
+        bonusMaxStamina = 0;
+        bonusStaminaRegen = 0;
+        bonusCritRate = 0;
+        bonusCritDamage = 0;
+        bonusArmor = 0;
+
         RecalculateStats();
+    }
+    
+    public float GetDamageTaken(float rawDamage)
+    {
+        if (_armor < 0) 
+        {
+            float amplifyMultiplier = 2f - (100f / (100f - _armor));
+            return rawDamage * amplifyMultiplier; 
+        }
+        float damageMultiplier = 100f / (100f + _armor);
+        return rawDamage * damageMultiplier; 
     }
 
     public float GetCalculatedHitDamage()
     {
         float randomChance = UnityEngine.Random.Range(0f, 100f);
-        if (randomChance <= _critRate)
-        {
-            return _attackDamage * (1f + _critDamage);
-        }
+        if (randomChance <= _critRate) return _attackDamage * (1f + _critDamage);
         return _attackDamage;
     }
     
@@ -70,53 +87,12 @@ public class EnemyStatsManager : MonoBehaviour
         OnStatsChange?.Invoke();
     }
     
-    // Bonus stats add functions
-
-    public void AddDamageModifier(float amount)
-    {
-        bonusAttackDamage += amount;
-        RecalculateStats();
-    }
-
-    public void AddCritRateModifier(float amount)
-    {
-        bonusCritRate += amount;
-        RecalculateStats();
-    }
-
-    public void AddCritDamageModifier(float amount)
-    {
-        bonusCritDamage += amount;
-        RecalculateStats();
-    }
-
-    public void AddStaminaModifier(float amount)
-    {
-        bonusMaxStamina += amount;
-        RecalculateStats();
-    }
-
-    public void AddMaxEmbersModifier(float amount)
-    {
-        bonusMaxEmbers += amount;
-        RecalculateStats();
-    }
-
-    public void AddMoveSpeedModifier(float amount)
-    {
-        bonusMoveSpeed += amount;
-        RecalculateStats();
-    }
-
-    public void AddStaminaRegenModifier(float amount)
-    {
-        bonusStaminaRegen += amount;
-        RecalculateStats();
-    }
-    
-    public void AddArmorModifier(float amount)
-    {
-        bonusArmor += amount;
-        RecalculateStats();
-    }
+    public void AddDamageModifier(float amount) { bonusAttackDamage += amount; RecalculateStats(); }
+    public void AddCritRateModifier(float amount) { bonusCritRate += amount; RecalculateStats(); }
+    public void AddCritDamageModifier(float amount) { bonusCritDamage += amount; RecalculateStats(); }
+    public void AddStaminaModifier(float amount) { bonusMaxStamina += amount; RecalculateStats(); }
+    public void AddMaxEmbersModifier(float amount) { bonusMaxEmbers += amount; RecalculateStats(); }
+    public void AddMoveSpeedModifier(float amount) { bonusMoveSpeed += amount; RecalculateStats(); }
+    public void AddStaminaRegenModifier(float amount) { bonusStaminaRegen += amount; RecalculateStats(); }
+    public void AddArmorModifier(float amount) { bonusArmor += amount; RecalculateStats(); }
 }

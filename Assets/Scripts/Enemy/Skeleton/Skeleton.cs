@@ -6,12 +6,13 @@ public class Skeleton : EnemyBase
     {
         if (currentState == EnemyState.Hurt) return;
 
-        if (anim == null) return;
+        // Sử dụng Anim (viết hoa) từ lớp cha
+        if (Anim == null) return;
         
         switch (attackIndex)
         {
-            case 1: anim.SetTrigger("Attack1"); break;
-            case 2: anim.SetTrigger("Attack2"); break;
+            case 1: Anim.SetTrigger("Attack1"); break;
+            case 2: Anim.SetTrigger("Attack2"); break;
         }
     }
 }

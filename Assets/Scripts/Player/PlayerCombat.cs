@@ -13,11 +13,6 @@ public class PlayerCombat : MonoBehaviour
         SetupWeapon(normalAttackCollider);
     }
 
-    private void Start()
-    {
-        SetupWeapon(normalAttackCollider);
-    }
-
     private void SetupWeapon(Collider2D col)
     {
         if (col != null)
@@ -48,4 +43,6 @@ public class PlayerCombat : MonoBehaviour
     {
         PlayerHealth.isInvincible = false;
     }
+    
+    
 }

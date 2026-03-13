@@ -22,7 +22,7 @@ MonoBehaviour:
   BaseArmor: 20
   silhouetteColor: {r: 0, g: 0, b: 0, a: 1}
   lightColor: {r: 1, g: 1, b: 1, a: 1}
-  RollSpeed: 15
+  RollSpeed: 2.5
   RollCooldown: 1
   InvicibleDuration: 0.5
   MaxLightRadius: 3

@@ -7,64 +7,82 @@ public enum EnemyState { Idle, Chase, Attack, Dead, Hurt }
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class EnemyBase : MonoBehaviour
 {
+    // ==========================================
+    // CẦU NỐI TRUNG GIAN (PUBLIC GETTERS)
+    // ==========================================
+    public EnemyHealth HealthSystem { get; private set; }
+    public EnemyStatsManager StatsManager { get; private set; }
+    public EnemyEffectManager EffectManager { get; private set; }
+    public EnemyReward RewardSystem { get; private set; }
+    public Rigidbody2D RB { get; private set; }
+    public Animator Anim { get; private set; }
+    public SpriteRenderer SpriteRenderer { get; private set; }
+
     [Header("Setup")]
     [SerializeField] protected EnemyStats stats;
     [SerializeField] protected Collider2D weaponCollider; 
 
     [Header("Combat Settings")]
     [SerializeField] protected float hurtDuration = 0.5f;
-    
-    protected Transform target;
-    protected EnemyHealth healthSystem;
-    public EnemyHealth HealthSystem => healthSystem;
-    public EnemyStatsManager statsManager;
-    protected Rigidbody2D rb;
-    protected Animator anim;
-    protected SpriteRenderer spriteRenderer;
+    public Transform Target { get; private set; } 
 
     protected EnemyState currentState = EnemyState.Idle;
     protected float nextAttackTime = 0f;
     protected float distanceToTarget;
     protected float hurtEndTime;
 
+    [HideInInspector] public GameObject originalPrefab;
+
     protected virtual void Awake()
     {
-        healthSystem = GetComponent<EnemyHealth>();
-        statsManager = GetComponent<EnemyStatsManager>();
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        HealthSystem = GetComponent<EnemyHealth>();
+        StatsManager = GetComponent<EnemyStatsManager>();
+        EffectManager = GetComponent<EnemyEffectManager>();
+        RewardSystem = GetComponent<EnemyReward>();
+        RB = GetComponent<Rigidbody2D>();
+        Anim = GetComponent<Animator>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj) target = playerObj.transform;
+        if (playerObj) Target = playerObj.transform;
     }
-    
-    protected virtual void Start()
-    {
-        if (healthSystem)
-        {
-            healthSystem.OnDeath += HandleDeath;
-            healthSystem.OnHit += HandleHit;
-        }
 
-        // TỰ ĐỘNG SETUP VŨ KHÍ
+    protected virtual void OnEnable()
+    {
+        if (StatsManager) StatsManager.Initialize(this);
+        if (HealthSystem) HealthSystem.Initialize(this);
+        if (EffectManager) EffectManager.Initialize(this);
+        if (RewardSystem) RewardSystem.Initialize(this);
+        if (HealthSystem)
+        {
+            HealthSystem.OnDeath += HandleDeath;
+            HealthSystem.OnHit += HandleHit;
+        }
         if (weaponCollider != null)
         {
             var hitbox = weaponCollider.GetComponent<EnemyWeaponHitbox>();
             if (hitbox == null) hitbox = weaponCollider.gameObject.AddComponent<EnemyWeaponHitbox>();
             
-            float dmg = statsManager != null ? statsManager.AttackDamage : stats.BaseAtkDamage;
+            float dmg = StatsManager != null ? StatsManager.AttackDamage : stats.BaseAtkDamage;
             hitbox.Initialize(dmg, transform);
             weaponCollider.enabled = false; 
         }
+        
+        currentState = EnemyState.Idle;
+        RB.simulated = true;
+        if (Anim)
+        {
+            Anim.Rebind();
+            Anim.Update(0f);
+        }
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void OnDisable()
     {
-        if (healthSystem)
+        if (HealthSystem)
         {
-            healthSystem.OnDeath -= HandleDeath;
-            healthSystem.OnHit -= HandleHit;
+            HealthSystem.OnDeath -= HandleDeath;
+            HealthSystem.OnHit -= HandleHit;
         }
     }
     
@@ -73,36 +91,27 @@ public abstract class EnemyBase : MonoBehaviour
         ChangeState(EnemyState.Hurt);
         
         DisableEnemyHitBox();
-        
         StopMovement();
-        if(anim) 
+        
+        if(Anim) 
         {
-            anim.ResetTrigger("Attack1");
-            anim.ResetTrigger("Attack2");
-            anim.SetTrigger("Hurt");
+            Anim.ResetTrigger("Attack1");
+            Anim.ResetTrigger("Attack2");
+            Anim.SetTrigger("Hurt");
         }
         
         hurtEndTime = Time.time + hurtDuration;
     }
 
-    // --- ANIMATION EVENTS ---
-    public void EnableEnemyHitBox()
-    {
-        if (weaponCollider) weaponCollider.enabled = true;
-    }
+    public void EnableEnemyHitBox() { if (weaponCollider) weaponCollider.enabled = true; }
+    public void DisableEnemyHitBox() { if (weaponCollider) weaponCollider.enabled = false; }
 
-    public void DisableEnemyHitBox()
-    {
-        if (weaponCollider) weaponCollider.enabled = false;
-    }
-
-    // --- MAIN LOOP ---
     protected virtual void Update()
     {
         if (currentState == EnemyState.Dead) return;
-        if (target == null) return;
+        if (Target == null) return;
 
-        distanceToTarget = Vector2.Distance(transform.position, target.position);
+        distanceToTarget = Vector2.Distance(transform.position, Target.position);
 
         switch (currentState)
         {
@@ -144,37 +153,30 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void LogicHurt()
     {
         StopMovement();
-        
-        if (Time.time >= hurtEndTime)
-        {
-            ChangeState(EnemyState.Chase);
-        }
+        if (Time.time >= hurtEndTime) ChangeState(EnemyState.Chase);
     }
 
-    protected void ChangeState(EnemyState newState) 
-    { 
-        currentState = newState; 
-    }
+    protected void ChangeState(EnemyState newState) { currentState = newState; }
 
     protected virtual void FaceTarget()
     {
-        if (target == null || spriteRenderer == null) return;
-        Vector2 direction = target.position - transform.position;
-        if (direction.x != 0) spriteRenderer.flipX = direction.x < 0;
+        if (Target == null || SpriteRenderer == null) return;
+        Vector2 direction = Target.position - transform.position;
+        if (direction.x != 0) SpriteRenderer.flipX = direction.x < 0;
     }
 
     protected virtual void MoveToTarget()
     {
-        if (anim) anim.SetBool("IsMoving", true);
-        Vector2 direction = (target.position - transform.position).normalized;
-        float speed = statsManager != null ? statsManager.MoveSpeed : stats.BaseMoveSpeed;
-        rb.linearVelocity = direction * speed;
+        if (Anim) Anim.SetBool("IsMoving", true);
+        Vector2 direction = (Target.position - transform.position).normalized;
+        float speed = StatsManager != null ? StatsManager.MoveSpeed : stats.BaseMoveSpeed;
+        RB.linearVelocity = direction * speed;
     }
 
     protected virtual void StopMovement()
     {
-        if (anim) anim.SetBool("IsMoving", false);
-        rb.linearVelocity = Vector2.zero;
+        if (Anim) Anim.SetBool("IsMoving", false);
+        RB.linearVelocity = Vector2.zero;
     }
 
     protected virtual void HandleDeath()
@@ -182,18 +184,23 @@ public abstract class EnemyBase : MonoBehaviour
         ChangeState(EnemyState.Dead);
         StopMovement();
         DisableEnemyHitBox();
-        rb.simulated = false;
+        RB.simulated = false;
 
-        if (anim) 
+        if (Anim) 
         {
-            anim.ResetTrigger("Hurt"); 
-            anim.ResetTrigger("Attack1");
-            anim.ResetTrigger("Attack2");
-
-            anim.SetTrigger("Die"); 
+            Anim.ResetTrigger("Hurt"); 
+            Anim.ResetTrigger("Attack1");
+            Anim.ResetTrigger("Attack2");
+            Anim.SetTrigger("Die"); 
         }
+    }
 
-        Destroy(gameObject, 2f); 
+    private void ReturnToPool()
+    {
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.ReturnEnemy(originalPrefab, gameObject);
+        else
+            Destroy(gameObject);
     }
 
     protected virtual int ChooseAttackType()

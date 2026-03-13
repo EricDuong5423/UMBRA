@@ -25,7 +25,7 @@ MonoBehaviour:
   enemyName: Monster
   healOnKill: 10
   ligthShardOnKill: 10
-  lookRadius: 6
+  lookRadius: 3
   stopDistance: 1
   attackCooldown: 2
   attackRangeMin: 0.5
