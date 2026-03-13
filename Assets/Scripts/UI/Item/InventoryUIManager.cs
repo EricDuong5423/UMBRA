@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class InventoryUIManager : MonoBehaviour
 {
     [SerializeField] private ItemManager playerInventory;
     [SerializeField] private Transform itemContainer;
     [SerializeField] private ItemSlotUI itemSlotPrefab;
+    [SerializeField] private Button EnableIventoryButton;
+    [SerializeField] private Ease AnimationEase;
+    [SerializeField] private float AnimationSpeed = 1f;
 
     private Dictionary<ItemData, ItemSlotUI> spawnedSlot = new Dictionary<ItemData, ItemSlotUI>();
 
@@ -32,5 +37,33 @@ public class InventoryUIManager : MonoBehaviour
             newSlot.Setup(item, currentStack);
             spawnedSlot.Add(item, newSlot);
         }
+    }
+
+    public void TurnOffInventory()
+    {
+        transform.DOMoveY(transform.position.y + 210f, AnimationSpeed)
+                 .SetEase(AnimationEase)
+                 .OnComplete(EnableButton)
+                 .Play();
+    }
+
+    public void TurnOnInventory()
+    {
+        var sequence = DOTween.Sequence();
+        var animation = transform.DOMoveY(transform.position.y - 210f, AnimationSpeed);
+        sequence.Append(animation)
+                .JoinCallback(DisableButton)
+                .SetEase(AnimationEase)
+                .Play();
+    }
+
+    private void EnableButton()
+    {
+        EnableIventoryButton.gameObject.SetActive(true);
+    }
+
+    private void DisableButton()
+    {
+        EnableIventoryButton.gameObject.SetActive(false);
     }
 }
