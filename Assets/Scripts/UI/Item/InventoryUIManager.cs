@@ -1,69 +1,105 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 
 public class InventoryUIManager : MonoBehaviour
 {
-    [SerializeField] private ItemManager playerInventory;
-    [SerializeField] private Transform itemContainer;
-    [SerializeField] private ItemSlotUI itemSlotPrefab;
-    [SerializeField] private Button EnableIventoryButton;
-    [SerializeField] private Ease AnimationEase;
-    [SerializeField] private float AnimationSpeed = 1f;
+    [SerializeField] private GameObject itemSlotPrefab;
+    [SerializeField] private GameObject gridParent;
+    [SerializeField] private int maxSlots = 100;
+    [SerializeField] private ItemDetails itemDetails;
+    private ItemManager itemManager;
+    public static InventoryUIManager Instance { get; private set; }
+    private ItemSlotUI currentSelectedSlot;
+    
+    private List<ItemSlotUI> itemSlots = new List<ItemSlotUI>();
 
-    private Dictionary<ItemData, ItemSlotUI> spawnedSlot = new Dictionary<ItemData, ItemSlotUI>();
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
-        if (playerInventory != null) playerInventory.OnInvetoryChanged += HandleItemChanged;
+        itemManager = PlayerManager.Instance.PlayerItemManager;
+        for (int i = 0; i < maxSlots; i++)
+        {
+            GameObject itemSlot = Instantiate(itemSlotPrefab, gridParent.transform);
+            itemSlot.transform.SetParent(gridParent.transform);
+            ItemSlotUI itemSlotUI = itemSlot.GetComponent<ItemSlotUI>();
+            itemSlotUI.ClearSlot();
+            itemSlots.Add(itemSlotUI);
+        }
+        if (itemManager != null)
+        {
+            itemManager.OnInvetoryChanged += OnInventoryChangedEvent;
+        }
+    }
+
+    public void OnClicked(ItemSlotUI selectedSlot)
+    {
+        if (selectedSlot == null || selectedSlot.currentItem == null) return;
+
+        if (currentSelectedSlot == selectedSlot) return;
+
+        if (currentSelectedSlot != null)
+        {
+            currentSelectedSlot.SetHighLight(false);
+        }
+        
+        currentSelectedSlot = selectedSlot;
+        currentSelectedSlot.SetHighLight(true);
+
+        if (itemDetails != null)
+        {
+            itemDetails.Setup(currentSelectedSlot.currentItem, currentSelectedSlot.currentItemAmount);
+        }
     }
 
     private void OnDestroy()
     {
-        if (playerInventory != null) playerInventory.OnInvetoryChanged -= HandleItemChanged;
+        itemManager.OnInvetoryChanged -= OnInventoryChangedEvent;
+    }
+    
+    private void OnInventoryChangedEvent(ItemData item, int count)
+    {
+        HandleUIChanged();
     }
 
-    private void HandleItemChanged(ItemData item, int currentStack)
+    private void HandleUIChanged()
     {
-        if (spawnedSlot.ContainsKey(item))
+        var itemList = itemManager.inventory.ToList();
+        for (int i = 0; i < itemSlots.Count; i++)
         {
-            spawnedSlot[item].Setup(item, currentStack);
+            if (i < itemList.Count)
+            {
+                itemSlots[i].UpdateSlot(itemList[i].Key, itemList[i].Value);
+            }
+            else
+            {
+                itemSlots[i].ClearSlot();
+            }
         }
-        else
+    }
+    
+    public Color GetRarityColor(ItemRarity rarity)
+    {
+        switch (rarity)
         {
-            ItemSlotUI newSlot = Instantiate(itemSlotPrefab, itemContainer);
-            newSlot.Setup(item, currentStack);
-            spawnedSlot.Add(item, newSlot);
+            case ItemRarity.Common: return Color.white;
+            case ItemRarity.Uncommon: return Color.green;
+            case ItemRarity.Rare: return Color.blue;
+            case ItemRarity.Epic: return Color.magenta;
+            case ItemRarity.Legendary: return new Color(1f, 0.5f, 0f);
+            default: return Color.white;
         }
-    }
-
-    public void TurnOffInventory()
-    {
-        transform.DOMoveY(transform.position.y + 210f, AnimationSpeed)
-                 .SetEase(AnimationEase)
-                 .OnComplete(EnableButton)
-                 .Play();
-    }
-
-    public void TurnOnInventory()
-    {
-        var sequence = DOTween.Sequence();
-        var animation = transform.DOMoveY(transform.position.y - 210f, AnimationSpeed);
-        sequence.Append(animation)
-                .JoinCallback(DisableButton)
-                .SetEase(AnimationEase)
-                .Play();
-    }
-
-    private void EnableButton()
-    {
-        EnableIventoryButton.gameObject.SetActive(true);
-    }
-
-    private void DisableButton()
-    {
-        EnableIventoryButton.gameObject.SetActive(false);
     }
 }

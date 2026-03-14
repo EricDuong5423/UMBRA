@@ -36,7 +36,9 @@ MonoBehaviour:
   m_SoftMaskable: 0
   m_HideGeneratedComponents: 1
   m_ShaderVariantRegistry:
-    m_OptionalShaders: []
+    m_OptionalShaders:
+    - key: Hidden/UI/Default (UIEffect)
+      value: Hidden/UI/Default (UIEffect)
     m_Asset: {fileID: -3761420160977493772}
     m_ErrorOnUnregisteredVariant: 0
     m_UnregisteredVariants: []
