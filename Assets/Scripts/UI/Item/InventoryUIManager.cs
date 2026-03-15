@@ -16,6 +16,7 @@ public class InventoryUIManager : MonoBehaviour
     private ItemSlotUI currentSelectedSlot;
     
     private List<ItemSlotUI> itemSlots = new List<ItemSlotUI>();
+    [SerializeField] private float slotStaggerDelay = 0.05f;
 
     private void Awake()
     {
@@ -81,7 +82,8 @@ public class InventoryUIManager : MonoBehaviour
         {
             if (i < itemList.Count)
             {
-                itemSlots[i].UpdateSlot(itemList[i].Key, itemList[i].Value);
+                float delay = i * slotStaggerDelay;
+                itemSlots[i].UpdateSlot(itemList[i].Key, itemList[i].Value, delay);
             }
             else
             {

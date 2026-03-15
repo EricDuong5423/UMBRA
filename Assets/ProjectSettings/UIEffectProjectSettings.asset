@@ -34,7 +34,29 @@ ShaderVariantCollection:
   - first: {fileID: 4800000, guid: 96246b1ead49a4c5a996fd477bc5a117, type: 3}
     second:
       variants:
+      - keywords: 
+        passType: 0
       - keywords: COLOR_FILTER
+        passType: 0
+      - keywords: COLOR_FILTER DETAIL_MASKING
+        passType: 0
+      - keywords: COLOR_FILTER DETAIL_SUBTRACTIVE
+        passType: 0
+      - keywords: COLOR_FILTER EDGE_PLAIN
+        passType: 0
+      - keywords: COLOR_FILTER EDGE_SHINY
+        passType: 0
+      - keywords: COLOR_FILTER GRADATION_COLOR2
+        passType: 0
+      - keywords: COLOR_FILTER GRADATION_GRADIENT
+        passType: 0
+      - keywords: COLOR_FILTER TRANSITION_SHINY
+        passType: 0
+      - keywords: DETAIL_MASKING TRANSITION_SHINY
+        passType: 0
+      - keywords: DETAIL_MULTIPLY_ADDITIVE TRANSITION_SHINY
+        passType: 0
+      - keywords: DETAIL_REPLACE TRANSITION_SHINY
         passType: 0
       - keywords: EDGE_PLAIN
         passType: 0
@@ -45,4 +67,32 @@ ShaderVariantCollection:
       - keywords: SAMPLING_EDGE_LUMINANCE
         passType: 0
       - keywords: SAMPLING_EDGE_LUMINANCE TARGET_HUE
+        passType: 0
+      - keywords: TARGET_HUE TRANSITION_SHINY
+        passType: 0
+      - keywords: TARGET_LUMINANCE TRANSITION_SHINY
+        passType: 0
+      - keywords: TONE_GRAYSCALE TRANSITION_SHINY
+        passType: 0
+      - keywords: TONE_NEGATIVE TRANSITION_SHINY
+        passType: 0
+      - keywords: TONE_POSTERIZE TRANSITION_SHINY
+        passType: 0
+      - keywords: TONE_RETRO TRANSITION_SHINY
+        passType: 0
+      - keywords: TONE_SEPIA TRANSITION_SHINY
+        passType: 0
+      - keywords: TRANSITION_BLAZE
+        passType: 0
+      - keywords: TRANSITION_BURN
+        passType: 0
+      - keywords: TRANSITION_FADE
+        passType: 0
+      - keywords: TRANSITION_MASK
+        passType: 0
+      - keywords: TRANSITION_MELT
+        passType: 0
+      - keywords: TRANSITION_PATTERN
+        passType: 0
+      - keywords: TRANSITION_SHINY
         passType: 0
