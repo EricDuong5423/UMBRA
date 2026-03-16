@@ -75,6 +75,15 @@ public class PlayerController : MonoBehaviour
         {
             if (PlayerManager.Instance.PlayerStamina.TryConsumeStamina(10f)) Attack();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (TabManager.Instance == null) return;
+            var mainMenuCanvas = TabManager.Instance.gameObject.GetComponent<CanvasGroup>();
+            if (mainMenuCanvas == null) return;
+            mainMenuCanvas.alpha = TabManager.isOpened ?  0f : 1f;
+            TabManager.isOpened = !TabManager.isOpened;
+        }
         
         // Test Code
         if (Input.GetKeyDown(KeyCode.R))

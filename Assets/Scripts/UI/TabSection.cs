@@ -33,6 +33,7 @@ public class TabSection : MonoBehaviour
             {
                 canvasGroup.blocksRaycasts = false;
                 canvasGroup.interactable = false;
+                canvasGroup.alpha = 0f;
             });
     }
 

@@ -1,11 +1,17 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class EnemyHealthBarUI : MonoBehaviour
 {
     [SerializeField] private Image healthBarFill;
+    [SerializeField] private Image easeHealthBarFill;
     [SerializeField] private EnemyBase enemyBase;
+    [SerializeField] private float effectDuration = 0.5f;
+
+    private Tween easeHealthBarEffect;
+    private float lastHealth;
 
     private void Start()
     {
@@ -20,7 +26,10 @@ public class EnemyHealthBarUI : MonoBehaviour
     {
         float ratio = currentEmber / maxEmber;
         ratio = Mathf.Clamp(ratio, 0, 1);
-        
-        healthBarFill.fillAmount = ratio;
+        var sequence =  DOTween.Sequence();
+        easeHealthBarEffect = sequence
+            .Append(healthBarFill.DOFillAmount(ratio, 0f))
+            .Append(easeHealthBarFill.DOFillAmount(ratio, effectDuration))
+            .Play();
     }
 }

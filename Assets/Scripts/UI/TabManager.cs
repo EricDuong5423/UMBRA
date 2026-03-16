@@ -15,9 +15,18 @@ public class TabManager : MonoBehaviour
     private UITabButton[] buttons;
     private TabSection[] sections;
     private int currentIndex = -1;
+    
+    public static TabManager Instance { get; private set; }
+    public static bool isOpened = false;
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         buttons = new UITabButton[] { inventoryButton, statsButton, settingsButton };
         sections = new TabSection[] { inventorySection, statsSection, settingsSection };
 

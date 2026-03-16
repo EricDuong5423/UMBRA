@@ -4,6 +4,8 @@ public class PlayerWeaponHitbox : MonoBehaviour
 {
     private Transform owner;
     private PlayerStatsManager stats;
+    [SerializeField] private float shakeStrengthMultply = 3f;
+    [SerializeField] private float effectDuration = 0.5f;
 
     public void Initialize(PlayerStatsManager playerStats, Transform playerTransform)
     {
@@ -21,10 +23,9 @@ public class PlayerWeaponHitbox : MonoBehaviour
             target.TakeDamage(finalDamage, owner);
             if (!owner) return;
             ItemManager inventory = owner.GetComponent<ItemManager>();
-            if (inventory != null)
-            {
-                inventory.TriggerOnHitEffects(target, finalDamage);
-            }
+            if (inventory == null) return;
+            inventory.TriggerOnHitEffects(target, finalDamage);
+            CameraShake.Shake(effectDuration, finalDamage * shakeStrengthMultply);
         }
     }
 }
