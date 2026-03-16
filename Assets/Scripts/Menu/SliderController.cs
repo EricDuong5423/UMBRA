@@ -3,29 +3,33 @@ using UnityEngine.UI;
 
 public class SliderController : MonoBehaviour
 {
-    private AudioController audioController;
     [SerializeField] private Slider slider;
     [SerializeField] private string type;
-    void Start()
+
+    private void Start()
     {
-        audioController = AudioController.Instance;
+        AudioController audio = AudioController.Instance;
+        if (audio == null) return;
         switch (type)
         {
-            case "BGM":
-            {
-                slider.value = audioController.BGMVolume;
-                break;
-            }
-            case "SFX":
-            {
-                slider.value = audioController.SFXVolume;
-                break;
-            }
-            case "Enviroment":
-            {
-                slider.value = audioController.EnviromentVolume;
-                break;
-            }
+            case "BGM":         slider.value = audio.BGMVolume; break;
+            case "SFX":         slider.value = audio.SFXVolume; break;
+            case "Enviroment":  slider.value = audio.EnviromentVolume; break;
+        }
+        slider.onValueChanged.RemoveAllListeners();
+        slider.onValueChanged.AddListener(OnSliderChanged);
+    }
+
+    private void OnSliderChanged(float value)
+    {
+        AudioController audio = AudioController.Instance;
+        if (audio == null) return;
+
+        switch (type)
+        {
+            case "BGM":         audio.SetBGMVolume(slider); break;
+            case "SFX":         audio.SetSFXVolume(slider); break;
+            case "Enviroment":  audio.SetEnviromentVolume(slider); break;
         }
     }
 }
