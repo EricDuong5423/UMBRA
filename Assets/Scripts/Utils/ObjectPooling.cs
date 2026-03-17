@@ -4,30 +4,23 @@ using UnityEngine;
 public class ObjectPooling : MonoBehaviour
 {
     private GameObject objectPrefab;
-    private List<GameObject> objectPool = new();
-
-    public void SetPrefab(GameObject prefab)
-    {
-        objectPrefab = prefab;
-    }
-
+    private Queue<GameObject> objectPool = new Queue<GameObject>();
+    public void SetPrefab(GameObject prefab) { objectPrefab = prefab; }
     public GameObject Get()
     {
-        if (objectPool == null || objectPool.Count <= 0)
+        if (objectPool.Count > 0)
         {
-            var obj = Instantiate(objectPrefab);
-            obj.SetActive(true);
-            return obj;
+            var result = objectPool.Dequeue();
+            result.SetActive(true);
+            return result;
         }
-        var result = objectPool[0];
-        result.SetActive(true);
-        objectPool.RemoveAt(0);
-        return result;
+        var obj = Instantiate(objectPrefab);
+        obj.SetActive(true);
+        return obj;
     }
-
     public void AddToPool(GameObject obj)
     {
         obj.SetActive(false);
-        objectPool.Add(obj);
+        objectPool.Enqueue(obj);
     }
 }

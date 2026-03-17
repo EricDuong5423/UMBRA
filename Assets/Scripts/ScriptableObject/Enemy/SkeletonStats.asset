@@ -30,3 +30,8 @@ MonoBehaviour:
   attackCooldown: 2
   attackRangeMin: 0.5
   attackRangeMax: 0.8
+  wandersWhenIdle: 1
+  wanderRadius: 3
+  wanderInterval: 2
+  fleesWhenLowHealth: 1
+  fleeHealthThreshold: 0.8

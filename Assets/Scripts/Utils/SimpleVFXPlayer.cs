@@ -9,6 +9,9 @@ public class SimpleVFXPlayer : MonoBehaviour
     private float timePerFrame;
     private float timer;
     private int currentFrame;
+    public event System.Action OnAnimationComplete;
+    
+    [SerializeField] private bool loop = false;
 
     private void Awake()
     {
@@ -36,12 +39,23 @@ public class SimpleVFXPlayer : MonoBehaviour
 
     private void Update()
     {
-        if(frames == null || frames.Length == 0) return;
+        if (frames == null || frames.Length == 0) return;
         timer += Time.deltaTime;
         if (timer >= timePerFrame)
         {
             timer -= timePerFrame;
-            currentFrame = (currentFrame + 1) % frames.Length;
+            currentFrame++;
+            if (currentFrame >= frames.Length)
+            {
+                if (loop)
+                    currentFrame = 0;
+                else
+                {
+                    StopAnimation();
+                    OnAnimationComplete?.Invoke(); // báo cho VFXManager return về pool
+                    return;
+                }
+            }
             sr.sprite = frames[currentFrame];
         }
     }

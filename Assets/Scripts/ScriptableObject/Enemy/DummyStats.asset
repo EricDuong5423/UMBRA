@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e486c9b0c1f8840aa81985051a0427, type: 3}
+  m_Name: DummyStats
+  m_EditorClassIdentifier: 
+  BaseMaxEmbers: 50
+  BaseMoveSpeed: 0
+  BaseAtkDamage: 0
+  BaseMaxStamina: 0
+  BaseStaminaRegen: 0
+  BaseCritRate: 0
+  BaseCritDamage: 0
+  BaseArmor: 20
+  silhouetteColor: {r: 0, g: 0, b: 0, a: 1}
+  lightColor: {r: 1, g: 1, b: 1, a: 1}
+  enemyName: Dummy target
+  healOnKill: 10
+  ligthShardOnKill: 50
+  lookRadius: 0
+  stopDistance: 0
+  attackCooldown: 0
+  attackRangeMin: 0
+  attackRangeMax: 0
+  wandersWhenIdle: 0
+  wanderRadius: 0
+  wanderInterval: 0
+  fleesWhenLowHealth: 0
+  fleeHealthThreshold: 0.25

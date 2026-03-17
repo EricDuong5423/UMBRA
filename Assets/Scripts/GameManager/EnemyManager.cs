@@ -15,12 +15,9 @@ public class EnemyManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        else Destroy(gameObject);
     }
     public virtual GameObject SpawnEnemy(GameObject prefab, Vector3 position, Quaternion rotation)
     {
@@ -43,8 +40,6 @@ public class EnemyManager : MonoBehaviour
         {
             enemyBase.originalPrefab = prefab;
         }
-        obj.SetActive(true);
-
         return obj;
     }
     
@@ -62,6 +57,16 @@ public class EnemyManager : MonoBehaviour
         else
         {
             Destroy(obj);
+        }
+    }
+    
+    public void ReturnAllEnemies()
+    {
+        var allEnemies = container.GetComponentsInChildren<EnemyBase>(true);
+        foreach (var enemy in allEnemies)
+        {
+            if (enemy.gameObject.activeSelf)
+                ReturnEnemy(enemy.originalPrefab, enemy.gameObject);
         }
     }
 }

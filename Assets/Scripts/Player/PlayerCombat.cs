@@ -34,15 +34,5 @@ public class PlayerCombat : MonoBehaviour
         if(normalAttackCollider) normalAttackCollider.enabled = false;
     }
     
-    public void EnableIFrame()
-    {
-        PlayerHealth.isInvincible = true;
-    }
-    
-    public void DisableIFrame()
-    {
-        PlayerHealth.isInvincible = false;
-    }
-    
     
 }

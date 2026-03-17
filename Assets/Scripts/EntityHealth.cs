@@ -11,6 +11,7 @@ public abstract class EntityHealth : MonoBehaviour, IDamageable
     public bool IsDead { get; protected set; } 
     protected void InitializeHealth(float maxHealth)
     {
+        IsDead = false;
         MaxEmbers = maxHealth;
         CurrentEmbers = maxHealth;
         BroadcastHealth();

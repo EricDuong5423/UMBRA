@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class BaseEffectManager : MonoBehaviour
 {
-    public List<ActiveEffect> activeEffects = new List<ActiveEffect>();
+    protected List<ActiveEffect> activeEffects = new List<ActiveEffect>();
+    public IReadOnlyList<ActiveEffect> ActiveEffects => activeEffects;
     protected EntityHealth healthSystem;
     
     public event Action<ActiveEffect, Transform> OnEffectStarted;

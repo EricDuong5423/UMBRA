@@ -21,27 +21,22 @@ public class StaminaSystem : MonoBehaviour
 
     private void Start()
     {
-        if (playerStatsManager != null)
-        {
-            currentStamina = playerStatsManager.MaxStamina;
-            playerStatsManager.OnStatsChange += HandleStatsChanged;
-        }
+        // fix: bỏ double-subscribe, chỉ broadcast
         BroadcastStamina();
     }
-    
-    private void OnDestroy() 
+
+    private void OnDestroy()
     {
-        if (playerStatsManager != null) playerStatsManager.OnStatsChange -= HandleStatsChanged;
+        if (playerStatsManager != null)
+            playerStatsManager.OnStatsChange -= HandleStatsChanged;
     }
 
     private void Update()
     {
-        if (playerStatsManager != null && currentStamina < MaxStamina)
-        {
-            currentStamina += playerStatsManager.StaminaRegen * Time.deltaTime;
-            if (currentStamina > MaxStamina) currentStamina = MaxStamina;
-            BroadcastStamina();
-        }
+        if (playerStatsManager == null || currentStamina >= MaxStamina) return;
+        currentStamina += playerStatsManager.StaminaRegen * Time.deltaTime;
+        if (currentStamina > MaxStamina) currentStamina = MaxStamina;
+        BroadcastStamina();
     }
 
     public bool TryConsumeStamina(float amount)

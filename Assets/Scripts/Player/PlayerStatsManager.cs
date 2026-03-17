@@ -39,10 +39,11 @@ public class PlayerStatsManager : MonoBehaviour
     
     public PlayerStats BaseStats => baseStats;
 
-    public float GetCalculatedHitDamage()
+    public float GetCalculatedHitDamage(out bool isCrit)
     {
         float randomChance = UnityEngine.Random.Range(0f, 100f);
-        if (randomChance <= _critRate)
+        isCrit = randomChance <= _critRate;
+        if (isCrit)
         {
             return _attackDamage * (1f + _critDamage);
         }

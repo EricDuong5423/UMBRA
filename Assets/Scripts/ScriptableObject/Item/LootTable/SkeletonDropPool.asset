@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee79442abbb0f424fbe1f6cbb75f3291, type: 3}
   m_Name: SkeletonDropPool
   m_EditorClassIdentifier: 
-  dropChance: 100
+  dropChance: 20
   commonWeight: 50
   uncommonWeight: 30
   rareWeight: 15

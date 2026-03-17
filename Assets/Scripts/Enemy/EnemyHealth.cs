@@ -9,7 +9,6 @@ public class EnemyHealth : EntityHealth
     public void Initialize(EnemyBase manager)
     {
         enemyBase = manager;
-        
         InitializeHealth(enemyBase.StatsManager.MaxEmbers);
         enemyBase.StatsManager.OnStatsChange -= HandleStatsChanged;
         enemyBase.StatsManager.OnStatsChange += HandleStatsChanged;
@@ -17,7 +16,7 @@ public class EnemyHealth : EntityHealth
 
     private void OnDestroy()
     {
-        if (enemyBase != null && enemyBase.StatsManager != null) 
+        if (enemyBase != null && enemyBase.StatsManager != null)
             enemyBase.StatsManager.OnStatsChange -= HandleStatsChanged;
     }
 

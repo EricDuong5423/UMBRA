@@ -10,20 +10,20 @@ using UnityEngine;
 [RequireComponent(typeof(CoinSystem))]
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(StaminaSystem))]
-[RequireComponent(typeof(PlayerController))]
 public class PlayerManager : MonoBehaviour
 {
     public PlayerStatsManager PlayerStatsManager { get; private set; }
     public PlayerHealth PlayerHealth { get; private set; }
     public PlayerCombat PlayerCombat { get; private set; }
-    public PlayerVisuals PlayerVisuals  { get; private set; }
+    public PlayerVisuals PlayerVisuals { get; private set; }
     public PlayerEffectManager PlayerEffectManager { get; private set; }
     public PlayerMovement PlayerMovement { get; private set; }
     public ItemManager PlayerItemManager { get; private set; }
     public CoinSystem PlayerCoinSystem { get; private set; }
     public StaminaSystem PlayerStamina { get; private set; }
     public PlayerController PlayerController { get; private set; }
-    
+    public PlayerWeaponHitbox PlayerWeaponHitbox { get; private set; }
+
     public static PlayerManager Instance;
 
     private void Awake()
@@ -34,6 +34,8 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         PlayerStatsManager = GetComponent<PlayerStatsManager>();
         PlayerHealth = GetComponent<PlayerHealth>();
         PlayerCombat = GetComponent<PlayerCombat>();
@@ -44,6 +46,7 @@ public class PlayerManager : MonoBehaviour
         PlayerCoinSystem = GetComponent<CoinSystem>();
         PlayerStamina = GetComponent<StaminaSystem>();
         PlayerController = GetComponent<PlayerController>();
+        PlayerWeaponHitbox = GetComponentInChildren<PlayerWeaponHitbox>();
     }
 
     private void Start()

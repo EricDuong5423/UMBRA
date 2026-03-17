@@ -1,50 +1,55 @@
 using UnityEngine;
 
-public enum EnemyState { Idle, Chase, Attack, Dead, Hurt }
+public enum EnemyState { Idle, Wander, Chase, Attack, Flee, Hurt, Dead }
 
-[RequireComponent(typeof(EnemyHealth))] 
+[RequireComponent(typeof(EnemyHealth))]
 [RequireComponent(typeof(EnemyStatsManager))]
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class EnemyBase : MonoBehaviour
 {
-    // ==========================================
-    // CẦU NỐI TRUNG GIAN (PUBLIC GETTERS)
-    // ==========================================
-    public EnemyHealth HealthSystem { get; private set; }
+    // ── Public Getters ──────────────────────────────────────
+    public EnemyHealth HealthSystem       { get; private set; }
     public EnemyStatsManager StatsManager { get; private set; }
     public EnemyEffectManager EffectManager { get; private set; }
-    public EnemyReward RewardSystem { get; private set; }
-    public Rigidbody2D RB { get; private set; }
-    public Animator Anim { get; private set; }
-    public SpriteRenderer SpriteRenderer { get; private set; }
+    public EnemyReward RewardSystem       { get; private set; }
+    public Rigidbody2D RB                 { get; private set; }
+    public Animator Anim                  { get; private set; }
+    public SpriteRenderer SpriteRenderer  { get; private set; }
+    public Transform Target               { get; private set; }
+    public EnemyStats Stats               => stats; // expose ra ngoài cho spawn system
 
     [Header("Setup")]
     [SerializeField] protected EnemyStats stats;
-    [SerializeField] protected Collider2D weaponCollider; 
+    [SerializeField] protected Collider2D weaponCollider;
 
     [Header("Combat Settings")]
     [SerializeField] protected float hurtDuration = 0.5f;
-    public Transform Target { get; private set; } 
+
+    [HideInInspector] public GameObject originalPrefab;
 
     protected EnemyState currentState = EnemyState.Idle;
     protected float nextAttackTime = 0f;
     protected float distanceToTarget;
     protected float hurtEndTime;
 
-    [HideInInspector] public GameObject originalPrefab;
+    // Wander
+    private Vector2 wanderTarget;
+    private float nextWanderTime;
 
+    // ── Lifecycle ───────────────────────────────────────────
     protected virtual void Awake()
     {
-        HealthSystem = GetComponent<EnemyHealth>();
-        StatsManager = GetComponent<EnemyStatsManager>();
-        EffectManager = GetComponent<EnemyEffectManager>();
-        RewardSystem = GetComponent<EnemyReward>();
-        RB = GetComponent<Rigidbody2D>();
-        Anim = GetComponent<Animator>();
-        SpriteRenderer = GetComponent<SpriteRenderer>();
+        HealthSystem    = GetComponent<EnemyHealth>();
+        StatsManager    = GetComponent<EnemyStatsManager>();
+        EffectManager   = GetComponent<EnemyEffectManager>();
+        RewardSystem    = GetComponent<EnemyReward>();
+        RB              = GetComponent<Rigidbody2D>();
+        Anim            = GetComponent<Animator>();
+        SpriteRenderer  = GetComponent<SpriteRenderer>();
 
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj) Target = playerObj.transform;
+        // fix: dùng PlayerManager thay FindGameObjectWithTag
+        if (PlayerManager.Instance != null)
+            Target = PlayerManager.Instance.transform;
     }
 
     protected virtual void OnEnable()
@@ -53,23 +58,24 @@ public abstract class EnemyBase : MonoBehaviour
         if (HealthSystem) HealthSystem.Initialize(this);
         if (EffectManager) EffectManager.Initialize(this);
         if (RewardSystem) RewardSystem.Initialize(this);
+
         if (HealthSystem)
         {
             HealthSystem.OnDeath += HandleDeath;
-            HealthSystem.OnHit += HandleHit;
+            HealthSystem.OnHit   += HandleHit;
         }
+
         if (weaponCollider != null)
         {
             var hitbox = weaponCollider.GetComponent<EnemyWeaponHitbox>();
             if (hitbox == null) hitbox = weaponCollider.gameObject.AddComponent<EnemyWeaponHitbox>();
-            
-            float dmg = StatsManager != null ? StatsManager.AttackDamage : stats.BaseAtkDamage;
-            hitbox.Initialize(dmg, transform);
-            weaponCollider.enabled = false; 
+            hitbox.Initialize(StatsManager, transform); // fix: truyền StatsManager, không cache float
+            weaponCollider.enabled = false;
         }
-        
-        currentState = EnemyState.Idle;
+
+        currentState = stats != null && stats.wandersWhenIdle ? EnemyState.Wander : EnemyState.Idle;
         RB.simulated = true;
+
         if (Anim)
         {
             Anim.Rebind();
@@ -82,30 +88,11 @@ public abstract class EnemyBase : MonoBehaviour
         if (HealthSystem)
         {
             HealthSystem.OnDeath -= HandleDeath;
-            HealthSystem.OnHit -= HandleHit;
+            HealthSystem.OnHit   -= HandleHit;
         }
     }
-    
-    protected virtual void HandleHit(Vector2 dir)
-    {
-        ChangeState(EnemyState.Hurt);
-        
-        DisableEnemyHitBox();
-        StopMovement();
-        
-        if(Anim) 
-        {
-            Anim.ResetTrigger("Attack1");
-            Anim.ResetTrigger("Attack2");
-            Anim.SetTrigger("Hurt");
-        }
-        
-        hurtEndTime = Time.time + hurtDuration;
-    }
 
-    public void EnableEnemyHitBox() { if (weaponCollider) weaponCollider.enabled = true; }
-    public void DisableEnemyHitBox() { if (weaponCollider) weaponCollider.enabled = false; }
-
+    // ── Update Loop ─────────────────────────────────────────
     protected virtual void Update()
     {
         if (currentState == EnemyState.Dead) return;
@@ -113,24 +100,63 @@ public abstract class EnemyBase : MonoBehaviour
 
         distanceToTarget = Vector2.Distance(transform.position, Target.position);
 
+        // Kiểm tra flee ưu tiên cao
+        if (ShouldFlee() && currentState != EnemyState.Flee && currentState != EnemyState.Hurt)
+        {
+            ChangeState(EnemyState.Flee);
+        }
+
         switch (currentState)
         {
-            case EnemyState.Idle: LogicIdle(); break;
-            case EnemyState.Chase: LogicChase(); break;
+            case EnemyState.Idle:   LogicIdle();   break;
+            case EnemyState.Wander: LogicWander(); break;
+            case EnemyState.Chase:  LogicChase();  break;
             case EnemyState.Attack: LogicAttack(); break;
-            case EnemyState.Hurt:  LogicHurt(); break;
+            case EnemyState.Flee:   LogicFlee();   break;
+            case EnemyState.Hurt:   LogicHurt();   break;
         }
     }
 
+    // ── State Logic (override thoải mái trong subclass) ─────
     protected virtual void LogicIdle()
     {
         StopMovement();
-        if (distanceToTarget <= stats.lookRadius) ChangeState(EnemyState.Chase);
+        if (distanceToTarget <= stats.lookRadius)
+        {
+            ChangeState(EnemyState.Chase);
+            return;
+        }
+        if (stats.wandersWhenIdle && Time.time >= nextWanderTime)
+            ChangeState(EnemyState.Wander);
+    }
+
+    protected virtual void LogicWander()
+    {
+        // Nếu thấy player → chase ngay
+        if (distanceToTarget <= stats.lookRadius) { ChangeState(EnemyState.Chase); return; }
+
+        // Chọn điểm wander mới khi đến nơi hoặc hết timer
+        if (Time.time >= nextWanderTime || Vector2.Distance(transform.position, wanderTarget) < 0.3f)
+        {
+            Vector2 randomDir = Random.insideUnitCircle.normalized;
+            wanderTarget = (Vector2)transform.position + randomDir * Random.Range(1f, stats.wanderRadius);
+            nextWanderTime = Time.time + stats.wanderInterval;
+        }
+
+        Vector2 dir = (wanderTarget - (Vector2)transform.position).normalized;
+        FaceDirection(dir);
+        float speed = StatsManager != null ? StatsManager.MoveSpeed * 0.5f : stats.BaseMoveSpeed * 0.5f;
+        RB.linearVelocity = dir * speed;
+        if (Anim) Anim.SetBool("IsMoving", true);
     }
 
     protected virtual void LogicChase()
     {
-        if (distanceToTarget > stats.lookRadius * 1.5f) { ChangeState(EnemyState.Idle); return; }
+        if (distanceToTarget > stats.lookRadius * 1.5f)
+        {
+            ChangeState(stats.wandersWhenIdle ? EnemyState.Wander : EnemyState.Idle);
+            return;
+        }
         if (distanceToTarget <= stats.attackRangeMax) { ChangeState(EnemyState.Attack); return; }
         FaceTarget();
         MoveToTarget();
@@ -141,7 +167,7 @@ public abstract class EnemyBase : MonoBehaviour
         StopMovement();
         if (distanceToTarget > stats.attackRangeMax) { ChangeState(EnemyState.Chase); return; }
         FaceTarget();
-        
+
         if (Time.time >= nextAttackTime)
         {
             int attackType = ChooseAttackType();
@@ -150,19 +176,79 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
+    protected virtual void LogicFlee()
+    {
+        Vector2 fleeDir = ((Vector2)transform.position - (Vector2)Target.position).normalized;
+        FaceDirection(fleeDir);
+        float speed = StatsManager != null ? StatsManager.MoveSpeed : stats.BaseMoveSpeed;
+        RB.linearVelocity = fleeDir * speed;
+        if (Anim) Anim.SetBool("IsMoving", true);
+        
+        if (distanceToTarget > stats.lookRadius)
+            ChangeState(stats.wandersWhenIdle ? EnemyState.Wander : EnemyState.Idle);
+    }
+
     protected virtual void LogicHurt()
     {
         StopMovement();
-        if (Time.time >= hurtEndTime) ChangeState(EnemyState.Chase);
+        if (Time.time >= hurtEndTime)
+            ChangeState(EnemyState.Chase);
     }
 
+    // ── Hit / Death ─────────────────────────────────────────
+    protected virtual void HandleHit(Vector2 dir)
+    {
+        ChangeState(EnemyState.Hurt);
+        DisableEnemyHitBox();
+        StopMovement();
+
+        if (Anim)
+        {
+            Anim.ResetTrigger("Attack1");
+            Anim.ResetTrigger("Attack2");
+            Anim.SetTrigger("Hurt");
+        }
+
+        hurtEndTime = Time.time + hurtDuration;
+    }
+
+    protected virtual void HandleDeath()
+    {
+        ChangeState(EnemyState.Dead);
+        StopMovement();
+        DisableEnemyHitBox();
+        RB.simulated = false;
+
+        if (Anim)
+        {
+            Anim.ResetTrigger("Hurt");
+            Anim.ResetTrigger("Attack1");
+            Anim.ResetTrigger("Attack2");
+            Anim.SetTrigger("Die");
+        }
+    }
+
+    private void ReturnToPool()
+    {
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.ReturnEnemy(originalPrefab, gameObject);
+        else
+            Destroy(gameObject);
+    }
+
+    // ── Helpers ─────────────────────────────────────────────
     protected void ChangeState(EnemyState newState) { currentState = newState; }
 
     protected virtual void FaceTarget()
     {
         if (Target == null || SpriteRenderer == null) return;
-        Vector2 direction = Target.position - transform.position;
-        if (direction.x != 0) SpriteRenderer.flipX = direction.x < 0;
+        SpriteRenderer.flipX = (Target.position.x - transform.position.x) < 0;
+    }
+
+    protected void FaceDirection(Vector2 dir)
+    {
+        if (SpriteRenderer == null) return;
+        if (dir.x != 0) SpriteRenderer.flipX = dir.x < 0;
     }
 
     protected virtual void MoveToTarget()
@@ -179,28 +265,21 @@ public abstract class EnemyBase : MonoBehaviour
         RB.linearVelocity = Vector2.zero;
     }
 
-    protected virtual void HandleDeath()
+    private bool ShouldFlee()
     {
-        ChangeState(EnemyState.Dead);
-        StopMovement();
-        DisableEnemyHitBox();
-        RB.simulated = false;
-
-        if (Anim) 
-        {
-            Anim.ResetTrigger("Hurt"); 
-            Anim.ResetTrigger("Attack1");
-            Anim.ResetTrigger("Attack2");
-            Anim.SetTrigger("Die"); 
-        }
+        if (stats == null || !stats.fleesWhenLowHealth) return false;
+        if (HealthSystem == null || HealthSystem.MaxEmbers <= 0) return false;
+        return (HealthSystem.CurrentEmbers / HealthSystem.MaxEmbers) <= stats.fleeHealthThreshold;
     }
 
-    private void ReturnToPool()
+    public void EnableEnemyHitBox()  { if (weaponCollider) weaponCollider.enabled = true; }
+    public void DisableEnemyHitBox() { if (weaponCollider) weaponCollider.enabled = false; }
+    protected void SpawnProjectile(GameObject projectilePrefab, Vector2 direction, float speed)
     {
-        if (EnemyManager.Instance != null)
-            EnemyManager.Instance.ReturnEnemy(originalPrefab, gameObject);
-        else
-            Destroy(gameObject);
+        if (projectilePrefab == null) return;
+        GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        if (proj.TryGetComponent(out Rigidbody2D rb))
+            rb.linearVelocity = direction.normalized * speed;
     }
 
     protected virtual int ChooseAttackType()
@@ -208,8 +287,11 @@ public abstract class EnemyBase : MonoBehaviour
         if (distanceToTarget <= stats.attackRangeMin) return 1;
         return 2;
     }
-
     protected abstract void PerformAttack(int attackIndex);
+    public void SetStats(EnemyStats overrideStats)
+    {
+        stats = overrideStats;
+    }
 
     protected virtual void OnDrawGizmosSelected()
     {
@@ -218,5 +300,7 @@ public abstract class EnemyBase : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, stats.lookRadius);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, stats.attackRangeMax);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, stats.attackRangeMin);
     }
 }

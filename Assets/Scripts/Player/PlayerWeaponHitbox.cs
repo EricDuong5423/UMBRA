@@ -1,11 +1,12 @@
 using UnityEngine;
+using System;
 
 public class PlayerWeaponHitbox : MonoBehaviour
 {
+    public event Action<float, Vector2, bool> OnHitLanded;
+
     private Transform owner;
     private PlayerStatsManager stats;
-    [SerializeField] private float shakeStrengthMultply = 3f;
-    [SerializeField] private float effectDuration = 0.5f;
 
     public void Initialize(PlayerStatsManager playerStats, Transform playerTransform)
     {
@@ -15,17 +16,17 @@ public class PlayerWeaponHitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
         if (other.TryGetComponent(out IDamageable target))
         {
             if (!stats) return;
-            float finalDamage = stats.GetCalculatedHitDamage();
+            float finalDamage = stats.GetCalculatedHitDamage(out bool isCrit);
             target.TakeDamage(finalDamage, owner);
-            if (!owner) return;
-            ItemManager inventory = owner.GetComponent<ItemManager>();
-            if (inventory == null) return;
-            inventory.TriggerOnHitEffects(target, finalDamage);
-            CameraShake.Shake(effectDuration, finalDamage * shakeStrengthMultply);
+            Vector2 hitDirection = owner != null
+                ? ((Vector2)(other.transform.position - owner.position)).normalized
+                : Vector2.zero;
+            OnHitLanded?.Invoke(finalDamage, hitDirection, isCrit);
+            ItemManager inventory = owner?.GetComponent<ItemManager>();
+            inventory?.TriggerOnHitEffects(target, finalDamage);
         }
     }
 }

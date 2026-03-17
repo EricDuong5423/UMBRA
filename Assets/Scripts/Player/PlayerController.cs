@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
             if (mainMenuCanvas == null) return;
             mainMenuCanvas.alpha = TabManager.isOpened ?  0f : 1f;
             TabManager.isOpened = !TabManager.isOpened;
+            GameManager.Instance.PauseGame();
         }
         
         // Test Code

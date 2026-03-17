@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EnemyWeaponHitbox : MonoBehaviour
 {
-    private float damage;
+    private EnemyStatsManager statsManager;
     private Transform owner;
 
-    public void Initialize(float damageAmount, Transform enemyTransform)
+    public void Initialize(EnemyStatsManager stats, Transform enemyTransform)
     {
-        damage = damageAmount;
+        statsManager = stats;
         owner = enemyTransform;
     }
 
@@ -15,6 +15,7 @@ public class EnemyWeaponHitbox : MonoBehaviour
     {
         if (other.TryGetComponent(out IDamageable target))
         {
+            float damage = statsManager != null ? statsManager.GetCalculatedHitDamage() : 0f;
             target.TakeDamage(damage, owner);
         }
     }

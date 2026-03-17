@@ -4,20 +4,22 @@ using System.Collections;
 public class PlayerHealth : EntityHealth
 {
     [Header("Player Settings")]
-    public static bool isInvincible = false;
+    public bool isInvincible = false; // fix: instance thay vì static
 
     private PlayerStatsManager playerStatsManager;
 
     public void Initialize(PlayerStatsManager statsManager)
     {
         playerStatsManager = statsManager;
+        isInvincible = false;
         InitializeHealth(playerStatsManager.MaxEmbers);
         playerStatsManager.OnStatsChange += HandleStatsChanged;
     }
 
     private void OnDestroy()
     {
-        if (playerStatsManager != null) playerStatsManager.OnStatsChange -= HandleStatsChanged;
+        if (playerStatsManager != null)
+            playerStatsManager.OnStatsChange -= HandleStatsChanged;
     }
 
     private void HandleStatsChanged()
@@ -30,7 +32,7 @@ public class PlayerHealth : EntityHealth
         if (isInvincible || IsDead) return;
         float finalDamage = playerStatsManager.GetDamageTaken(amount);
         base.TakeDamage(finalDamage, source);
-        ItemManager inventory =  GetComponent<ItemManager>();
+        ItemManager inventory = GetComponent<ItemManager>();
         if (!inventory) return;
         inventory.TriggerOnPlayerTakeDamageEffect(amount);
         if (!IsDead) StartCoroutine(InvincibilityRoutine());
@@ -40,6 +42,16 @@ public class PlayerHealth : EntityHealth
     {
         isInvincible = true;
         yield return new WaitForSeconds(playerStatsManager.BaseStats.InvicibleDuration);
+        isInvincible = false;
+    }
+    
+    public void EnableIFrame()
+    {
+        isInvincible = true;
+    }
+    
+    public void DisableIFrame()
+    {
         isInvincible = false;
     }
 }

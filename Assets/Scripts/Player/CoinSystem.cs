@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class CoinSystem : MonoBehaviour
 {
-    //Su kien
     public event Action<uint> OnCoinChanged;
-    //Getter
     private uint currentCoins;
     public uint CurrentCoins => currentCoins;
 

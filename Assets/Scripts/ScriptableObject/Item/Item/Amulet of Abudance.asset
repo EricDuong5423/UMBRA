@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Amulet of Abudance
   m_EditorClassIdentifier: 
   Name: Amulet of Abudance
-  Rarity: 2
+  Rarity: 0
   Icon: {fileID: -8086061825395384126, guid: d18b351a2a04714439b414066d8a23fd, type: 3}
   Description: Born from the ashes of the ancient Pyramid. It gifts you with an abundance
     of health.
@@ -24,4 +24,5 @@ MonoBehaviour:
   bonusStaminaRegen: 0
   bonusCritRate: 0
   bonusCritDamage: 0
-  effects: []
+  bonusArmor: 0
+  effects: {fileID: 0}

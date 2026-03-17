@@ -22,7 +22,14 @@ public class EffectVFXManager : MonoBehaviour
     {
         GameObject vfxObj = vfxPool.Get();
         vfxObj.transform.position = position;
-        vfxObj.transform.SetParent(parent, true); 
+        vfxObj.transform.SetParent(parent, true);
+
+        var player = vfxObj.GetComponent<SimpleVFXPlayer>();
+        if (player != null)
+        {
+            player.OnAnimationComplete -= () => ReturnGenericVFX(vfxObj);
+            player.OnAnimationComplete += () => ReturnGenericVFX(vfxObj);
+        }
         return vfxObj;
     }
 

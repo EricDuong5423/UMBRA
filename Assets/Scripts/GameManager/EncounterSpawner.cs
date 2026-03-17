@@ -44,7 +44,7 @@ public class EncounterSpawner : MonoBehaviour
                 if (data.spawnPoint != null)
                 {
                     Gizmos.DrawLine(transform.position, data.spawnPoint.position);
-                    Gizmos.DrawWireSphere(data.spawnPoint.position, 0.5f);
+                    Gizmos.DrawWireSphere(data.spawnPoint.position, data.radius);
                 }
             }
         }

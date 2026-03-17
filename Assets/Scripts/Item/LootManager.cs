@@ -15,6 +15,7 @@ public class LootManager : MonoBehaviour
             Destroy(Instance);
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void TryDropItem(Vector3 dropPosition, LootTable specificLootTable)

@@ -19,13 +19,9 @@ public class ItemManager : MonoBehaviour
     {
         if(item == null) return;
         if (inventory.ContainsKey(item))
-        {
             inventory[item]++;
-        }
         else
-        {
             inventory.Add(item, 1);
-        }
         
         ApplyAllItemStats();
         OnInvetoryChanged?.Invoke(item, inventory[item]);
@@ -41,11 +37,11 @@ public class ItemManager : MonoBehaviour
         playerStatsManager.bonusMaxStamina = 0;
         playerStatsManager.bonusMoveSpeed = 0;
         playerStatsManager.bonusArmor = 0;
+
         foreach (var kvp in inventory)
         {
             ItemData item = kvp.Key;
-            int count =  kvp.Value;
-            
+            int count = kvp.Value;
             playerStatsManager.bonusAttackDamage += item.bonusAttackDmg * count;
             playerStatsManager.bonusCritDamage += item.bonusCritDamage * count;
             playerStatsManager.bonusCritRate += item.bonusCritRate * count;
@@ -53,6 +49,7 @@ public class ItemManager : MonoBehaviour
             playerStatsManager.bonusMaxEmbers += item.bonusMaxEmbers * count;
             playerStatsManager.bonusMaxStamina += item.bonusStamina * count;
             playerStatsManager.bonusMoveSpeed += item.bonusMoveSpeed * count;
+            playerStatsManager.bonusArmor += item.bonusArmor * count;
         }
         playerStatsManager.RecalculateStats();
     }
@@ -61,12 +58,8 @@ public class ItemManager : MonoBehaviour
     {
         foreach (var kvp in inventory)
         {
-            ItemData item = kvp.Key;
-            int stack = kvp.Value;
-            if (item.effects != null && item.effects != null)
-            {
-                item.effects.OnHitEnemy(gameObject, enemy, damage, stack);
-            }
+            if (kvp.Key.effects != null)
+                kvp.Key.effects.OnHitEnemy(gameObject, enemy, damage, kvp.Value);
         }
     }
 
@@ -74,12 +67,8 @@ public class ItemManager : MonoBehaviour
     {
         foreach (var kvp in inventory)
         {
-            ItemData item = kvp.Key;
-            int stack = kvp.Value;
-            if (item.effects != null && item.effects != null)
-            {
-                item.effects.OnKillEnemy(gameObject, stack);
-            }
+            if (kvp.Key.effects != null)
+                kvp.Key.effects.OnKillEnemy(gameObject, kvp.Value);
         }
     }
 
@@ -87,12 +76,8 @@ public class ItemManager : MonoBehaviour
     {
         foreach (var kvp in inventory)
         {
-            ItemData item = kvp.Key;
-            int stack = kvp.Value;
-            if (item.effects != null && item.effects != null)
-            {
-                item.effects.OnPlayerTakeDamage(gameObject, damageTaken, stack);
-            }
+            if (kvp.Key.effects != null)
+                kvp.Key.effects.OnPlayerTakeDamage(gameObject, damageTaken, kvp.Value);
         }
     }
 }
