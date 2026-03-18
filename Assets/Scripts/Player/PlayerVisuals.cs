@@ -39,7 +39,7 @@ public class PlayerVisuals : MonoBehaviour
         animator.SetBool("IsMoving", isMoving);
     }
 
-    private void TriggerHurtAnim(Vector2 knockbackDir)
+    private void TriggerHurtAnim(Vector2 knockbackDir, float _)
     {
         
         if (animator == null) return;

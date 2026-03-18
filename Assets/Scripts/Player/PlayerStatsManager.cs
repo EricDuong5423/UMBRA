@@ -15,6 +15,7 @@ public class PlayerStatsManager : MonoBehaviour
     public float bonusCritRate = 0;
     public float bonusCritDamage = 0;
     public float bonusArmor = 0;
+    public float bonusKnockback = 0;
     
     private float _maxEmbers;
     private float _moveSpeed;
@@ -24,6 +25,7 @@ public class PlayerStatsManager : MonoBehaviour
     private float _critRate;
     private float _critDamage;
     private float _armor;
+    private float _knockbackForce;
 
     public float MaxEmbers => _maxEmbers;
     public float MoveSpeed => _moveSpeed;
@@ -36,6 +38,8 @@ public class PlayerStatsManager : MonoBehaviour
     public float MaxStamina => _maxStamina;
     public float StaminaRegen => _staminaRegen;
     public float Armor => _armor;
+    
+    public float KnockbackForce => _knockbackForce;
     
     public PlayerStats BaseStats => baseStats;
 
@@ -67,6 +71,7 @@ public class PlayerStatsManager : MonoBehaviour
         _critRate = baseStats.BaseCritRate + bonusCritRate;
         _critDamage = baseStats.BaseCritDamage + bonusCritDamage;
         _armor = baseStats.BaseArmor + bonusArmor;
+        _knockbackForce = baseStats.BaseKnockbackForce + bonusKnockback;
         OnStatsChange?.Invoke();
     }
     
@@ -126,6 +131,12 @@ public class PlayerStatsManager : MonoBehaviour
     public void AddArmorModifier(float amount)
     {
         bonusArmor += amount;
+        RecalculateStats();
+    }
+
+    public void AddKnockbackModifier(float amount)
+    {
+        bonusKnockback += amount;
         RecalculateStats();
     }
 }

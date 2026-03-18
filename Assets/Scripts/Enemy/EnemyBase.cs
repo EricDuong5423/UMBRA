@@ -16,7 +16,7 @@ public abstract class EnemyBase : MonoBehaviour
     public Animator Anim                  { get; private set; }
     public SpriteRenderer SpriteRenderer  { get; private set; }
     public Transform Target               { get; private set; }
-    public EnemyStats Stats               => stats; // expose ra ngoài cho spawn system
+    public EnemyStats Stats               => stats;
 
     [Header("Setup")]
     [SerializeField] protected EnemyStats stats;
@@ -24,6 +24,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     [Header("Combat Settings")]
     [SerializeField] protected float hurtDuration = 0.5f;
+    [SerializeField] protected float knockBackStrength = 3f;
 
     [HideInInspector] public GameObject originalPrefab;
 
@@ -69,7 +70,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             var hitbox = weaponCollider.GetComponent<EnemyWeaponHitbox>();
             if (hitbox == null) hitbox = weaponCollider.gameObject.AddComponent<EnemyWeaponHitbox>();
-            hitbox.Initialize(StatsManager, transform); // fix: truyền StatsManager, không cache float
+            hitbox.Initialize(StatsManager, transform);
             weaponCollider.enabled = false;
         }
 
@@ -99,8 +100,6 @@ public abstract class EnemyBase : MonoBehaviour
         if (Target == null) return;
 
         distanceToTarget = Vector2.Distance(transform.position, Target.position);
-
-        // Kiểm tra flee ưu tiên cao
         if (ShouldFlee() && currentState != EnemyState.Flee && currentState != EnemyState.Hurt)
         {
             ChangeState(EnemyState.Flee);
@@ -132,10 +131,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void LogicWander()
     {
-        // Nếu thấy player → chase ngay
         if (distanceToTarget <= stats.lookRadius) { ChangeState(EnemyState.Chase); return; }
-
-        // Chọn điểm wander mới khi đến nơi hoặc hết timer
         if (Time.time >= nextWanderTime || Vector2.Distance(transform.position, wanderTarget) < 0.3f)
         {
             Vector2 randomDir = Random.insideUnitCircle.normalized;
@@ -190,23 +186,29 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void LogicHurt()
     {
-        StopMovement();
         if (Time.time >= hurtEndTime)
+        {
+            StopMovement();
             ChangeState(EnemyState.Chase);
+        }
     }
 
     // ── Hit / Death ─────────────────────────────────────────
-    protected virtual void HandleHit(Vector2 dir)
+    protected virtual void HandleHit(Vector2 dir, float knockbackForce)
     {
         ChangeState(EnemyState.Hurt);
         DisableEnemyHitBox();
-        StopMovement();
+        StopMovement(); 
 
         if (Anim)
         {
             Anim.ResetTrigger("Attack1");
             Anim.ResetTrigger("Attack2");
             Anim.SetTrigger("Hurt");
+        }
+        if (knockbackForce > 0f)
+        {
+            RB.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
         }
 
         hurtEndTime = Time.time + hurtDuration;

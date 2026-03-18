@@ -27,11 +27,11 @@ public class PlayerHealth : EntityHealth
         UpdateMaxHealth(playerStatsManager.MaxEmbers);
     }
 
-    public override void TakeDamage(float amount, Transform source)
+    public override void TakeDamage(float amount, Transform source, bool _, float knockbackForce)
     {
         if (isInvincible || IsDead) return;
         float finalDamage = playerStatsManager.GetDamageTaken(amount);
-        base.TakeDamage(finalDamage, source);
+        base.TakeDamage(finalDamage, source, _);
         ItemManager inventory = GetComponent<ItemManager>();
         if (!inventory) return;
         inventory.TriggerOnPlayerTakeDamageEffect(amount);

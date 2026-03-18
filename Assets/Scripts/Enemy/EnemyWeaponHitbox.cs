@@ -16,7 +16,7 @@ public class EnemyWeaponHitbox : MonoBehaviour
         if (other.TryGetComponent(out IDamageable target))
         {
             float damage = statsManager != null ? statsManager.GetCalculatedHitDamage() : 0f;
-            target.TakeDamage(damage, owner);
+            target.TakeDamage(damage, owner, false);
         }
     }
 }

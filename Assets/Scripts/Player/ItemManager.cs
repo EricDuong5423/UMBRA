@@ -37,6 +37,7 @@ public class ItemManager : MonoBehaviour
         playerStatsManager.bonusMaxStamina = 0;
         playerStatsManager.bonusMoveSpeed = 0;
         playerStatsManager.bonusArmor = 0;
+        playerStatsManager.bonusKnockback = 0;
 
         foreach (var kvp in inventory)
         {
@@ -50,6 +51,7 @@ public class ItemManager : MonoBehaviour
             playerStatsManager.bonusMaxStamina += item.bonusStamina * count;
             playerStatsManager.bonusMoveSpeed += item.bonusMoveSpeed * count;
             playerStatsManager.bonusArmor += item.bonusArmor * count;
+            playerStatsManager.bonusKnockback += item.bonusKnockback * count;
         }
         playerStatsManager.RecalculateStats();
     }

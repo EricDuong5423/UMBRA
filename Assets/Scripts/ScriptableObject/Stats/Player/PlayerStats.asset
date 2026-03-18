@@ -25,6 +25,7 @@ MonoBehaviour:
   RollSpeed: 2.5
   RollCooldown: 1
   InvicibleDuration: 0.5
+  BaseKnockbackForce: 0.5
   MaxLightRadius: 3
   MinLightRadius: 1
   MaxLightIntensity: 1.5

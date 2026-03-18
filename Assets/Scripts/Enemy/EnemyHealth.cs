@@ -20,17 +20,17 @@ public class EnemyHealth : EntityHealth
             enemyBase.StatsManager.OnStatsChange -= HandleStatsChanged;
     }
 
-    public override void TakeDamage(float amount, Transform source)
+    public override void TakeDamage(float amount, Transform source, bool isCrit, float knockbackForce)
     {
         float finalDamage = enemyBase.StatsManager.GetDamageTaken(amount);
-        DamageTextManager.Instance.SpawnDamageText($"{Mathf.RoundToInt(finalDamage)}", Color.red, transform);
-        base.TakeDamage(finalDamage, source);
+        DamageTextManager.Instance.SpawnDamageText($"{Mathf.RoundToInt(finalDamage)}", isCrit ? Color.red: Color.white, transform, isCrit);
+        base.TakeDamage(finalDamage, source, isCrit, knockbackForce);
     }
 
     public override void TakeDoTDamage(float amount)
     {
         base.TakeDoTDamage(amount);
-        DamageTextManager.Instance.SpawnDamageText($"{amount}", Color.green, transform);
+        DamageTextManager.Instance.SpawnDamageText($"{amount}", Color.green, transform, false);
     }
 
     private void HandleStatsChanged()

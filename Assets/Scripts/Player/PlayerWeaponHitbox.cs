@@ -20,7 +20,8 @@ public class PlayerWeaponHitbox : MonoBehaviour
         {
             if (!stats) return;
             float finalDamage = stats.GetCalculatedHitDamage(out bool isCrit);
-            target.TakeDamage(finalDamage, owner);
+            float knockback = stats.KnockbackForce; 
+            target.TakeDamage(finalDamage, owner, isCrit, knockback);
             Vector2 hitDirection = owner != null
                 ? ((Vector2)(other.transform.position - owner.position)).normalized
                 : Vector2.zero;

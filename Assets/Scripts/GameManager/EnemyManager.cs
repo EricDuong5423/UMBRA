@@ -12,12 +12,12 @@ public class EnemyManager : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
+            return;
         }
-        else Destroy(gameObject);
+        Instance = this;
     }
     public virtual GameObject SpawnEnemy(GameObject prefab, Vector3 position, Quaternion rotation)
     {

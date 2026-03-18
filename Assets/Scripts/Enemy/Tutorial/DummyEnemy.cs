@@ -32,10 +32,13 @@ public class DummyEnemy : EnemyBase
 
     protected override void LogicHurt()
     {
-        StopMovement();
         Vector2 faceDir = ((Vector2)transform.position - (Vector2)Target.position).normalized;
         FaceDirection(-faceDir);
-        if(Time.time >= hurtEndTime) ChangeState(EnemyState.Idle);
+        if (Time.time >= hurtEndTime)
+        {
+            StopMovement();
+            ChangeState(EnemyState.Idle);
+        }
     }
 
     protected override void HandleDeath()

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 487275b6c07f2984b8224a61f5017e82
+guid: 005495962b6b7774195420254fb25c11
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7644252257238236103
-    second: panel-transparent-center-006_0
+      213: 5016155248791503310
+    second: LastKnightOfTheSun_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,8 +51,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 96
-  spriteBorder: {x: 24, y: 24, z: 24, w: 24}
+  spritePixelsToUnits: 1024
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: panel-transparent-center-006_0
+      name: LastKnightOfTheSun_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 96
+        width: 1024
+        height: 1024
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 24, y: 24, z: 24, w: 24}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7cbb92e4de6d51a60800000000000000
-      internalID: 7644252257238236103
+      spriteID: ec1cd6e3f96fc9540800000000000000
+      internalID: 5016155248791503310
       vertices: []
       indices: 
       edges: []
@@ -151,8 +151,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1326d4d4e4e42034383e9007c83188d3
-    internalID: 900508040
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      panel-transparent-center-006_0: 7644252257238236103
+      LastKnightOfTheSun_0: 5016155248791503310
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

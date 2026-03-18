@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DamageTextManager : BasePoolManager<DamageTextManager>
 {
-    public void SpawnDamageText(string value, Color color, Transform parentTransform)
+    public void SpawnDamageText(string value, Color color, Transform parentTransform, bool isCrit)
     {
         GameObject obj = base.Spawn();
         
@@ -10,7 +10,7 @@ public class DamageTextManager : BasePoolManager<DamageTextManager>
 
         if (damageText != null)
         {
-            damageText.SetData(value, color, parentTransform);
+            damageText.SetData(value, color, parentTransform, isCrit);
         }
     }
 }

@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         PlayerManager.Instance.PlayerHealth.OnHit -= HandleGetHit;
     }
 
-    private void HandleGetHit(Vector2 dir)
+    private void HandleGetHit(Vector2 dir, float _)
     {
         isAttacking = false; 
         isRolling = false;
@@ -79,11 +79,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (TabManager.Instance == null) return;
+            if (!TabManager.isOpened) GameManager.Instance.PauseGame();
+            else GameManager.Instance.ResumeGame();
             var mainMenuCanvas = TabManager.Instance.gameObject.GetComponent<CanvasGroup>();
             if (mainMenuCanvas == null) return;
             mainMenuCanvas.alpha = TabManager.isOpened ?  0f : 1f;
             TabManager.isOpened = !TabManager.isOpened;
-            GameManager.Instance.PauseGame();
+            
         }
         
         // Test Code

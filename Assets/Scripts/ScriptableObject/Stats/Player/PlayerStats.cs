@@ -7,6 +7,8 @@ public class PlayerStats : EntitesStats
     public float RollSpeed = 15f;
     public float RollCooldown = 1f;
     public float InvicibleDuration = 0.5f;
+    [Header("Effect for VFX")] 
+    public float BaseKnockbackForce = 3f;
     [Header("Light Mechanics (Visuals)")] 
     public float MaxLightRadius = 5f;
     public float MinLightRadius = 1f;

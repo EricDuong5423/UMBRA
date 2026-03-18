@@ -545,8 +545,8 @@ GameObject:
   - component: {fileID: 3089924175228957521}
   - component: {fileID: 6971317524050354973}
   - component: {fileID: 2004354538712301189}
-  - component: {fileID: 4829759216992940509}
   - component: {fileID: 3704993221307105290}
+  - component: {fileID: 4829759216992940509}
   - component: {fileID: 490069507715865603}
   - component: {fileID: 1122998862864666028}
   - component: {fileID: 9117816546144100737}
@@ -681,22 +681,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4829759216992940509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5503448758859226737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c228a2d1f921fc40a074d641f732fd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 881561ec60e53ea4fb4d3c316f7b8a98, type: 2}
-  weaponCollider: {fileID: 3354267765345520460}
-  hurtDuration: 0.5
-  originalPrefab: {fileID: 0}
 --- !u!61 &3704993221307105290
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -743,6 +727,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.2132721, y: 0.3557427}
   m_EdgeRadius: 0
+--- !u!114 &4829759216992940509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5503448758859226737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c228a2d1f921fc40a074d641f732fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 881561ec60e53ea4fb4d3c316f7b8a98, type: 2}
+  weaponCollider: {fileID: 3354267765345520460}
+  hurtDuration: 0.5
+  originalPrefab: {fileID: 0}
 --- !u!114 &490069507715865603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,7 +769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93610703581d1df44aa76e1de1b26ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 881561ec60e53ea4fb4d3c316f7b8a98, type: 2}
   myLootTable: {fileID: 11400000, guid: 9d71d5f4753b82b42a6a10e49971ccd5, type: 2}
 --- !u!114 &9117816546144100737
 MonoBehaviour:
@@ -783,7 +782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f57c870983761c4d926e2059155031c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseStats: {fileID: 11400000, guid: 881561ec60e53ea4fb4d3c316f7b8a98, type: 2}
   bonusMaxEmbers: 0
   bonusMoveSpeed: 0
   bonusAttackDamage: 0
@@ -804,7 +802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ff0e1314e822b45a4c6ca2a80f161b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeEffects: []
 --- !u!114 &1805360550381212243
 MonoBehaviour:
   m_ObjectHideFlags: 0

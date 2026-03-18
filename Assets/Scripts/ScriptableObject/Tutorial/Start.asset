@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4872a20238d3ffd4eb5e315cdb62cb8b, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: 
+  Title: The beginning
+  Description: This is the sunless world, you are the last knight whom will protect
+    the light of the dying sun.
+  ExampleImage: {fileID: 21300000, guid: 005495962b6b7774195420254fb25c11, type: 3}
+  Icon: {fileID: -3887254326804499480, guid: 49853b430195b064ca3fd4e89e013ac2, type: 3}
+  keyToPress: 0
+  PauseGameWhileShowing: 1
+  CloseAfterSecond: 5

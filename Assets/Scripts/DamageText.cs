@@ -21,10 +21,11 @@ public class DamageText : MonoBehaviour
     private Vector3 lastKnownPosition;
     private float animatedY;
 
-    public void SetData(string value, Color color, Transform targetTransform)
+    public void SetData(string value, Color color, Transform targetTransform, bool isCrit)
     {
         text.text = value;
         text.color = color;
+        text.fontSize = isCrit ? text.fontSize * 2 : text.fontSize;
         target = targetTransform;
         float randomX = Random.Range(xMin, xMax);
         randomOffset = new Vector3(randomX, 0f, 0f);
