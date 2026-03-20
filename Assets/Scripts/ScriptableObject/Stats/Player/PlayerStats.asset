@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   BaseMaxEmbers: 100
-  BaseMoveSpeed: 1.5
+  BaseMoveSpeed: 2
   BaseAtkDamage: 10
   BaseMaxStamina: 100
   BaseStaminaRegen: 5
