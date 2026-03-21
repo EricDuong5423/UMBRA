@@ -121,8 +121,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1349703283
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: 1018b0ba13578bf459bd254ae1a2be99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -279,6 +279,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: cf446c7ff20d2fe45bf5a29923dbbe4a, type: 2}
   weaponCollider: {fileID: 3663897665676224651}
   hurtDuration: 0.5
+  knockBackStrength: 3
   originalPrefab: {fileID: 0}
 --- !u!114 &3415193119708906653
 MonoBehaviour:
@@ -305,7 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ff0e1314e822b45a4c6ca2a80f161b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeEffects: []
 --- !u!114 &4019878614222356293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +771,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1349703283
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &150524922325205211

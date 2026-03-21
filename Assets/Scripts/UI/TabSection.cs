@@ -7,12 +7,7 @@ public class TabSection : MonoBehaviour
     [SerializeField] private float showDuration = 0.2f;
     [SerializeField] private float hideDuration = 0.15f;
 
-    private CanvasGroup canvasGroup;
-
-    private void Awake()
-    {
-        canvasGroup = GetComponent<CanvasGroup>();
-    }
+    [SerializeField] private CanvasGroup canvasGroup;
 
     public void Show()
     {
@@ -20,7 +15,7 @@ public class TabSection : MonoBehaviour
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
         canvasGroup.DOKill();
-        canvasGroup.DOFade(1f, showDuration).SetEase(Ease.OutCubic);
+        canvasGroup.DOFade(1f, showDuration).SetEase(Ease.OutCubic).SetUpdate(true).Play();
     }
 
     public void Hide()
@@ -34,7 +29,8 @@ public class TabSection : MonoBehaviour
                 canvasGroup.blocksRaycasts = false;
                 canvasGroup.interactable = false;
                 canvasGroup.alpha = 0f;
-            });
+            })
+            .SetUpdate(true).Play();
     }
 
     public void HideImmediate()
