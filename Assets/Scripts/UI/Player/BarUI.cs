@@ -38,13 +38,17 @@ public class BarUI : MonoBehaviour
         float targetFill = Mathf.Clamp01(current / max);
         barTween?.Kill();
         barTween = fillImage.DOFillAmount(targetFill, fillDuration)
-            .SetEase(Ease.OutCubic);
+            .SetEase(Ease.OutCubic)
+            .SetUpdate(UpdateType.Normal, true)
+            .Play();
         float fromValue = float.TryParse(amountText.text.Split('/')[0], out float parsed) ? parsed : current;
         textTween?.Kill();
         textTween = DOVirtual.Float(fromValue, current, fillDuration, value =>
         {
             amountText.text = $"{Mathf.RoundToInt(value)}/{Mathf.RoundToInt(max)}";
-        }).SetEase(Ease.OutCubic);
+        }).SetEase(Ease.OutCubic)
+        .SetUpdate(UpdateType.Normal, true)
+        .Play();
     }
     private void OnDestroy()
     {

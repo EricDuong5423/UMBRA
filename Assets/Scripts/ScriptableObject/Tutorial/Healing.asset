@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4872a20238d3ffd4eb5e315cdb62cb8b, type: 3}
+  m_Name: Healing
+  m_EditorClassIdentifier: 
+  Title: Healing
+  Description: This is bonfire, you will need to spent your coin to heal your wounds.
+    Here is 100 coin for you to heal your wounds. Spend it wisely
+  ExampleImage: {fileID: -4834654688182981524, guid: fa613bc1f2a7c5845839dd608aefb074, type: 3}
+  Icon: {fileID: 7423911770136226819, guid: 49853b430195b064ca3fd4e89e013ac2, type: 3}
+  keyToPress: 0
+  PauseGameWhileShowing: 1
+  CloseAfterSecond: 5

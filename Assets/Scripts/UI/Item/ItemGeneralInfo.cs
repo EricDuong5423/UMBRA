@@ -25,7 +25,9 @@ public class ItemGeneralInfo : MonoBehaviour
         countTween = DOVirtual.Float(0, amount, countUpDuration, value =>
         {
             itemAmount.text = Mathf.FloorToInt(value).ToString();
-        }).SetEase(Ease.OutCubic);
+        }).SetEase(Ease.OutCubic)
+        .SetUpdate(true)
+        .Play();
     }
     public void Clear()
     {

@@ -69,7 +69,9 @@ public class ItemSlotUI : MonoBehaviour, IPointerClickHandler
         entrance.Join(itemIcon.DOFade(1f, fadeInDuration).SetEase(Ease.OutCubic));
         entrance.Join(itemIcon.transform
             .DOLocalMoveY(defaultTransform.y, fadeInDuration)
-            .SetEase(Ease.OutCubic));
+            .SetEase(Ease.OutCubic))
+            .SetUpdate(true)
+            .Play();
         fadeTween = entrance;
         stackCountText.text = stack > 0 ? $"{stack:N0}" : "";
     }

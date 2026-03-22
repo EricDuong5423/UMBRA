@@ -53,13 +53,17 @@ public class ItemBonusStatsUI : MonoBehaviour
             t.text = "0";
             t.DOFade(1f, fadeDuration)
              .SetDelay(index * staggerDelay)
-             .SetEase(Ease.OutCubic);
+             .SetEase(Ease.OutCubic)
+             .SetUpdate(true)
+             .Play();
             countTweens[index] = DOVirtual.Float(0, targetValue, countUpDuration, value =>
             {
                 t.text = value.ToString("0.0");
             })
             .SetDelay(index * staggerDelay)
-            .SetEase(Ease.OutCubic);
+            .SetEase(Ease.OutCubic)
+            .SetUpdate(true)
+            .Play();
         }
     }
     public void Clear()

@@ -14,6 +14,7 @@ public class TabManager : MonoBehaviour
 
     private UITabButton[] buttons;
     private TabSection[] sections;
+    [SerializeField] private CanvasGroup _canvasGroup;
     private int currentIndex = -1;
     
     public static TabManager Instance { get; private set; }
@@ -27,6 +28,8 @@ public class TabManager : MonoBehaviour
             return;
         }
         Instance = this;
+        
+        if(_canvasGroup == null) _canvasGroup = GetComponent<CanvasGroup>();
         buttons = new UITabButton[] { inventoryButton, statsButton, settingsButton };
         sections = new TabSection[] { inventorySection, statsSection, settingsSection };
 
@@ -36,6 +39,23 @@ public class TabManager : MonoBehaviour
         foreach (var section in sections)
             section.HideImmediate();
         SelectTab(0);
+        CloseMenu();
+    }
+
+    public void OpenMenu()
+    {
+        isOpened = true;
+        _canvasGroup.alpha = 1f;
+        _canvasGroup.blocksRaycasts = true;
+        _canvasGroup.interactable = true;
+    }
+
+    public void CloseMenu()
+    {
+        isOpened = false;
+        _canvasGroup.alpha = 0f;
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.interactable = false;
     }
 
     private void OnEnable()

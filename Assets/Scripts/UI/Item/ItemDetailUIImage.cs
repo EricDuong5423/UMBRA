@@ -38,13 +38,17 @@ public class ItemDetailUIImage : MonoBehaviour
         entrance.Join(itemIcon.DOFade(1f, fadeInDuration).SetEase(Ease.OutCubic));
         entrance.Join(itemIcon.transform
             .DOLocalMoveY(originalPosition.y, fadeInDuration)
-            .SetEase(Ease.OutCubic));
+            .SetEase(Ease.OutCubic))
+            .SetUpdate(true)
+            .Play();
         entrance.OnComplete(() =>
         {
             bobTween = itemIcon.transform
                 .DOLocalMoveY(originalPosition.y + bobAmount, bobDuration)
                 .SetEase(Ease.InOutSine)
-                .SetLoops(-1, LoopType.Yoyo);
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetUpdate(true)
+                .Play();
         });
         fadeTween = entrance;
     }

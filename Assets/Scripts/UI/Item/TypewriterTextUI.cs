@@ -24,7 +24,7 @@ public class TypewriterTextUI : MonoBehaviour
         descriptionTween = DOVirtual.Float(0, totalChars, duration, value =>
         {
             textComponent.maxVisibleCharacters = Mathf.FloorToInt(value);
-        }).SetEase(ease).Play();
+        }).SetEase(ease).SetUpdate(true).Play();
     }
 
     public void Clear()

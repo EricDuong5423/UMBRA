@@ -29,19 +29,19 @@ public class UITabButton : MonoBehaviour, IPointerClickHandler, IPointerDownHand
             ? originalPosition.y + selectedOffsetY
             : originalPosition.y;
 
-        transform.DOLocalMoveY(targetY, selectMoveDuration).SetEase(Ease.OutCubic);
+        transform.DOLocalMoveY(targetY, selectMoveDuration).SetEase(Ease.OutCubic).SetUpdate(true).Play();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         transform.DOKill();
-        transform.DOScale(pressedScale, pressDuration).SetEase(Ease.OutQuad);
+        transform.DOScale(pressedScale, pressDuration).SetEase(Ease.OutQuad).SetUpdate(true).Play();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         transform.DOKill();
-        transform.DOScale(1f, releaseDuration).SetEase(Ease.OutBack);
+        transform.DOScale(1f, releaseDuration).SetEase(Ease.OutBack).SetUpdate(true).Play();
     }
 
     public void OnPointerClick(PointerEventData eventData)
