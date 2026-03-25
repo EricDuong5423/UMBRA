@@ -5,6 +5,9 @@ public enum EnemyState { Idle, Wander, Chase, Attack, Flee, Hurt, Dead }
 [RequireComponent(typeof(EnemyHealth))]
 [RequireComponent(typeof(EnemyStatsManager))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(EnemyReward))]
+[RequireComponent(typeof(EnemyEffectManager))]
+[RequireComponent(typeof(EntityVFXHandler))]
 public abstract class EnemyBase : MonoBehaviour
 {
     // ── Public Getters ──────────────────────────────────────
