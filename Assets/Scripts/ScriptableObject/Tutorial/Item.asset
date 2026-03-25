@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4872a20238d3ffd4eb5e315cdb62cb8b, type: 3}
+  m_Name: Item
+  m_EditorClassIdentifier: 
+  Title: Item
+  Description: Your knight will scale by looting item. Each item will give stats
+    and at least one effect. Item can be stack to 99 per item.
+  ExampleImage: {fileID: 2457820292483049683, guid: 4c7229410ff82be49830ac044454df37, type: 3}
+  Icon: {fileID: -7566721535615466780, guid: 49853b430195b064ca3fd4e89e013ac2, type: 3}
+  keyToPress: 0
+  PauseGameWhileShowing: 1
+  CloseAfterSecond: 3

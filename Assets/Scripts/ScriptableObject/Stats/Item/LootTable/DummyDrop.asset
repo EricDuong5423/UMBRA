@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee79442abbb0f424fbe1f6cbb75f3291, type: 3}
   m_Name: DummyDrop
   m_EditorClassIdentifier: 
-  dropChance: 100
-  commonWeight: 100
+  dropChance: 0
+  commonWeight: 0
   uncommonWeight: 0
   rareWeight: 0
   epicWeight: 0
   legendaryWeight: 0
-  itemsToDrop:
-  - {fileID: 11400000, guid: 9ecba27ff3f755440b4d5de3f278a6c3, type: 2}
-  - {fileID: 11400000, guid: 235a149f8096f2844b80a58ce3115a0b, type: 2}
+  itemsToDrop: []

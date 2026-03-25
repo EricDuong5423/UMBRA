@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager Instance { get; private set; }
     [SerializeField] private TutorialPopupUI popupUI;
+    [SerializeField] private List<TutorialZone> _tutorialZones = new List<TutorialZone>();
 
     private Coroutine autoDismissCoroutine;
 

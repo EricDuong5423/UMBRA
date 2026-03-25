@@ -33,5 +33,5 @@ MonoBehaviour:
   wandersWhenIdle: 1
   wanderRadius: 3
   wanderInterval: 2
-  fleesWhenLowHealth: 1
-  fleeHealthThreshold: 0.8
+  fleesWhenLowHealth: 0
+  fleeHealthThreshold: 0

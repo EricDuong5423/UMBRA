@@ -34,6 +34,21 @@ public class EncounterSpawner : MonoBehaviour
             }
         }
     }
+
+    public void SpawnEnemies(SpawnData spawnData)
+    {
+        if (spawnData.enemyPrefab == null || spawnData.spawnPoint == null) return;
+        for (int i = 0; i < spawnData.count; i++)
+        {
+            Vector2 randomCirclePoint = Random.insideUnitCircle * spawnData.radius;
+            Vector3 randomPosition = spawnData.spawnPoint.position + new Vector3(randomCirclePoint.x, randomCirclePoint.y, 0f);
+            EnemyManager.Instance.SpawnEnemy(
+                spawnData.enemyPrefab, 
+                randomPosition, 
+                spawnData.spawnPoint.rotation
+            );
+        }
+    }
     private void OnDrawGizmosSelected()
     {
         if (enemiesToSpawn != null)
