@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Interactable
   - TriggerZone
+  - Projectile
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Object
   - TriggerZone
   - Wall
-  - 
+  - Projectile
   - 
   - 
   - 

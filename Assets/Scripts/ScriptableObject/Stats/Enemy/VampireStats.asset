@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e486c9b0c1f8840aa81985051a0427, type: 3}
+  m_Name: VampireStats
+  m_EditorClassIdentifier: 
+  BaseMaxEmbers: 300
+  BaseMoveSpeed: 1
+  BaseAtkDamage: 0
+  BaseMaxStamina: 0
+  BaseStaminaRegen: 0
+  BaseCritRate: 5
+  BaseCritDamage: 60
+  BaseArmor: 10
+  silhouetteColor: {r: 0, g: 0, b: 0, a: 1}
+  lightColor: {r: 1, g: 1, b: 1, a: 1}
+  enemyName: Vampire boss
+  healOnKill: 500
+  ligthShardOnKill: 300
+  lookRadius: 15
+  stopDistance: 10
+  attackCooldown: 2
+  attackRangeMin: 1.2
+  attackRangeMax: 2.5
+  wandersWhenIdle: 0
+  wanderRadius: 3
+  wanderInterval: 2
+  fleesWhenLowHealth: 0
+  fleeHealthThreshold: 0.25

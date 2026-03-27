@@ -250,7 +250,7 @@ public abstract class EnemyBase : MonoBehaviour
         SpriteRenderer.flipX = (Target.position.x - transform.position.x) < 0;
     }
 
-    protected void FaceDirection(Vector2 dir)
+    protected virtual void FaceDirection(Vector2 dir)
     {
         if (SpriteRenderer == null) return;
         if (dir.x != 0) SpriteRenderer.flipX = dir.x < 0;
