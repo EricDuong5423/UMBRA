@@ -1,26 +1,100 @@
+using System.Collections;
 using UnityEngine;
 
 public class VampireBoss : EnemyBase
 {
+    [SerializeField] private float decisionInterval = 0.5f;
+    [SerializeField] [Range(0f, 1f)] private float aggroChance = 0.6f;
+    private float nextDecisionTime = 0f;
+    public static VampireBoss Instance { get; private set; }
     [SerializeField] private GameObject _projectilePrefab;
+    private SpawnData _spawnData;
+    private EncounterSpawner _spawner;
+    [SerializeField] private GameObject _minionPrefab;
     [SerializeField] private float _projectileDamage = 10f;
     [SerializeField] private float _knockBackForce = 10f;
     protected override void PerformAttack(int attackIndex)
     {
         if (currentState == EnemyState.Hurt) return;
-        Anim.SetTrigger("Attack");
         switch (attackIndex)
         {
-            case 1: SpawnProjectile(1); break;
-            case 2: SpawnProjectile(10); break;
+            case 1: SpawnProjectile(1); Anim.SetTrigger("Attack"); break;
+            case 2: SpawnProjectile(10); Anim.SetTrigger("Attack"); break;
+            case 3: SpawnMinion(3); break;
             default: break;
         }
     }
 
+    private void DecideChaseOrWander()
+    {
+        if (Time.time < nextDecisionTime) return;
+        nextDecisionTime = Time.time + decisionInterval;
+
+        if (Random.value <= aggroChance)
+        {
+            ChangeState(EnemyState.Chase);
+        }
+        else
+        {
+            ChangeState(EnemyState.Wander);
+        }
+    }
+    
+    protected override void LogicChase()
+    {
+        if (distanceToTarget > stats.lookRadius * 1.5f)
+        {
+            ChangeState(stats.wandersWhenIdle ? EnemyState.Wander : EnemyState.Idle);
+            return;
+        }
+        
+        if (distanceToTarget <= stats.attackRangeMax) { ChangeState(EnemyState.Attack); return; }
+        DecideChaseOrWander();
+        if (currentState != EnemyState.Chase) return;
+
+        FaceTarget();
+        MoveToTarget();
+    }
+
     protected override int ChooseAttackType()
     {
-        int result = Random.Range(1, 2);
-        return result;
+        float dist = Vector2.Distance(transform.position, Target.position);
+        if (dist < stats.attackRangeMax && dist >= stats.attackRangeMin)
+        {
+            return Random.Range(1, 2);
+        }
+        else
+        {
+            return 3;
+        }
+        
+    }
+
+    protected void Start()
+    {
+        _spawner = FindAnyObjectByType<EncounterSpawner>(); 
+        
+        if (_spawner == null)
+        {
+            Debug.LogError("Boss không tìm thấy EncounterSpawner trên Scene!");
+        }
+    }
+
+    private void SpawnMinion(float radius)
+    {
+        float ratio = HealthSystem.CurrentEmbers / HealthSystem.MaxEmbers;
+        int count = 0;
+        if (ratio == 1) count = 1;
+        else if (ratio < 1 && ratio >= 0.5) count = 2;
+        else count = Random.Range(3, 5);
+        _spawnData = new SpawnData(); 
+        
+        _spawnData.enemyPrefab = _minionPrefab;
+        _spawnData.radius = radius;
+        _spawnData.count = count;
+        _spawnData.spawnPoint = transform;
+        
+        _spawner.SpawnEnemies(_spawnData);
     }
 
     protected override void HandleHit(Vector2 dir, float knockbackForce)
@@ -86,9 +160,15 @@ public class VampireBoss : EnemyBase
 
     private void SpawnProjectile(int count)
     {
+        StartCoroutine(SpawnProjectileRoutine(count, 0.5f));
+    }
+    
+    private IEnumerator SpawnProjectileRoutine(int count, float delayTime)
+    {
         for (int i = 0; i < count; i++)
         {
-            ProjectileManager.Instance.SpawnProjectile(_projectilePrefab, Target, this.transform, _projectileDamage,  _knockBackForce);
+            ProjectileManager.Instance.SpawnProjectile(_projectilePrefab, Target, this.transform, _projectileDamage, _knockBackForce);
+            yield return new WaitForSeconds(delayTime);
         }
     }
 }

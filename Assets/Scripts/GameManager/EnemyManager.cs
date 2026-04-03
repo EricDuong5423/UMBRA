@@ -4,6 +4,8 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
+
+    private const int maxEnemies = 5;
     
     [Header("Pool Setup")]
     [SerializeField] protected Transform container;
@@ -29,7 +31,16 @@ public class EnemyManager : MonoBehaviour
             newPool.SetPrefab(prefab);
             pools.Add(prefab, newPool);
         }
-        
+
+        int activeCount = 0;
+        foreach (Transform child in container)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                activeCount++;
+            }
+        }
+        if(activeCount >= maxEnemies) return null;
         GameObject obj = pools[prefab].Get();
         obj.transform.SetParent(container, true);
         obj.transform.position = position;

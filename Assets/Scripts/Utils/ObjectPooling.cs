@@ -5,6 +5,7 @@ public class ObjectPooling : MonoBehaviour
 {
     private GameObject objectPrefab;
     private Queue<GameObject> objectPool = new Queue<GameObject>();
+    public Queue<GameObject> ObjectPool => objectPool;
     public void SetPrefab(GameObject prefab) { objectPrefab = prefab; }
     public GameObject Get()
     {

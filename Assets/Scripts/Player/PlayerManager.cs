@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerStatsManager))]
 [RequireComponent(typeof(PlayerHealth))]
@@ -25,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerWeaponHitbox PlayerWeaponHitbox { get; private set; }
 
     public static PlayerManager Instance;
+    
+    
 
     private void Awake()
     {
@@ -35,6 +38,7 @@ public class PlayerManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
         PlayerStatsManager = GetComponent<PlayerStatsManager>();
         PlayerHealth = GetComponent<PlayerHealth>();
@@ -49,6 +53,18 @@ public class PlayerManager : MonoBehaviour
         PlayerWeaponHitbox = GetComponentInChildren<PlayerWeaponHitbox>();
     }
 
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if (arg0.name == "MainMenu")
+        {
+            PlayerMovement.StopMovement();
+        }
+        else
+        {
+            PlayerMovement.StartMovement();
+        }
+    }
+    
     private void Start()
     {
         PlayerStatsManager.Initialize();

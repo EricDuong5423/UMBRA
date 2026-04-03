@@ -32,4 +32,14 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.linearVelocity = Vector2.zero;
     }
+
+    public void StopMovement()
+    {
+        rb.bodyType = RigidbodyType2D.Static;
+    }
+
+    public void StartMovement()
+    {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+    }
 }

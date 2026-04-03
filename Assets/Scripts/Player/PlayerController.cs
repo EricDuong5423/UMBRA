@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _baseScale;
     public static bool isMovable = true;
 
+    public static bool canControl = true;
+
     private void Awake()
     {
         _baseScale = transform.localScale;
@@ -48,8 +50,29 @@ public class PlayerController : MonoBehaviour
         isHurting = false;
     }
 
+    public void DisablePlayerControl()
+    {
+        canControl = false;
+
+        moveInput = Vector2.zero;
+        PlayerManager.Instance.PlayerVisuals.UpdateMovementAnim(Vector2.zero, false);
+    }
+
+    public void EnablePlayerControl()
+    {
+        canControl = true;
+    }
+
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (TabManager.Instance == null) return;
+            if (!TabManager.isOpened) GameManager.Instance.PauseGame();
+            else GameManager.Instance.ResumeGame();
+            if(TabManager.isOpened) TabManager.Instance.CloseMenu();
+            else TabManager.Instance.OpenMenu();
+        }
         if (PlayerManager.Instance.PlayerHealth.IsDead || isHurting || !isMovable) 
         {
             PlayerManager.Instance.PlayerMovement.StopMoving();
@@ -57,6 +80,8 @@ public class PlayerController : MonoBehaviour
         }
 
         if (isRolling || isAttacking) return;
+
+        if (!canControl) return; 
 
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
@@ -74,15 +99,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (PlayerManager.Instance.PlayerStamina.TryConsumeStamina(10f)) Attack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (TabManager.Instance == null) return;
-            if (!TabManager.isOpened) GameManager.Instance.PauseGame();
-            else GameManager.Instance.ResumeGame();
-            if(TabManager.isOpened) TabManager.Instance.CloseMenu();
-            else TabManager.Instance.OpenMenu();
         }
         
         // Test Code
@@ -107,15 +123,17 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PlayerManager.Instance.PlayerHealth.IsDead || isHurting || isAttacking) 
+        if (PlayerManager.Instance.PlayerHealth.IsDead || isHurting || isAttacking || !canControl) 
         {
             PlayerManager.Instance.PlayerMovement.StopMoving();
             return;
         }
+    
         if (isRolling)
         {
             return; 
         }
+    
         PlayerManager.Instance.PlayerMovement.Move(moveInput);
     }
     

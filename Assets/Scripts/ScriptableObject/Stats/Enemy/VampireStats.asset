@@ -26,10 +26,10 @@ MonoBehaviour:
   healOnKill: 500
   ligthShardOnKill: 300
   lookRadius: 15
-  stopDistance: 10
+  stopDistance: 1
   attackCooldown: 2
-  attackRangeMin: 1.2
-  attackRangeMax: 2.5
+  attackRangeMin: 2
+  attackRangeMax: 7
   wandersWhenIdle: 0
   wanderRadius: 3
   wanderInterval: 2
