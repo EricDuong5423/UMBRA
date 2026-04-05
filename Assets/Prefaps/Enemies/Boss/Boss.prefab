@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3698094128448791727}
   - component: {fileID: 227269886474776921}
   - component: {fileID: 5918838595056334368}
+  - component: {fileID: 4222224589313976747}
   m_Layer: 8
   m_Name: Boss
   m_TagString: Enemy
@@ -220,6 +221,11 @@ MonoBehaviour:
   telegraphDuration: 0.8
   lifestealPercent: 0.15
   enrageAttackSpeedBonus: 0.3
+  strafeSpeed: 2.5
+  strafeDuration: 1
+  strafeCooldown: 2.5
+  approachSpeedMultiplier: 1.5
+  attackPauseDuration: 0.5
 --- !u!114 &3175243137851333514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +298,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectVFXContainer: {fileID: 317345190157519902}
+--- !u!114 &4222224589313976747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945162898502977847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ddaaf8d23b9464196ea5881556ec2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAttackSFX:
+  - {fileID: 8300000, guid: e799c8a55a847c9449b8d5ab51834ae6, type: 3}
+  - {fileID: 8300000, guid: 8dcd6295b4797c848a8311f579c70827, type: 3}
+  enemyHitSFX:
+  - {fileID: 8300000, guid: bfb6231664ade6d4cbbb7c591a1b1e0d, type: 3}
+  enemyDeathSFX: []
 --- !u!1 &8432804754838938171
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,11 +28,6 @@ public class PlayerHealth : EntityHealth
         UpdateMaxHealth(playerStatsManager.MaxEmbers);
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.R)) TakeDamage(MaxEmbers, transform, false, 0f);
-    }
-
     public override void TakeDamage(float amount, Transform source, bool _, float knockbackForce)
     {
         if (isInvincible || IsDead) return;
