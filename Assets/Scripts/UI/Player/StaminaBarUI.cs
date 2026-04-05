@@ -7,11 +7,10 @@ public class StaminaBarUI : ResourceBarUI
 
     private void Start()
     {
+        staminaSystem = PlayerManager.Instance.PlayerStamina;
         if (staminaSystem != null)
         {
             staminaSystem.OnStaminaChanged += UpdateView;
-            
-            // Nhờ bước 3 nên ta mới gọi được dòng này
             UpdateView(staminaSystem.CurrentStamina, staminaSystem.MaxStamina);
         }
     }

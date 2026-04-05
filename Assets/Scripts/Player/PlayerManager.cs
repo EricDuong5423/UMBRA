@@ -62,6 +62,7 @@ public class PlayerManager : MonoBehaviour
         else
         {
             PlayerMovement.StartMovement();
+            PlayerHealth.Ressurect();
         }
     }
     

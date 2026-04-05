@@ -10,6 +10,7 @@ public class PlayerVisuals : MonoBehaviour
     
     private PlayerStats playerStats; 
     private PlayerHealth playerHealth;
+    private bool pendingHealTrigger = false;
 
     public void Initialize(PlayerStats stats, PlayerHealth health)
     {
@@ -19,8 +20,16 @@ public class PlayerVisuals : MonoBehaviour
         playerHealth.OnHealthChanged += UpdateVisuals;
         playerHealth.OnHit += TriggerHurtAnim;
         playerHealth.OnDeath += TriggerDeathAnim;
+        playerHealth.OnHeal += TriggerHeal;
         
         UpdateVisuals(playerHealth.CurrentEmbers, playerHealth.MaxEmbers);
+    }
+
+    public void ResetDeathAnimation()
+    {
+        if (animator == null) return;
+        animator.ResetTrigger("Death"); 
+        animator.Play("Idle");
     }
 
     private void OnDestroy()
@@ -44,6 +53,26 @@ public class PlayerVisuals : MonoBehaviour
         
         if (animator == null) return;
         animator.SetTrigger("Hurt");
+    }
+
+    private void TriggerHeal()
+    {
+        if (animator == null) return;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            pendingHealTrigger = true;
+            return;
+        }
+        animator.SetTrigger("Heal");
+    }
+
+    public void OnAttackAnimationEnd()
+    {
+        if (pendingHealTrigger)
+        {
+            pendingHealTrigger = false;
+            animator.SetTrigger("Heal");
+        }
     }
 
     public void TriggerRoll(Vector2 direction)

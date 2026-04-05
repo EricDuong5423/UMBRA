@@ -16,6 +16,17 @@ public class PlayerController : MonoBehaviour
     public static bool isMovable = true;
 
     public static bool canControl = true;
+    
+    public void ResetState()
+    {
+        CancelInvoke(); 
+        isHurting = false;
+        isAttacking = false;
+        isRolling = false;
+        canControl = true;
+        isMovable = true;
+        moveInput = Vector2.zero;
+    }
 
     private void Awake()
     {

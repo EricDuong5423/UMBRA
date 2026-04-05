@@ -29,6 +29,7 @@ public class ItemManager : MonoBehaviour
 
     private void ApplyAllItemStats()
     {
+        if(playerStatsManager == null) return;
         playerStatsManager.bonusAttackDamage = 0;
         playerStatsManager.bonusCritDamage = 0;
         playerStatsManager.bonusCritRate = 0;
@@ -54,6 +55,12 @@ public class ItemManager : MonoBehaviour
             playerStatsManager.bonusKnockback += item.bonusKnockback * count;
         }
         playerStatsManager.RecalculateStats();
+    }
+
+    public void RemoveAllItems()
+    {
+        inventory.Clear();
+        ApplyAllItemStats();
     }
 
     public void TriggerOnHitEffects(IDamageable enemy, float damage)

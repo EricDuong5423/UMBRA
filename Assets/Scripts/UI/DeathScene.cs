@@ -64,10 +64,14 @@ public class DeathScene : MonoBehaviour
         var animationButton = returnButton.DOAnchorPosY(-170, duration).SetEase(ease);
         sequence1
             .Append(animationBackground)
-            .Join(animationDeathTextTweener);
+            .Join(animationDeathTextTweener)
+            .SetUpdate(true)
+            .Play();
         sequence2
             .Append(sequence1)
-            .Append(animationButton).Play();
+            .Append(animationButton)
+            .SetUpdate(true)
+            .Play();
     }
 
     public void HandleReturnButton()

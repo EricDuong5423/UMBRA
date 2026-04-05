@@ -16,6 +16,7 @@ public class MainMenuController : MonoBehaviour
     public void OnPlayButtonClick()
     {
         SceneManager.LoadScene(TutorialMap);
+        GameManager.Instance.SetState(GameManager.GameState.Tutorial);
         PlayClickedButtonSound();
         AudioController.Instance.PlayBGMSound(tutorialMapClip);
         PlayEnviromentButtonSound();

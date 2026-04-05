@@ -27,6 +27,7 @@ public class CameraShake : MonoBehaviour
 
     private void Start()
     {
+        cinemachineCamera.Follow = PlayerManager.Instance.transform;
         hitbox = PlayerManager.Instance.PlayerWeaponHitbox;
         if (hitbox != null)
             hitbox.OnHitLanded += OnHitLanded;

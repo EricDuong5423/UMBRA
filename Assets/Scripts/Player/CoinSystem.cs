@@ -9,6 +9,11 @@ public class CoinSystem : MonoBehaviour
 
     private void Awake()
     {
+        ResetCoins();
+    }
+
+    public void ResetCoins()
+    {
         currentCoins = 0;
     }
 

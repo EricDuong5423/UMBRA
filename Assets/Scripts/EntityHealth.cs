@@ -6,6 +6,7 @@ public abstract class EntityHealth : MonoBehaviour, IDamageable
     public event Action<float, float> OnHealthChanged;
     public event Action<Vector2, float> OnHit;
     public event Action OnDeath;
+    public event Action OnHeal;
     public float CurrentEmbers { get; protected set; }
     public float MaxEmbers { get; protected set; }
     public bool IsDead { get; protected set; } 
@@ -57,9 +58,9 @@ public abstract class EntityHealth : MonoBehaviour, IDamageable
     public virtual void Heal(float amount)
     {
         if (IsDead) return;
-        CurrentEmbers += amount;
-        CurrentEmbers = Mathf.Clamp(CurrentEmbers, 0, MaxEmbers);
+        CurrentEmbers = Mathf.Min(CurrentEmbers + amount, MaxEmbers);
         BroadcastHealth();
+        OnHeal?.Invoke();
     }
 
     protected virtual void Die()

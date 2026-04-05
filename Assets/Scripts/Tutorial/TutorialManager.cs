@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,18 @@ public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager Instance { get; private set; }
     [SerializeField] private TutorialPopupUI popupUI;
-    [SerializeField] private List<TutorialZone> _tutorialZones = new List<TutorialZone>();
+    [SerializeField] private PlayerManager _player;
+    [SerializeField] private Vector3 _playerSpawn;
 
     private Coroutine autoDismissCoroutine;
 
+    private void Start()
+    {
+        _player = PlayerManager.Instance;
+        if (_player == null) return;
+        _player.transform.position = _playerSpawn;
+    }
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)

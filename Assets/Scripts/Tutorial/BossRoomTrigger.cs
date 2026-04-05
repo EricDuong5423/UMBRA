@@ -16,6 +16,9 @@ public class BossRoomTrigger : MonoBehaviour
     
     [Header("Boss health bar")]
     [SerializeField] private BossHealthBarUI bossHealthBarUI;
+    
+    [Header("Boss theme song")]
+    [SerializeField] private AudioClip bossSong;
     private bool hasTriggerd = false;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -24,9 +27,15 @@ public class BossRoomTrigger : MonoBehaviour
         {
             hasTriggerd = true;
             GetComponent<Collider2D>().enabled = false;
-
             StartCoroutine(SpawnAndCinematicRoutine());
+            PlayBossSong();
         }
+    }
+
+    private void PlayBossSong()
+    {
+        if (AudioController.Instance == null) return;
+        AudioController.Instance.PlayBGMSound(bossSong);
     }
 
     private IEnumerator SpawnAndCinematicRoutine()

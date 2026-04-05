@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
 public class PlayerHealth : EntityHealth
 {
     [Header("Player Settings")]
-    public bool isInvincible = false; // fix: instance thay vì static
+    public bool isInvincible = false;
 
     private PlayerStatsManager playerStatsManager;
 
@@ -25,6 +26,11 @@ public class PlayerHealth : EntityHealth
     private void HandleStatsChanged()
     {
         UpdateMaxHealth(playerStatsManager.MaxEmbers);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R)) TakeDamage(MaxEmbers, transform, false, 0f);
     }
 
     public override void TakeDamage(float amount, Transform source, bool _, float knockbackForce)
@@ -53,5 +59,22 @@ public class PlayerHealth : EntityHealth
     public void DisableIFrame()
     {
         isInvincible = false;
+    }
+
+    public void GameOver()
+    {
+        GameManager.Instance.SetState(GameManager.GameState.GameOver);
+    }
+    
+    public void Ressurect()
+    {
+        IsDead = false;
+        isInvincible = false;
+        PlayerManager.Instance.PlayerStamina.ResetStamina();
+        PlayerManager.Instance.PlayerItemManager.RemoveAllItems();
+        PlayerManager.Instance.PlayerCoinSystem.ResetCoins();
+        Heal(PlayerManager.Instance.PlayerStatsManager.BaseStats.BaseMaxEmbers);
+        PlayerManager.Instance.PlayerVisuals.ResetDeathAnimation();
+        PlayerManager.Instance.PlayerController.ResetState();
     }
 }

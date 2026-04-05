@@ -19,9 +19,14 @@ public class StaminaSystem : MonoBehaviour
         BroadcastStamina();
     }
 
+    public void ResetStamina()
+    {
+        if(playerStatsManager == null) return;
+        currentStamina = playerStatsManager.MaxStamina;
+    }
+
     private void Start()
     {
-        // fix: bỏ double-subscribe, chỉ broadcast
         BroadcastStamina();
     }
 

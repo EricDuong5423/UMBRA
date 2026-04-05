@@ -10,6 +10,7 @@ public class CoinUI : MonoBehaviour
 
     private void Start()
     {
+        coinSystem = PlayerManager.Instance.PlayerCoinSystem;
         if (coinSystem != null)
         {
             coinSystem.OnCoinChanged += ChangeCoinText;

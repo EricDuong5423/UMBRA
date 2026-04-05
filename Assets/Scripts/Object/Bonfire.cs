@@ -16,24 +16,11 @@ public class Bonfire : MonoBehaviour, IInteractable
     [SerializeField] private uint coinAmountRequired = 100;
     [SerializeField] private float healPercentAmount = 0.5f;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Start()
     {
-        if (other != null && other.gameObject.CompareTag("Player"))
-        {
-            playerInteractor =  other.gameObject.GetComponent<Interactor>();
-            playerHealth = other.gameObject.GetComponent<PlayerHealth>();
-            playerCoin = other.gameObject.GetComponent<CoinSystem>();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other != null && other.gameObject.CompareTag("Player"))
-        {
-            playerHealth = null;
-            playerCoin = null;
-            playerInteractor = null;
-        }
+        playerHealth = PlayerManager.Instance.PlayerHealth;
+        playerCoin = PlayerManager.Instance.PlayerCoinSystem;
+        playerInteractor = PlayerManager.Instance.gameObject.GetComponent<Interactor>();
     }
 
     public void Healing()
