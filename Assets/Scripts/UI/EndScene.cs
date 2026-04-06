@@ -40,6 +40,7 @@ public class EndScene : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (vampireBoss == null) return;
         vampireBoss.HealthSystem.OnDeath -= HandleBossDeath;
     }
 

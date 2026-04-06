@@ -61,10 +61,10 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
-            case GameState.Paused:   Time.timeScale = 0f; PlayerManager.Instance.PlayerController.DisablePlayerControl(); break;
+            case GameState.Paused:   Time.timeScale = 0f; PlayerManager.Instance?.PlayerController.DisablePlayerControl(); break;
             case GameState.GameOver: Time.timeScale = 0f; isRunning = false; break;
             case GameState.Victory:  Time.timeScale = 0f; isRunning = false; break;
-            default:                 Time.timeScale = 1f; PlayerManager.Instance.PlayerController.EnablePlayerControl(); break;
+            default:                 Time.timeScale = 1f; PlayerManager.Instance?.PlayerController.EnablePlayerControl(); break;
         }
     }
 
